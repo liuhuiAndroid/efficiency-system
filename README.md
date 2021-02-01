@@ -19,6 +19,7 @@ ECharts ：https://echarts.apache.org/
 Vue3：https://www.vue3js.cn/docs/zh/
 
 ```shell
+winpty vue.cmd create efficiency-system
 // Project setup
 npm install
 // Compiles and hot-reloads for development
