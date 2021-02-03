@@ -20,17 +20,17 @@
 
 
 			<!-- 导航栏部分 -->
-			<nav>
-				<h2 class="logo"></h2>
-				<div class="nav" id="nav">
-					<h2 class="fl"> {{web_name}} </h2>
-					<div class="fr">	
-						<ul>
-							<li v-for="item in nav"><a href="#"> {{item}} </a></li>
-							<li><a href="#"> {{date}} </a></li>
-							<li><a href="#"> {{exit}} </a></li>
-						</ul>
-					</div>
+			<nav class="nav w" id="nav">
+				<div class="logo fl">
+					<h1></h1>
+					<h2> {{web_name}} </h2>					
+				</div>
+				<div class="fr">	
+					<ul>
+						<li v-for="item in nav"><a href="#"> {{item}} </a></li>
+						<li><a href="#"> {{date}} </a></li>
+						<li><a href="#"> {{exit}} </a></li>
+					</ul>
 				</div>
 			</nav>	
 			<!-- 导航栏结束 -->
