@@ -86,6 +86,9 @@
 	display: inline-block;
 	margin-right: 35px;
 }
+.weather ul li span:last-child  {
+	margin-right: 65px;
+}
 .device-status {
 	margin-top: 60px;
 	padding-left: 5px;
