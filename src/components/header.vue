@@ -10,6 +10,8 @@
         :to="val.path"
       >{{val.name}}</router-link>
     </div>
+    <div>2021-02-03</div>
+    <div>退出系统</div>
   </div>
 </template>
 

@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <div id="myChart" :style="{ width: '300px', height: '300px' }"></div>
+    <div>浙江帷盛科技光伏电站</div>
+    <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
+    <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
   </div>
 </template>
 
@@ -29,6 +31,49 @@ export default defineComponent({
                 type: 'bar',
                 data: [5, 20, 36, 10, 10, 20]
             }]
+        });
+      }
+
+      // 饼状图
+      const pieChartEle = document.getElementById("pieChart");
+      if(pieChartEle){
+        let pieChart = echarts.init(pieChartEle);
+        // 绘制饼状图
+        pieChart.setOption({
+            title: {
+                text: '12月电站能效损失比例饼状图',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 63, name: '灰尘损失'},
+                        {value: 7, name: '高温损失'},
+                        {value: 20, name: '预期遮挡'},
+                        {value: 21, name: '组件衰减'},
+                        {value: 12, name: '非预期遮挡'},
+                        {value: 9, name: '异常损失'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
         });
       }
   },
