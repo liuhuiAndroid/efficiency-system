@@ -1,0 +1,108 @@
+.main:after {
+	content:"";
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+.main > div {
+	float: left;
+	position: relative;
+	width: 600px;
+	height: 1000px;
+}
+.main-l {
+	padding-top: 90px;
+}
+.main-l ul > li {
+	width: 550px;
+	height: 255px;
+	background-color: #080245;
+	margin-bottom: 30px;
+}
+.summary {
+	line-height: 48px;
+	font-size: 30px;
+	text-align: center;
+}
+.summary tr {
+	border-bottom: 2px solid #64A396;
+}
+.summary-name {
+	width: 175px;
+	background-color: #A9CE98;
+}
+.summary-date {
+	width: 345px;
+	background-color: #4F917E;
+	color: white;
+	font-weight: 800;
+}
+/*左侧*/
+/*中间*/
+.main-b h1 {
+	padding:20px 0;
+	font-size: 48px;
+	color: white;
+}
+.monitor {
+	padding-left: 18px;
+}
+.monitor h2 {
+	padding-top: 55px;
+	color: white;
+	font-size: 28px;
+}
+.monitor >div{
+	width: 480px;
+	height: 330px;
+	background-color: #080245;
+}
+.energy-efficiency-loss {
+	width: 540px;
+	height: 335px;
+	background-color: #080245;
+	margin-top: 90px;
+}
+.weather {
+	width: 500px;
+	height: 190px;
+	color: white;
+	border: 1px solid #555468;
+	margin-top: 40px;
+	background-color: #080245;
+}
+.weather h2 {
+	font-size: 20px;
+	font-weight: 400;
+	margin: 15px;
+}
+.weather ul {
+	padding-left: 55px;
+	width: 452px;
+}
+.weather ul li span {
+	line-height: 40px;
+	font-size: 16px;
+	display: inline-block;
+	margin-right: 35px;
+}
+.device-status {
+	margin-top: 60px;
+	padding-left: 5px;
+}
+.device-status table {
+	background-color: #080245;
+	border: 1px solid #A19FB0;
+}
+.device-status table tr td {
+	width: 98px;
+	line-height: 50px;
+	color: white;
+	font-size: 16px;
+	text-align: center;
+}
+.irradiance {
+	height: 310px;
+	background-color: #080245;
+	margin-top: 100px;
+}
