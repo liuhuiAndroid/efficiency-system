@@ -3,16 +3,26 @@
     <div>浙江帷盛科技光伏电站</div>
     <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
     <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
+    <div>{{count}}</div>
   </div>
 </template>
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '../store'
 import request from '@/utils/request'
 
 export default defineComponent({
   name: 'Home',
+  setup() {
+    const store = useStore<GlobalDataProps>()
+    const count = computed(() => store.state.count)
+    return {
+      count
+    }
+  },
   mounted () {
     request({
       url: 'wids?key=d9fbda784ccf58fc4d686dbec6a77455',

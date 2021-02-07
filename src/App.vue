@@ -6,11 +6,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from './store'
 import HeaderComponent from './components/header.vue'
 
 export default defineComponent({
   name: 'App',
+  setup() {
+    const store = useStore<GlobalDataProps>()
+    const currentUser = computed(() => store.state.user)
+  },
   components: {
     HeaderComponent
   }
