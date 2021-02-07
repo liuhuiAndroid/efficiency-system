@@ -1,17 +1,17 @@
 <template>
-  <div class="header">
-    <div class="logo cp" @click="routeToHome">光魄能效云系统</div>
-    <div class="nav-wrapper">
-      <!-- 导航 -->
-      <router-link
-        class="nav cp"
-        v-for="(val, index) of navs"
-        :key="`nav-${val.path}-${index}`"
-        :to="val.path"
-      >{{val.name}}</router-link>
+  <nav class="nav w" id="nav">
+    <div class="logo fl">
+      <h1></h1>
+      <h2> {{web_name}} </h2>					
     </div>
-    <div>2021-02-03</div>
-    <div>退出系统</div>
+  </nav>	
+  <div class="nav-wrapper">
+    <router-link
+      class="nav cp"
+      v-for="(val, index) of navs"
+      :key="`nav-${val.path}-${index}`"
+      :to="val.path"
+    >{{val.name}}</router-link>
   </div>
 </template>
 
@@ -35,40 +35,48 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.header {
-  display: flex;
-  align-items: center;
-  
-  .logo,
-  .nav-wrapper {
-    padding: 0 16px;
-    height: 48px;
-    line-height: 48px;
-  }
 
-  .nav-wrapper {
-    flex: 1;
-  }
-
-.nav {
-    display: inline-block;
-    padding: 0 8px;
-    text-decoration: none;
-    transition: all 300ms;
-
-    &-button {
-      border-color: transparent;
-      padding: 8px 16px;
-      margin-right: 16px;
-      &:hover {
-        border-color: transparent;
-      }
-    }
-
-    &-user {
-      padding: 8px 16px;
-      font-weight: 300;
-    }
-  }
+nav {
+	height: 60px;
+	border-bottom: 2px solid #6C6C70;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.logo {
+	margin-left:-30px; 
+}
+.logo h1{
+	position: absolute;
+	width: 120px;
+	height: 55px;
+	background: url(../../images/logo.png) no-repeat;
+}
+.logo h2 {
+	padding-left: 140px;
+	font-size: 28px;
+	color: white;
+	line-height: 80px;
+}
+.nav ul li {
+	float: left
+}
+.nav ul li a{
+	display: inline-block;
+	float: left;
+	font-size: 22px;
+	color: white;
+	line-height: 80px;
+	padding: 0 12px;
+}
+.nav ul li:nth-child(1) a {
+	font-weight: 800;
+}
+.nav ul li:nth-child(8) a {
+	font-size: 16px;
+	padding-left: 24px;
+	padding-right: 68px;
+}
+.nav ul li:nth-child(9) a {
+	font-size: 18px;	
 }
 </style>
