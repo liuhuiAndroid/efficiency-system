@@ -15,8 +15,10 @@ export default defineComponent({
   name: 'Home',
   mounted () {
     request({
-      url: '?version=v9&appid=2&appsecret=z',
+      url: 'wids?key=d9fbda784ccf58fc4d686dbec6a77455',
       method: 'get'
+    }).then((response: any) => {
+      console.log('weather:' + response.reason)
     })
 
     const myChartEle = document.getElementById('myChart')

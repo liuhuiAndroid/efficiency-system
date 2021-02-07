@@ -4,8 +4,8 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: '/api',
-  timeout: 3000,
+  baseURL: '/simpleWeather',
+  timeout: 5000,
   withCredentials: true,
   headers: {
     // clear cors
@@ -15,21 +15,21 @@ const service = axios.create({
 
 // Request interceptors
 service.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     // Add Authorization header to every request, you can add other custom headers here
     // config.headers['Authorization'] = 'tokentokentokentokentokentokenhhh'
     return config
   },
-  (error) => {
+  (error: any) => {
     Promise.reject(error)
   }
 )
 
 // Response interceptors
 service.interceptors.response.use(
-  (response) => {
+  (response: any) => {
     const res = response.data
-    if (res.status !== 200) {
+    if (res.error_code !== 0) {
       // 若后台返回错误值，此处返回对应错误对象，下面 error 就会接收
       return Promise.reject(new Error(res.info || 'Error'))
     } else {
@@ -37,7 +37,7 @@ service.interceptors.response.use(
       return response.data
     }
   },
-  (error) => {
+  (error: any) => {
     if (error && error.response) {
       switch (error.response.status) {
         case 400: error.message = '请求错误(400)'

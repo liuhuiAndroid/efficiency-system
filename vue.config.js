@@ -9,12 +9,12 @@ module.exports = {
     port: 8081,
     https: false,
     proxy: {
-      '/api': {
-        target: 'http://www.tianqiapi.com/api/',
+      '/simpleWeather': {
+        target: 'http://apis.juhe.cn/simpleWeather/',
         ws: true,
         changOrigin: true,//允许跨域
         pathRewrite: {
-          '^/api': ''
+          '^/simpleWeather': ''
         }
       }
 
