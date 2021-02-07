@@ -2,9 +2,9 @@
   <nav class="nav w" id="nav">
     <div class="logo fl">
       <h1></h1>
-      <h2> {{web_name}} </h2>					
+      <h2>{{web_name}}</h2>
     </div>
-  </nav>	
+  </nav>
   <div class="nav-wrapper">
     <router-link
       class="nav cp"
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderItem',
@@ -28,55 +28,56 @@ export default defineComponent({
       { name: '设备预警', path: '/warning' },
       { name: '能效分析', path: '/analysis' },
       { name: '运维建议', path: '/suggestion' },
-      { name: '系统设置', path: '/setting' },
-    ],
-  }),
-});
+      { name: '系统设置', path: '/setting' }
+    ]
+  })
+})
 </script>
 
-<style lang="less">
-
+<style>
 nav {
-	height: 60px;
-	border-bottom: 2px solid #6C6C70;
-	overflow: hidden;
-	margin: 0 auto;
+    height: 60px;
+    border-bottom: 2px solid #6C6C70;
+    overflow: hidden;
+    margin: 0 auto;
 }
+
 .logo {
-	margin-left:-30px; 
+    margin-left: -30px;
 }
-.logo h1{
-	position: absolute;
-	width: 120px;
-	height: 55px;
-	background: url(../../images/logo.png) no-repeat;
+.logo h1 {
+    position: absolute;
+    width: 120px;
+    height: 55px;
+    background: url(../../images/logo.png) no-repeat;
 }
+
 .logo h2 {
-	padding-left: 140px;
-	font-size: 28px;
-	color: white;
-	line-height: 80px;
+    padding-left: 140px;
+    font-size: 28px;
+    color: white;
+    line-height: 80px;
 }
 .nav ul li {
-	float: left
+    float: left;
 }
 .nav ul li a{
-	display: inline-block;
-	float: left;
-	font-size: 22px;
-	color: white;
-	line-height: 80px;
-	padding: 0 12px;
+    display: inline-block;
+    float: left;
+    font-size: 22px;
+    color: white;
+    line-height: 80px;
+    padding: 0 12px;
 }
 .nav ul li:nth-child(1) a {
-	font-weight: 800;
+    font-weight: 800;
 }
 .nav ul li:nth-child(8) a {
-	font-size: 16px;
-	padding-left: 24px;
-	padding-right: 68px;
+    font-size: 16px;
+    padding-left: 24px;
+    padding-right: 68px;
 }
 .nav ul li:nth-child(9) a {
-	font-size: 18px;	
+    font-size: 18px;
 }
 </style>

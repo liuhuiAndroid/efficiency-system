@@ -6,19 +6,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HeaderComponent from './components/header.vue';
+import { defineComponent } from 'vue'
+import HeaderComponent from './components/header.vue'
 
 export default defineComponent({
-  name: 'Root',
+  name: 'App',
   components: {
-    HeaderComponent,
-  },
-  methods: {},
-});
+    HeaderComponent
+  }
+})
 </script>
 
-<style lang="scss">
+<style>
 html, body {
   margin: 0;
   padding: 0;
