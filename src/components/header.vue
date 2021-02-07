@@ -1,8 +1,7 @@
 <template>
   <nav class="nav w" id="nav">
     <div class="logo fl">
-      <h1></h1>
-      <h2>{{web_name}}</h2>
+      <router-link to="/">{{web_name}}</router-link>
     </div>
   </nav>
   <div class="nav-wrapper">
@@ -12,6 +11,9 @@
       :key="`nav-${val.path}-${index}`"
       :to="val.path"
     >{{val.name}}</router-link>
+  </div>
+  <div>
+    <router-link to="/login">登录</router-link>
   </div>
 </template>
 

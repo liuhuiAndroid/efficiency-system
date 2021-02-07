@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import Benchmarking from '../views/Benchmarking.vue'
+import Monitor from '../views/Monitor.vue'
+import MonitorDetail from '../views/MonitorDetail.vue'
+import Warning from '../views/Warning.vue'
+import Analysis from '../views/Analysis.vue'
+import Suggestion from '../views/Suggestion.vue'
+import Setting from '../views/Setting.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,37 +17,43 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/benchmarking',
     name: '标杆组串',
-    component: () => import('../views/Benchmarking.vue')
+    component: Benchmarking
   },
   {
     path: '/monitor',
     name: '实时监测',
-    component: () => import('../views/Monitor.vue')
+    component: Monitor
+  },
+  {
+    path: '/monitordetail/:id',
+    name: '实时监测详情',
+    component: MonitorDetail
   },
   {
     path: '/warning',
     name: '设备预警',
-    component: () => import('../views/Warning.vue')
+    component: Warning
   },
   {
     path: '/analysis',
     name: '能效分析',
-    component: () => import('../views/Analysis.vue')
+    component: Analysis
   },
   {
     path: '/suggestion',
     name: '运维建议',
-    component: () => import('../views/Suggestion.vue')
+    component: Suggestion
   },
   {
     path: '/setting',
     name: '系统设置',
-    component: () => import('../views/Setting.vue')
+    component: Setting
   }
 ]
 
+const history = createWebHistory(process.env.BASE_URL)
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history,
   routes
 })
 
