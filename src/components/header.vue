@@ -36,10 +36,10 @@ export default defineComponent({
 
 <style>
 nav {
-    height: 60px;
-    border-bottom: 2px solid #6C6C70;
-    overflow: hidden;
-    margin: 0 auto;
+      height: 60px;
+      border-bottom: 2px solid #6C6C70;
+      overflow: hidden;
+      margin: 0 auto;
 }
 
 .logo {
@@ -49,7 +49,7 @@ nav {
     position: absolute;
     width: 120px;
     height: 55px;
-    background: url(../../images/logo.png) no-repeat;
+    background: url(../assets/logo.png) no-repeat;
 }
 
 .logo h2 {

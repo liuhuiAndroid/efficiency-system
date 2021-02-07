@@ -10,4 +10,4 @@
 VSCode插件：
 
 - REST Client
-- 
+- vscode-standardjs - JavaScript 代码规范

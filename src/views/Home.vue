@@ -9,10 +9,16 @@
 <script lang="ts">
 import * as echarts from 'echarts'
 import { defineComponent } from 'vue'
+import request from '@/utils/request'
 
 export default defineComponent({
   name: 'Home',
   mounted () {
+    request({
+      url: '?version=v9&appid=2&appsecret=z',
+      method: 'get'
+    })
+
     const myChartEle = document.getElementById('myChart')
     if (myChartEle) {
       const myChart = echarts.init(myChartEle)
@@ -26,11 +32,13 @@ export default defineComponent({
           data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
         },
         yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
+        series: [
+          {
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
       })
     }
 
@@ -52,26 +60,28 @@ export default defineComponent({
           x: 'center',
           y: 'bottom'
         },
-        series: [{
-          name: '访问来源',
-          type: 'pie',
-          radius: '50%',
-          data: [
-            { value: 63, name: '灰尘损失' },
-            { value: 7, name: '高温损失' },
-            { value: 20, name: '预期遮挡' },
-            { value: 21, name: '组件衰减' },
-            { value: 12, name: '非预期遮挡' },
-            { value: 9, name: '异常损失' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '50%',
+            data: [
+              { value: 63, name: '灰尘损失' },
+              { value: 7, name: '高温损失' },
+              { value: 20, name: '预期遮挡' },
+              { value: 21, name: '组件衰减' },
+              { value: 12, name: '非预期遮挡' },
+              { value: 9, name: '异常损失' }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
             }
           }
-        }]
+        ]
       })
     }
   }
