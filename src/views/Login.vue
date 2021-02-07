@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps } from './store'
+import { GlobalDataProps } from '../store'
 // 定义路由行为
 import { useRouter } from 'vue-router'
 
@@ -18,10 +18,7 @@ export default defineComponent({
     store.commit('login')
 
     const router = useRouter()
-    router.push({name: '/monitordetail', params: {id: 1}})
-    return {
-      
-    }
+    router.push(name: '/monitordetail', params: {id: 1})
   }
 })
 </script>
