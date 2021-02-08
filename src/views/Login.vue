@@ -1,14 +1,14 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginFormRef" :model="formObj" :rules="rules" label-width="100px">
+    <el-form ref="loginForm" :model="loginFormObj" :rules="loginRules" label-width="100px">
       <el-form-item label="账号" prop="username">
-        <el-input v-model="formObj.username" placeholder="请输入账号" prefix-icon="el-icon-user" clearable maxlength="10"></el-input>
+        <el-input v-model="loginFormObj.username" placeholder="请输入账号" prefix-icon="el-icon-user" clearable maxlength="10"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="formObj.password" placeholder="请输入密码" prefix-icon="el-icon-user" clearable maxlength="10"></el-input>
+        <el-input v-model="loginFormObj.password" placeholder="请输入密码" prefix-icon="el-icon-lock" show-password clearable maxlength="10"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button :loading="loading" type="primary" round @click="submitForm()">登录</el-button>
+        <el-button :loading="loading" type="primary" round @click="handleLogin()">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -26,13 +26,13 @@ export default defineComponent({
     const router = useRouter()
     const store = useStore<GlobalDataProps>()
 
-    const loginFormRef = ref()
-    const formObj = reactive({
+    const loginForm = ref()
+    const loginFormObj = reactive({
       username: '',
       password: ''
     })
 
-    const rules = {
+    const loginRules = {
       username: [
         { required: true, message: '请输入账号', trigger: 'blur' },
         { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
@@ -45,35 +45,34 @@ export default defineComponent({
 
     const onSubmitAdd = async (values: any) => {
       console.log('onSubmitAdd', values)
-      const currentId = 1
-      console.log('router', router)
-      router.push('/monitordetail/1')
+      router.push('/')
       store.commit('login')
     }
 
-    const submitForm = async () => {
-      const form = unref(loginFormRef)
+    const handleLogin = async () => {
+      const form = unref(loginForm)
       if (!form) {
         console.log('form', false)
         return
       }
       await form.validate(() => {
-        onSubmitAdd(formObj)
+        onSubmitAdd(loginFormObj)
       })
     }
 
     return {
-      loginFormRef,
-      formObj,
-      rules,
-      submitForm
+      loginForm,
+      loginFormObj,
+      loginRules,
+      handleLogin
     }
   }
 })
 </script>
 <style>
- .login-container {
-    display: inline-block;
-    width: 300px;
-  }
+.login-container {
+  display: inline-block;
+  width: 300px;
+  background-color: #2d3a4b;
+}
 </style>

@@ -19,8 +19,8 @@ ECharts：https://echarts.apache.org/
 vue3：https://www.vue3js.cn/docs/zh/
 vue3 github：https://github.com/vuejs/vue-next
 
-vuex: https://next.router.vuejs.org/
-vuex github：https://github.com/vuejs/vue-router-next
+vue router: https://next.router.vuejs.org/
+vue router github：https://github.com/vuejs/vue-router-next
 
 vuex: https://vuex.vuejs.org/zh/
 vuex github：https://github.com/vuejs/vuex

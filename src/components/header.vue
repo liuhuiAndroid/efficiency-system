@@ -1,19 +1,19 @@
 <template>
-  <nav class="nav w" id="nav">
-    <div class="logo fl">
-      <router-link to="/">{{web_name}}</router-link>
+  <div class="header-container">
+    <nav class="nav w" id="nav">
+      <div class="logo fl">
+        <router-link to="/">{{web_name}}</router-link>
+      </div>
+    </nav>
+    <div class="nav-wrapper">
+      <router-link
+        class="nav cp"
+        v-for="(val, index) of navs"
+        :key="`nav-${val.path}-${index}`"
+        :to="val.path"
+      >{{val.name}}</router-link>
     </div>
-  </nav>
-  <div class="nav-wrapper">
-    <router-link
-      class="nav cp"
-      v-for="(val, index) of navs"
-      :key="`nav-${val.path}-${index}`"
-      :to="val.path"
-    >{{val.name}}</router-link>
-  </div>
-  <div>
-    <router-link to="/login">登录</router-link>
+    <div>退出系统</div>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderItem',
-  data: () => ({
-    navs: [
+  setup() {
+    const navs = [
       { name: '首页', path: '/' },
       { name: '标杆组串', path: '/benchmarking' },
       { name: '实时监测', path: '/monitor' },
@@ -32,7 +32,10 @@ export default defineComponent({
       { name: '运维建议', path: '/suggestion' },
       { name: '系统设置', path: '/setting' }
     ]
-  })
+    return {
+      navs
+    }
+  }
 })
 </script>
 

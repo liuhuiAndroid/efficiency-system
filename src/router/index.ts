@@ -15,49 +15,49 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: '首页',
     component: Home,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/benchmarking',
     name: '标杆组串',
     component: Benchmarking,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/monitor',
     name: '实时监测',
     component: Monitor,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/monitordetail/:id',
     name: '实时监测详情',
     component: MonitorDetail,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/warning',
     name: '设备预警',
     component: Warning,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/analysis',
     name: '能效分析',
     component: Analysis,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/suggestion',
     name: '运维建议',
     component: Suggestion,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/setting',
     name: '系统设置',
     component: Setting,
-    meta: { requiredLogin: false }
+    meta: { requiredLogin: true }
   },
   {
     path: '/login',
