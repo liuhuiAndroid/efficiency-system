@@ -44,10 +44,17 @@ export default defineComponent({
     }
 
     const onSubmitAdd = async (values: any) => {
-      console.log('onSubmitAdd', values)
-      router.push('/')
+      const payload = {
+        username: loginFormObj.username,
+        password: loginFormObj.password
+      }
       // 请求数据
-      store.dispatch('login')
+      store.dispatch('loginAndFetch', payload).then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e)
+      })
+      router.push('/')
     }
 
     const handleLogin = async () => {

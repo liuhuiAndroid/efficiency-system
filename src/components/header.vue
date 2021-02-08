@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { UserProps } from '../store'
 
 export default defineComponent({
   name: 'HeaderItem',

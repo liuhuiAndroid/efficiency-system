@@ -1,19 +1,21 @@
 <template>
   <div class="container">
     <header-component v-show="$route.name!=='login'"/>
+    <h1>{{error}}</h1>
     <router-view class="main-container"/>
     <loader v-if="true"></loader>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from 'vue'
+import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from './store'
 import HeaderComponent from './components/header.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import Loader from './components/Loader.vue'
+import axios from 'axios'
 
 export default defineComponent({
   name: 'App',
@@ -21,6 +23,8 @@ export default defineComponent({
     const store = useStore<GlobalDataProps>()
     const currentUser = computed(() => store.state.user)
     const isLoading = computed(() => store.state.loading)
+    const token = computed(() => store.state.token)
+    const error = computed(() => store.state.error)
 
     const route = useRoute()
     const routename = ref(route.name)
@@ -30,9 +34,19 @@ export default defineComponent({
       console.log(routename)
     })
 
+    onMounted(() => {
+      if (!currentUser.value.isLogin && token.value) {
+        axios.defaults.headers.common.Authorization = `Bearer ${token.value}`
+        store.dispatch('fetchCurrentUser').then(data => {
+          console.log(data)
+        })
+      }
+    })
+
     return {
       routename,
-      isLoading
+      isLoading,
+      error
     }
   },
   components: {
