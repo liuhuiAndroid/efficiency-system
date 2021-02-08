@@ -15,6 +15,7 @@ import HeaderComponent from './components/header.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import Loader from './components/Loader.vue'
+import createMessage from './components/createMessage'
 import axios from 'axios'
 
 export default defineComponent({
@@ -43,6 +44,12 @@ export default defineComponent({
       }
     })
 
+    watch(() => error.value.status, () => {
+      const { status, message } = error.value
+      if (status && message) {
+        createMessage(message, 'error')
+      }
+    })
     return {
       routename,
       isLoading,

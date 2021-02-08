@@ -15,6 +15,7 @@ axios.defaults.baseURL = 'http://api.vikingship.xyz/api'
 axios.interceptors.request.use(config => {
   // config.params = { ...config.params, icode: 'aaa' }
   store.commit('setLoading', false)
+  store.commit('setError', { status: false, message: '' })
   return config
 })
 axios.interceptors.response.use(config => {

@@ -20,6 +20,7 @@ import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
 // 定义路由行为
 import { useRouter } from 'vue-router'
+import createMessage from '../components/createMessage'
 
 export default defineComponent({
   setup() {
@@ -50,11 +51,13 @@ export default defineComponent({
       }
       // 请求数据
       store.dispatch('loginAndFetch', payload).then(data => {
-        console.log(data)
+        createMessage('登录成功 2秒后跳转首页', 'success')
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
       }).catch(e => {
         console.log(e)
       })
-      router.push('/')
     }
 
     const handleLogin = async () => {
