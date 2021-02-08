@@ -15,6 +15,7 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const currentId = +route.params.id // string convert to int
+    console.log('currentId', currentId)
     return {
       route
     }
