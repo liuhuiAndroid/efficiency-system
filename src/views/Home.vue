@@ -9,9 +9,9 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps } from '../store'
+import { GlobalDataProps, HomeProps } from '../store'
 import request from '@/utils/request'
 
 export default defineComponent({
@@ -19,6 +19,11 @@ export default defineComponent({
   setup() {
     const store = useStore<GlobalDataProps>()
     const count = computed(() => store.state.count)
+    onMounted(() => {
+      // 请求数据
+      store.dispatch('getHomeData')
+    })
+    const homeData = computed(() => store.state.homeData)
     return {
       count
     }

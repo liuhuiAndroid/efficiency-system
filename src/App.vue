@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <header-component v-show="$route.name!=='login'"/>
+    <h1 v-if="isLoading">正在读取中~~~</h1>
     <router-view class="main-container"/>
   </div>
 </template>
@@ -18,6 +19,7 @@ export default defineComponent({
   setup() {
     const store = useStore<GlobalDataProps>()
     const currentUser = computed(() => store.state.user)
+    const isLoading = computed(() => store.state.loading)
 
     const route = useRoute()
     const routename = ref(route.name)
@@ -28,7 +30,8 @@ export default defineComponent({
     })
 
     return {
-      routename
+      routename,
+      isLoading
     }
   },
   components: {

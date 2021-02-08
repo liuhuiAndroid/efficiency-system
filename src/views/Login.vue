@@ -46,7 +46,8 @@ export default defineComponent({
     const onSubmitAdd = async (values: any) => {
       console.log('onSubmitAdd', values)
       router.push('/')
-      store.commit('login')
+      // 请求数据
+      store.dispatch('login')
     }
 
     const handleLogin = async () => {
