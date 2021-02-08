@@ -18,7 +18,8 @@ export default defineComponent({
     store.commit('login')
 
     const router = useRouter()
-    router.push(name: '/monitordetail', params: {id: 1})
+    const currentId = 1
+    router.push({ path: `/monitordetail/${currentId}` })
   }
 })
 </script>

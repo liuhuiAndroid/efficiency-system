@@ -1,0 +1,8 @@
+###
+POST http://114.80.110.197/testmobileapi/json/reply/GetTakeSeeStaffEvaluationStatRequest
+Content-Type: application/json
+cityen: sz
+platform: android
+
+{"dayCount":-7,"pageCount":1,"pageIndex":1,"propId":"12082314393137CFD9843F1C33B98CDC"}
+

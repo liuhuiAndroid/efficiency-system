@@ -14,47 +14,54 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: '首页',
-    component: Home
+    component: Home,
+    meta: { requiredLogin: false }
   },
   {
     path: '/benchmarking',
     name: '标杆组串',
-    component: Benchmarking
+    component: Benchmarking,
+    meta: { requiredLogin: false }
   },
   {
     path: '/monitor',
     name: '实时监测',
     component: Monitor,
-    meta: { requiredLogin: true }
+    meta: { requiredLogin: false }
   },
   {
     path: '/monitordetail/:id',
     name: '实时监测详情',
-    component: MonitorDetail
+    component: MonitorDetail,
+    meta: { requiredLogin: false }
   },
   {
     path: '/warning',
     name: '设备预警',
-    component: Warning
+    component: Warning,
+    meta: { requiredLogin: false }
   },
   {
     path: '/analysis',
     name: '能效分析',
-    component: Analysis
+    component: Analysis,
+    meta: { requiredLogin: false }
   },
   {
     path: '/suggestion',
     name: '运维建议',
-    component: Suggestion
+    component: Suggestion,
+    meta: { requiredLogin: false }
   },
   {
     path: '/setting',
     name: '系统设置',
-    component: Setting
+    component: Setting,
+    meta: { requiredLogin: false }
   },
   {
     path: '/login',
-    name: '系统设置',
+    name: '登录',
     component: Login,
     meta: { requiredAlreadyLogin: true }
   }
@@ -71,8 +78,8 @@ router.beforeEach((to, from, next) => {
   console.log('to', to)
   console.log('to.meta', to.meta)
   console.log('from', from)
-  if (to.meta.requiredLogin && to.name !== 'login' && !store.state.user.isLogin) {
-    next({ name: 'login' })
+  if (to.meta.requiredLogin && !store.state.user.isLogin) {
+    next('/login')
   } else if (to.meta.requiredAlreadyLogin && store.state.user.isLogin) {
     next('/')
   } else {

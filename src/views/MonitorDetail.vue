@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>实时监测 详情</h1>
+    // pre 标签可定义预格式化的文本。在pre元素中的文本会保留空格和换行符。文本显现为等宽字体
     <pre>{{route}}</pre>
   </div>
 </template>
