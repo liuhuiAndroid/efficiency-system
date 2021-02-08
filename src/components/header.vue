@@ -43,7 +43,6 @@ nav {
       overflow: hidden;
       margin: 0 auto;
 }
-
 .logo {
     margin-left: -30px;
 }
@@ -53,7 +52,6 @@ nav {
     height: 55px;
     background: url(../assets/logo.png) no-repeat;
 }
-
 .logo h2 {
     padding-left: 140px;
     font-size: 28px;

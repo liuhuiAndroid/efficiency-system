@@ -11,6 +11,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "echarts": "^5.0.2",
+    "element-plus": "^1.0.2-beta.31",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
@@ -24,6 +25,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "babel-plugin-component": "^1.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
