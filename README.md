@@ -16,9 +16,17 @@
 
 ECharts：https://echarts.apache.org/
 
-Vue3：https://www.vue3js.cn/docs/zh/
+vue3：https://www.vue3js.cn/docs/zh/
+vue3 github：https://github.com/vuejs/vue-next
 
-element-plus: https://github.com/element-plus/element-plus
+vuex: https://next.router.vuejs.org/
+vuex github：https://github.com/vuejs/vue-router-next
+
+vuex: https://vuex.vuejs.org/zh/
+vuex github：https://github.com/vuejs/vuex
+
+element-plus: https://element-plus.gitee.io/#/zh-CN
+element-plus github: https://github.com/element-plus/element-plus
 
 ```shell
 winpty vue.cmd create efficiency-system
@@ -33,7 +41,3 @@ npm run lint
 // Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
-
-
-
-
