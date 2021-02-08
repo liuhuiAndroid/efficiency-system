@@ -14,9 +14,11 @@
 - 运维建议
 - 系统设置
 
-ECharts ：https://echarts.apache.org/
+ECharts：https://echarts.apache.org/
 
 Vue3：https://www.vue3js.cn/docs/zh/
+
+element-plus: https://github.com/element-plus/element-plus
 
 ```shell
 winpty vue.cmd create efficiency-system
