@@ -1,5 +1,5 @@
 /**
- * @description [ axios 请求封装]
+ * @description [ axios 请求封装 ]
  */
 import axios from 'axios'
 
@@ -13,11 +13,12 @@ const service = axios.create({
   }
 })
 
-// Request interceptors
+// Request interceptor
 service.interceptors.request.use(
-  (config: any) => {
+  config => {
     // Add Authorization header to every request, you can add other custom headers here
     // config.headers['Authorization'] = 'tokentokentokentokentokentokenhhh'
+    // config.params = { ...config.params, icode: 'aaa' }
     return config
   },
   (error: any) => {

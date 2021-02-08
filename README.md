@@ -28,6 +28,9 @@ vuex github：https://github.com/vuejs/vuex
 element-plus: https://element-plus.gitee.io/#/zh-CN
 element-plus github: https://github.com/element-plus/element-plus
 
+animate.css: https://animate.style/
+animate.css github: https://github.com/animate-css/animate.css
+
 ```shell
 winpty vue.cmd create efficiency-system
 // Project setup
