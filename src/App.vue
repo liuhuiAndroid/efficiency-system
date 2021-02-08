@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <header-component v-show="$route.name!=='login'"/>
-    <h1 v-if="isLoading">正在读取中~~~</h1>
     <router-view class="main-container"/>
+    <loader v-if="true"></loader>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ import { GlobalDataProps } from './store'
 import HeaderComponent from './components/header.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import Loader from './components/Loader.vue'
 
 export default defineComponent({
   name: 'App',
@@ -35,7 +36,8 @@ export default defineComponent({
     }
   },
   components: {
-    HeaderComponent
+    HeaderComponent,
+    Loader
   }
 })
 </script>
