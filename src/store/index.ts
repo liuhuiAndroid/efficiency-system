@@ -13,6 +13,11 @@ export interface HomeProps {
   createdAt?: string;
 }
 
+export interface GlobalErrorProps {
+  status: boolean;
+  message?: string;
+}
+
 export interface GlobalDataProps {
   token: string;
   loading: boolean;
@@ -20,11 +25,6 @@ export interface GlobalDataProps {
   user: UserProps;
   homeData: HomeProps;
   error: GlobalErrorProps;
-}
-
-export interface GlobalErrorProps {
-  status: boolean;
-  message?: string;
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -46,7 +46,7 @@ export default createStore<GlobalDataProps>({
     loading: false,
     count: 0,
     user: { isLogin: false },
-    homeData: { }
+    homeData: {}
   },
   mutations: {
     add (state) {
@@ -64,7 +64,7 @@ export default createStore<GlobalDataProps>({
       localStorage.remove('token')
       delete axios.defaults.headers.common.Authorization
     },
-    fetchCurrentUser(state, rawData) {
+    fetchCurrentUser (state, rawData) {
       state.user = { isLogin: true, ...rawData.data }
     },
     getHomeData (state, rawData) {
@@ -73,7 +73,7 @@ export default createStore<GlobalDataProps>({
     setLoading (state, status) {
       state.loading = status
     },
-    setError(state, e: GlobalErrorProps) {
+    setError (state, e: GlobalErrorProps) {
       state.error = e
     }
   },
@@ -82,7 +82,7 @@ export default createStore<GlobalDataProps>({
       // 异步请求改造
       return postAndCommit('/user/login', 'login', commit, payload)
     },
-    fetchCurrentUser({ commit }) {
+    fetchCurrentUser ({ commit }) {
       return getAndCommit('/user/current', 'fetchCurrentUser', commit)
     },
     async getHomeData ({ commit }, cid) {
@@ -95,7 +95,7 @@ export default createStore<GlobalDataProps>({
       })
     },
     // 组合Action
-    loginAndFetch({ dispatch }, loginData) {
+    loginAndFetch ({ dispatch }, loginData) {
       return dispatch('login', loginData).then(() => {
         return dispatch('fetchCurrentUser')
       })
