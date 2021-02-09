@@ -45,4 +45,5 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 npm cache clean -f
+npm install --global --production windows-build-tools
 ```
