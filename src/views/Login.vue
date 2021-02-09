@@ -61,7 +61,6 @@ export default defineComponent({
     }
 
     const handleLogin = async () => {
-      ElMessage.success('登录成功 2秒后跳转首页')
       const form = unref(loginForm)
       if (!form) {
         console.log('form', false)

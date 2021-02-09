@@ -29,12 +29,15 @@ export interface GlobalDataProps {
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
   const { data } = await axios.get(url)
-  // await new Promise(resolve => setTimeout(resolve, 3000))
+  // todo
+  await new Promise(resolve => setTimeout(resolve, 3000))
   commit(mutationName, data)
 }
 
 const postAndCommit = async (url: string, mutationName: string, commit: Commit, payload: any) => {
   const { data } = await axios.post(url, payload)
+  // todo
+  await new Promise(resolve => setTimeout(resolve, 3000))
   commit(mutationName, data)
   return data
 }

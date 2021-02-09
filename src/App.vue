@@ -3,7 +3,6 @@
     <header-component v-show="$route.name!=='login'"/>
     <h1>{{error}}</h1>
     <router-view class="main-container"/>
-    <!-- <loader v-if="true"></loader> -->
   </div>
 </template>
 
@@ -14,9 +13,9 @@ import { GlobalDataProps } from './store'
 import HeaderComponent from './components/header.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-// import Loader from './components/Loader.vue'
-import { ElMessage } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 import axios from 'axios'
+import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type'
 
 export default defineComponent({
   name: 'App',
@@ -51,15 +50,25 @@ export default defineComponent({
         ElMessage.error(message)
       }
     })
+
+    let loadingInstance: ILoadingInstance | undefined
+    watch(() => isLoading.value, () => {
+      console.log('isLoading', isLoading.value)
+      if (isLoading.value) {
+        loadingInstance = ElLoading.service({ fullscreen: true, text: '拼命加载中' })
+      } else {
+        if (loadingInstance) {
+          loadingInstance.close()
+        }
+      }
+    })
     return {
       routename,
-      isLoading,
       error
     }
   },
   components: {
     HeaderComponent
-    // Loader
   }
 })
 </script>
