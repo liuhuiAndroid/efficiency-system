@@ -37,6 +37,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (!currentUser.value.isLogin && token.value) {
+        // axios 设置通用 header
         axios.defaults.headers.common.Authorization = `Bearer ${token.value}`
         store.dispatch('fetchCurrentUser').then(data => {
           console.log(data)

@@ -47,10 +47,6 @@ app.config.globalProperties.$ELEMENT = { size: 'medium', zIndex: 2000 }
 app.use(ElButton)
 
 app.mount('#app')
-// console.log('store', store.state.count)
-// store.commit('add')
-// store.commit('add')
-// console.log('store', store.state.count)
 
 async function hello () {
   const greeting = await Promise.resolve('Hello')
