@@ -1,11 +1,11 @@
 <template>
   <el-container>
     <el-header>
-      <div>远东学校——光魄能效云系统</div>
+      <header-component v-show="$route.name!=='login'"/>
     </el-header>
     <el-container>
       <el-aside width="200px">
-        <header-component v-show="$route.name!=='login'"/>
+        <aside-component />
       </el-aside>
       <el-main>
         <router-view class="main-container"/>
@@ -19,6 +19,7 @@ import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from './store'
 import HeaderComponent from './components/header.vue'
+import AsideComponent from './components/aside.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { ElLoading, ElMessage } from 'element-plus'
@@ -74,7 +75,8 @@ export default defineComponent({
     }
   },
   components: {
-    HeaderComponent
+    HeaderComponent,
+    AsideComponent
   }
 })
 </script>
@@ -94,8 +96,8 @@ html, body {
   flex-direction: column;
 }
 
-.el-header, .el-footer {
-  background-color: #B3C0D1;
+.el-header {
+  background-color: #D3DCE6;
   color: #333;
   text-align: center;
   line-height: 60px;

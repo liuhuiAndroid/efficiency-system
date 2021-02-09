@@ -1,15 +1,16 @@
 <template>
   <div class="header-container">
-    <el-col>
-      <el-row v-for="(val, index) of navs" :key="`nav-${val.path}-${index}`">
-        <el-col :span="24">
-          <router-link :to="val.path">{{val.name}}</router-link>
-        </el-col>
-      </el-row>
-      <el-row @click="logout()">
-        <el-col :span="24"><div>退出系统</div></el-col>
-      </el-row>
-    </el-col>
+    <el-row>
+      <el-col :span="2">
+        <el-image
+          style="width: 130px; height: 60px"
+          :src="require('../assets/logo.png')"
+          :fit="contain">
+        </el-image>
+      </el-col>
+      <el-col :span="20"><div>远东学校——光魄能效云系统</div></el-col>
+      <el-col :span="2" @click="logout()"><div>退出系统</div></el-col>
+    </el-row>
   </div>
 </template>
 
@@ -18,18 +19,8 @@ import { defineComponent, getCurrentInstance } from 'vue'
 // import { UserProps } from '../store'
 
 export default defineComponent({
-  name: 'HeaderItem',
+  name: 'Header',
   setup() {
-    const navs = [
-      { name: '首页', path: '/' },
-      { name: '标杆组串', path: '/benchmarking' },
-      { name: '实时监测', path: '/monitor' },
-      { name: '设备预警', path: '/warning' },
-      { name: '能效分析', path: '/analysis' },
-      { name: '运维建议', path: '/suggestion' },
-      { name: '系统设置', path: '/setting' }
-    ]
-
     const currentInstance = getCurrentInstance()
     const logout = () => {
       if (currentInstance) {
@@ -49,7 +40,6 @@ export default defineComponent({
       }
     }
     return {
-      navs,
       logout
     }
   }
