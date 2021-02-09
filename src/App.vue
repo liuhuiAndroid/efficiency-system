@@ -1,8 +1,17 @@
 <template>
-  <div class="container">
-    <header-component v-show="$route.name!=='login'"/>
-    <router-view class="main-container"/>
-  </div>
+  <el-container>
+    <el-header>
+      <div>远东学校——光魄能效云系统</div>
+    </el-header>
+    <el-container>
+      <el-aside width="200px">
+        <header-component v-show="$route.name!=='login'"/>
+      </el-aside>
+      <el-main>
+        <router-view class="main-container"/>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts">
@@ -84,8 +93,17 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-.main-container {
-  flex: 1;
-  padding: 12px 20px;
+
+.el-header, .el-footer {
+  background-color: #B3C0D1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-aside {
+  background-color: #D3DCE6;
+  color: #333;
+  text-align: center;
 }
 </style>

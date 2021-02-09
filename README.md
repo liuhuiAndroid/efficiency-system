@@ -51,7 +51,3 @@ npm install --global --production windows-build-tools
 npm i -g npm-check-updates
 ncu -u
 ```
-
-
-
-https://github.com/LCL121/zheye

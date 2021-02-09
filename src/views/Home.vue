@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <div class="animate__animated animate__fadeInUp">浙江帷盛科技光伏电站</div>
     <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
     <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
     <div>{{count}}</div>

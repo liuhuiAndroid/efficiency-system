@@ -17,3 +17,6 @@ VSCode插件：
 - Vue3 系统入门与项目实战 https://coding.imooc.com/class/472.html
 - Vue3.0+TS 仿知乎专栏企业级项目 https://coding.imooc.com/class/449.html
 - Vue3.0+TS打造企业级组件库 https://coding.imooc.com/class/chapter/466.html
+
+- 项目参考: https://github.com/LCL121/zheye
+

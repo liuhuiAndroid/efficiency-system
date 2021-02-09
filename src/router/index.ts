@@ -9,6 +9,7 @@ import Suggestion from '../views/Suggestion.vue'
 import Setting from '../views/Setting.vue'
 import Login from '../views/Login.vue'
 import store from '../store'
+import TestColumnList from '../views/TestColumnList.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -63,6 +64,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: '登录',
     component: Login,
+    meta: { requiredAlreadyLogin: false }
+  },
+  {
+    path: '/test',
+    name: '登录',
+    component: TestColumnList,
     meta: { requiredAlreadyLogin: false }
   }
 ]
