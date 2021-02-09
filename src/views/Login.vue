@@ -20,7 +20,7 @@ import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
 // 定义路由行为
 import { useRouter } from 'vue-router'
-import createMessage from '../components/createMessage'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   setup() {
@@ -51,7 +51,7 @@ export default defineComponent({
       }
       // 请求数据
       store.dispatch('loginAndFetch', payload).then(data => {
-        createMessage('登录成功 2秒后跳转首页', 'success')
+        ElMessage.success('登录成功 2秒后跳转首页')
         setTimeout(() => {
           router.push('/')
         }, 2000)
@@ -61,6 +61,7 @@ export default defineComponent({
     }
 
     const handleLogin = async () => {
+      ElMessage.success('登录成功 2秒后跳转首页')
       const form = unref(loginForm)
       if (!form) {
         console.log('form', false)

@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import animated from 'animate.css'
-import { ElButton, ElInput, ElSpace, ElForm, ElFormItem } from 'element-plus'
+import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElMessage } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
@@ -41,6 +41,7 @@ app.component(ElInput.name, ElInput)
 app.component(ElSpace.name, ElSpace)
 app.component(ElForm.name, ElForm)
 app.component(ElFormItem.name, ElFormItem)
+app.component(ElMessage.name, ElMessage)
 // element-plus 全局配置
 app.config.globalProperties.$ELEMENT = { size: 'medium', zIndex: 2000 }
 app.use(ElButton)
@@ -51,7 +52,7 @@ app.mount('#app')
 // store.commit('add')
 // console.log('store', store.state.count)
 
-async function hello() {
+async function hello () {
   const greeting = await Promise.resolve('Hello')
   return greeting
 }
