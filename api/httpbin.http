@@ -6,3 +6,26 @@ platform: android
 
 {"dayCount":-7,"pageCount":1,"pageIndex":1,"propId":"12082314393137CFD9843F1C33B98CDC"}
 
+### 注册
+POST http://api.vikingship.xyz/api/users
+Content-Type: application/json
+
+{"email": "642464144@qq.com", "password": "111111", "nickName": "11111111111"}
+
+### 登录
+POST http://api.vikingship.xyz/api/user/login
+Content-Type: application/json
+
+{"email": "642464144@qq.com", "password": "111111"}
+
+### 获取当前用户登录信息
+GET http://api.vikingship.xyz/api/user/current
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYwMjIyZDIzOWM3YWIxMjYzYmFiYWE0MSIsImVtYWlsIjoiNjQyNDY0MTQ0QHFxLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJGs3QUp3NzJyRHZjcllEb3RPV1NocXU4Ui9NL2NGcXouWkdFQ2huWVR1ZGF5Nmp1SXpvR2YuIiwibmlja05hbWUiOiIxMTExMTExMTExMSIsInJvbGUiOnsiX2lkIjoiNWU2MDY5OGJkYjYwZjY0YjU3ZTM2MTMzIiwibmFtZSI6Im5vcm1hbFVzZXIiLCJfX3YiOjAsImNyZWF0ZWRBdCI6IjIwMjAtMDMtMDVUMDI6NTI6NTkuODA4WiIsImFjY2VzcyI6InVzZXIifSwiX192IjowLCJjb2x1bW4iOiI2MDIyMmQyMzljN2FiMTI2M2JhYmFhNDIiLCJjcmVhdGVkQXQiOiIyMDIxLTAyLTA5VDA2OjM1OjE1Ljc2MVoifSwiZXhwIjoxNjEzNDU3NjE4LCJpYXQiOjE2MTI4NTI4MTh9.vFRcXBQDKxrFtitrsgHm82YNwr_M8K7Ri0OObtJ5ljA
+
+### 专栏详情
+GET http://api.vikingship.xyz/api/columns/5f3e86d62c56ee13bb83096c
+
+### 专栏列表
+GET http://api.vikingship.xyz/api/columns?currentPage=1&pageSize=3
+
+
