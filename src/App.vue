@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <header-component v-show="$route.name!=='login'"/>
-    <h1>{{error}}</h1>
     <router-view class="main-container"/>
   </div>
 </template>
@@ -25,7 +24,6 @@ export default defineComponent({
     const isLoading = computed(() => store.state.loading)
     const token = computed(() => store.state.token)
     const error = computed(() => store.state.error)
-
     const route = useRoute()
     const routename = ref(route.name)
 
@@ -63,8 +61,7 @@ export default defineComponent({
       }
     })
     return {
-      routename,
-      error
+      routename
     }
   },
   components: {

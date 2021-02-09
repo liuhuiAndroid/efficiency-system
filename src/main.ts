@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import animated from 'animate.css'
-import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage } from 'element-plus'
+import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
 import axios from 'axios'
+import { IMessage } from 'element-plus/lib/el-message/src/types'
 
 axios.defaults.baseURL = 'http://api.vikingship.xyz/api'
 // Add a request interceptor
@@ -51,7 +52,14 @@ app.component(ElForm.name, ElForm)
 app.component(ElFormItem.name, ElFormItem)
 app.component(ElMessage.name, ElMessage)
 // element-plus 按需引入插件
-app.use(ElLoading)
+const plugins: any[] = [
+  ElLoading,
+  ElMessage,
+  ElMessageBox
+]
+plugins.forEach(plugin => {
+  app.use(plugin)
+})
 // element-plus 全局配置
 app.config.globalProperties.$ELEMENT = { size: 'medium', zIndex: 2000 }
 app.use(ElButton)
