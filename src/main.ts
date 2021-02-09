@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import animated from 'animate.css'
-import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage, ElMessageBox } from 'element-plus'
+import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage, ElMessageBox, ElPagination } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
@@ -51,6 +51,7 @@ app.component(ElSpace.name, ElSpace)
 app.component(ElForm.name, ElForm)
 app.component(ElFormItem.name, ElFormItem)
 app.component(ElMessage.name, ElMessage)
+app.component(ElPagination.name, ElPagination)
 // element-plus 按需引入插件
 const plugins: any[] = [
   ElLoading,
