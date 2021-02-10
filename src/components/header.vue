@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <el-row>
+    <!-- <el-row>
       <el-col :span="2">
         <el-image
           style="width: 130px; height: 60px"
@@ -10,7 +10,10 @@
       </el-col>
       <el-col :span="20"><div>远东学校——光魄能效云系统</div></el-col>
       <el-col :span="2" @click="logout()"><div>退出系统</div></el-col>
-    </el-row>
+    </el-row> -->
+    <div class="header-warp" id="headerWarp">
+      <img :src="require('../assets/logo.png')" alt="">
+    </div>
   </div>
 </template>
 

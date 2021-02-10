@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Shaw">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <link rel="stylesheet" href="./css/analysis.css">
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+    
+    <title>能效分析</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function handleCalc() {
+                var dw = document.body.clientWidth;
+                var minScale = dw / 1920;
+                if (minScale < 1200 / 1920) {
+                    minScale = 1200 / 1920;
+                } else if (minScale > 1) {
+                    minScale = 1;
+                }
+                document.documentElement.style.fontSize = (minScale * 100) + 'px';
+            }
+            handleCalc();
+            window.addEventListener('resize', handleCalc);
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="page-wrap" id="app">
+        <div class="header-warp" id="headerWarp">
+            <img src="./analysis/logo.png" alt="">
+           <div class="header-title">某某电站—光魄能效云系统</div>
+           <div class="header-date">
+               <p>2020年8月24日 星期一</p>
+               <p>27 晴</p>
+               <p>退出系统</p>
+            </div>
+        </div>
+        <div class="main-warp">
+            <div class="main-left">
+                <p><img src="./analysis/left1.png" alt=""><span>首页</span></p>
+                <p><img src="./analysis/left2.png" alt=""><span>标杆组串</span></p>
+                <p><img src="./analysis/left3.png" alt=""><span>实时监测</span></p>
+                <p><img src="./analysis/left4.png" alt=""><span>设备预警</span></p>
+                <p class="main-left_active"><img src="./analysis/left5_active.png" alt=""><span>能效分析</span></p>
+                <p><img src="./analysis/left6.png" alt=""><span>运维建议</span></p>
+                <p><img src="./analysis/left7.png" alt=""><span>系统设置</span></p>
+            </div>
+            <div class="main-right">
+                <div class="main-right-menu">
+                    <p class="main-menu-title">运行监测</p>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>1.2万元（2.1%）</span>
+                        </p>
+                    </div>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon1.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>1.2万元（2.1%）</span>
+                        </p>
+                    </div>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon2.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>1.2万元（2.1%）</span>
+                        </p>
+                    </div>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon3.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>1.2万元（2.1%）</span>
+                        </p>
+                    </div>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon4.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>1.2万元（2.1%）</span>
+                        </p>
+                    </div>
+                    <div class="main-menu-item">
+                        <img src="./analysis/menu_icon5.png" alt="">
+                        <p>
+                            组件效率衰减<br>
+                            <span>12700元（2.1%）</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="main-right-center">
+                    <p class="main-right-top">环境数据：<span style="margin-left: 0.2rem;">温度：4度</span><span>湿度：60%</span><span>风速：4m/s</span><span>GHI：120W/m</span><span>DHI：80W/m</span></p>
+                    <div class="main-chart">
+                        <div class="main-chart-box1">
+                            <div class="main-chart-box2">
+                                <div class="main-chart-top">
+                                    <div class="main-chart-item">
+                                        <img src="./analysis/guangfu.png" alt="">
+                                        <div class="main-chart-box">
+                                            <p class="main-chart-title">光伏消耗</p>
+                                            <div class="main-chart-desc">
+                                                <span>组件效率衰减：1.2万元（2.1%）</span>
+                                                <span>预期遮挡：1.2万元（2.1%）</span>
+                                                <span>组件效率衰减：1.2万元（2.1%）</span>
+                                                <span>预期遮挡：1.2万元（2.1%）</span>
+                                                <span>组件效率衰减：1.2万元（2.1%）</span>
+                                                <span>预期遮挡：1.2万元（2.1%）</span>
+                                            </div>
+                                            <p class="main-chart-bottom">光伏板</p>
+                                        </div>
+                                    </div>
+                                    <div class="main-chart-item main-chart-item2">
+                                        <img src="./analysis/nibian.png" alt="">
+                                        <div class="main-chart-box">
+                                            <p class="main-chart-title">逆变器消耗</p>
+                                            <div class="main-chart-desc main-chart-desc1">
+                                                <span>逆变器损耗：15100元（2.1%）</span>
+                                                <span>故障险检修损耗：11.2万元（2.1%）</span>
+                                            </div>
+                                            <p class="main-chart-bottom main-chart-bottom1">逆变器</p>
+                                        </div>
+                                    </div>
+                                    <div class="main-chart-item main-chart-item3">
+                                        <img src="./analysis/nibian.png" alt="">
+                                        <div class="main-chart-box">
+                                            <p class="main-chart-title">电网消耗</p>
+                                            <div class="main-chart-desc main-chart-desc1">
+                                                <span>限电损失：0%</span>
+                                                <span>功率预测不准确的罚款：0%</span>
+                                            </div>
+                                            <p class="main-chart-bottom main-chart-bottom1">电网</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-chart-img">
+                                    <img class="guangfu_img" src="./analysis/guangfu_img.png" alt="">
+                                    <img class="huiliu_img" src="./analysis/huiliu_img.png" alt="">
+                                    <img class="nibian_img" src="./analysis/nibian_img.png" alt="">
+                                    <img class="shengya_img" src="./analysis/shengya_img.png" alt="">
+                                    <img class="dianwang_img" src="./analysis/dianwang_img.png" alt="">
+                                    <img class="arrow1" src="./analysis/arrow.png" alt="">
+                                    <img class="arrow2" src="./analysis/arrow.png" alt="">
+                                    <img class="arrow3" src="./analysis/arrow3.png" alt="">
+                                    <img class="arrow4" src="./analysis/arrow3.png" alt="">
+                                </div>
+                                <div class="main-chart-top">
+                                    <div class="main-chart-item main-chart-item4">
+                                        <img src="./analysis/shengya.png" alt="">
+                                        <div class="main-chart-box">
+                                            <p class="main--chart-bottom-title">汇流箱</p>
+                                            <p class="main-chart-bottom-desc">汇流箱消耗</p>
+                                            <div class="main-chart-desc main-chart-desc2">
+                                                <span>功率预测不准确的罚款：0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="main-chart-item main-chart-item5">
+                                        <img src="./analysis/shengya.png" alt="">
+                                        <div class="main-chart-box">
+                                            <p class="main--chart-bottom-title">升压变</p>
+                                            <p class="main-chart-bottom-desc">升压变消耗</p>
+                                            <div class="main-chart-desc main-chart-desc2">
+                                                <span>功率预测不准确的罚款：0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+</html>

@@ -1,0 +1,338 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: Noto Sans S Chinese;
+  background: url(../img/background.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.page-wrap {
+  max-width: 1920px;
+  min-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.header-warp{
+  max-width: 1920px;
+  min-width: 1200px;
+  width: 100%;
+  height: 0.8rem;
+  background: url(../img/header.png) no-repeat center;
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+.header-warp img{
+  width: 1.2rem;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+
+.header-title{
+  font-size: 0.3rem;
+  line-height: 0.6rem;
+  font-weight: 500;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.header-date{
+  font-size: 0.16rem;
+  text-align: center;
+  color: #17FFFF;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.4rem;
+}
+
+.header-date p{
+  float: left;
+  margin-right: 10px;
+}
+
+.main-warp{
+  width: 100%;
+  position: absolute;
+  top: 1rem;
+  bottom: 0.2rem;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+
+.main-left{
+  width: 2rem;
+  height: 100%;
+  font-size: 0.16rem;
+  color: #D2FFFF;
+}
+
+.main-left p {
+  width: 90%;
+  margin: 0 auto;
+  height: 0.62rem;
+  margin-bottom: 0.3rem;
+  background: url(../img/menu_bg.png) no-repeat center;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-left p span{
+  display: block;
+  width: 70%;
+  height: 100%;
+  float: right;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-left_active{
+  color: #00B1FF;
+}
+
+.main-left p img{
+  width: 0.28rem;
+  height: 0.28rem;
+  margin: 0.16rem;
+}
+
+.main-right{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.2rem;
+  right: 0.2rem;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #00B1FF;
+}
+
+.main-right-header{
+  width: 100%;
+  padding: 0 0.2rem;
+  box-sizing: border-box;
+  height: 0.7rem;
+  background: #014F71;
+  font-size: 0.16rem;
+  color: #fff;
+  border-bottom: 1px solid #00B1FF;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-right-header div{
+  margin-right: 0.2rem;
+}
+.main-right-header p span{
+  margin-right: 0.2rem;
+}
+.main-right-center{
+  width: 100%;
+  overflow: hidden;
+}
+.main-center-warp{
+  position: absolute;
+  top: 0.7rem;
+  bottom: 0.2rem;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+}
+.main-center-box{
+  width: 100%;
+  overflow: hidden;
+}
+.select-main{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.select-input{
+  width: 2rem;
+  height: 0.46rem;
+  border: 1px solid;
+  border-image: linear-gradient(90deg, rgba(0, 177, 255, 1), rgba(0, 177, 255, 0.2), rgba(0, 177, 255, 1)) 1 1;
+  background: rgba(0, 177, 255, 0.2);
+  padding: 0 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.select-item{
+  width: 2rem;
+  overflow: hidden;
+  background: #00B1FF;
+  padding: 0 0.1rem;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0.47rem;
+  right: 0;
+  z-index: 99;
+  display: none;
+  cursor: pointer;
+}
+.select-item li{
+  width: 100%;
+  display: flex;
+  height: 0.4rem;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.center-item{
+  width: 100%;
+  height: 24%;
+  padding: 0.14rem 0 0 0.25rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 12px;
+  color: #fff;
+}
+
+.center-item-title{
+  width: 1.5rem;
+  height: 0.28rem;
+  line-height: 0.23rem;
+  background: url(../img/title_icon.png) no-repeat center;
+  background-size: 100% 100%;
+  overflow: hidden;
+  text-align: right;
+  margin-bottom: 0.2rem;
+  font-size: 0.16rem;
+  box-sizing: border-box;
+}
+
+.center-item-content{
+  width: 3rem;
+  height: 2rem;
+  background: url(../img/center_bg.png) no-repeat center;
+  background-size: 100% 100%;
+  float: left;
+  margin-right: 0.25rem;
+}
+
+.center-item-error{
+  background: url(../img/center_bg_error.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.center-item-error .content-title{
+  color: #FF0000;
+  
+}
+.center-item-error .content-title::after{
+  content: '';
+  clear: both;
+  background: url(../img/error_icon.png) no-repeat center;
+  width: 0.2rem;
+  height: 0.2rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+}
+
+.center-item-warning{
+  background: url(../img/center_bg_warning.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.center-item-warning .content-title{
+  color: #FFBE02;
+  
+}
+.center-item-warning .content-title::after{
+  content: '';
+  clear: both;
+  background: url(../img/warning_icon.png) no-repeat center;
+  width: 0.2rem;
+  height: 0.2rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+}
+
+.content-title{
+  width: 100%;
+  height: 50%;  
+  color: #10C5F3;
+  position: relative;
+  padding: 4% 0 0 4%;
+  box-sizing: border-box;
+}
+
+.content-title img{
+  width: 1rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.5rem;
+}
+
+.center-item-content p{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.08rem;
+}
+
+.center-item-content p span{
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
+}
+.page-warp1{
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 0.3rem;
+  height: 0.4rem;
+  margin-top: 0.1rem;
+  color: #fff;
+  font-size: 0.16rem;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-warp1 p{
+  float: right;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.page-warp1 p span{
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #013D63;
+  border-radius: 2px;
+  margin-left: 0.02rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-warp1 p .page-item-active{
+  background: #00B1FF;
+}

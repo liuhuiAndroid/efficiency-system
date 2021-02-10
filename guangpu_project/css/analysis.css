@@ -1,0 +1,378 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: Noto Sans S Chinese;
+  background: url(../analysis/background.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.page-wrap {
+  max-width: 1920px;
+  min-width: 1300px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.header-warp{
+  max-width: 1920px;
+  min-width: 1200px;
+  width: 100%;
+  height: 0.8rem;
+  background: url(../analysis/header.png) no-repeat center;
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+.header-warp img{
+  width: 1.2rem;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+
+.header-title{
+  font-size: 0.3rem;
+  line-height: 0.6rem;
+  font-weight: 500;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.header-date{
+  font-size: 0.16rem;
+  text-align: center;
+  color: #17FFFF;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.4rem;
+}
+
+.header-date p{
+  float: left;
+  margin-right: 10px;
+}
+
+.main-warp{
+  width: 100%;
+  position: absolute;
+  top: 1rem;
+  bottom: 0.2rem;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+
+.main-left{
+  width: 2rem;
+  height: 100%;
+  font-size: 0.16rem;
+  color: #D2FFFF;
+}
+
+.main-left p {
+  width: 90%;
+  margin: 0 auto;
+  height: 0.62rem;
+  margin-bottom: 0.3rem;
+  background: url(../analysis/menu_bg.png) no-repeat center;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-left p span{
+  display: block;
+  width: 70%;
+  height: 100%;
+  float: right;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-left_active{
+  color: #00B1FF;
+}
+
+.main-left p img{
+  width: 0.28rem;
+  height: 0.28rem;
+  margin: 0.16rem;
+}
+
+.main-right{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.2rem;
+  right: 0.2rem;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #00B1FF;
+}
+
+.main-right-menu{
+  width: 2.2rem;
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  bottom: 0.2rem;
+  border: 1px solid #00B1FF;
+  border-radius: 4px;
+  background: #022841;
+  font-size: 0.16rem;
+  color: #fff;
+  padding: 0.2rem 0 0 0.2rem;
+}
+
+.main-menu-title{
+  font-size: 0.18rem;
+}
+
+.main-menu-item{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.24rem;
+}
+
+.main-menu-item img{
+  width: 0.3rem;
+  margin-right: 0.2rem;
+}
+
+.main-menu-item span{
+  display: inline-block;
+  margin-top: 0.06rem;
+  color: #00B1FF;
+}
+
+.main-right-center{
+  position: absolute;
+  left: 2.8rem;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  right: 0;
+  box-sizing: border-box;
+  font-size: 0.16rem;
+  color: #fff;
+}
+.main-right-top{
+  width: 100%;
+  height: 0.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main-right-top span{
+  display: inline-block;
+  margin-left: 0.4rem;
+}
+.main-chart{
+  top: 0.6rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  overflow-y: scroll;
+  
+}
+
+.main-chart-box1{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-chart-box2{
+  width: 100%;
+  overflow: auto;
+}
+
+.main-chart-top{
+  width: 100%;
+  overflow: hidden;
+}
+
+.main-chart-item{
+  float: left;
+  width:  5rem;
+  height: 2.5rem;
+  margin-top: 0.05rem;
+  position: relative;
+}
+
+.main-chart-item img{
+  width: 100%;
+  height: 100%;
+}
+
+.main-chart-item2{
+  width: 2.8rem;
+  margin-left: 0.2rem;
+}
+
+.main-chart-item3{
+  width: 2.5rem;
+  margin-left: 1.9rem;
+}
+
+.main-chart-item4{
+  width: 2.6rem;
+  height: 2rem;
+  margin-left: 3.4rem;
+}
+
+.main-chart-item5{
+  width: 2.6rem;
+  height: 2rem;
+  margin-left: 1.3rem;
+}
+
+.main-chart-box{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 12px;
+  padding-left: 0.12rem;
+   box-sizing: border-box;
+}
+
+.main-chart-title{
+  margin: 0.04rem 0 0 0.06rem;
+  font-size: 0.16rem;
+}
+.main-chart-desc {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0.12rem;
+}
+
+.main-chart-desc span{
+  display: block;
+  width: 50%;
+  float: left;
+  margin-top: 0.08rem;
+}
+
+.main-chart-desc1 span{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.16rem;
+}
+
+.main-chart-desc2 span{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.24rem;
+}
+
+.main-chart-bottom{
+  position: absolute;
+  bottom: 0.08rem;
+  left: 46%;
+  font-size: 0.18rem;
+}
+.main-chart-bottom1{
+  left: 40%;
+  bottom: 0.1rem;
+}
+
+.main--chart-bottom-title{
+  width: 100%;
+  font-size: 0.16rem;
+  height: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.main-chart-img{
+  width: 80%;
+  height: 3rem;
+  margin: 0.2rem auto 0;
+  position: relative;
+}
+.main-chart-img1{
+  width: 100%;
+}
+.main-chart-bottom-desc{
+  margin-top: 0.4rem;
+}
+.guangfu_img{
+  width: 2.6rem;
+  top: 0.3rem;
+  left: 0;
+  position: absolute;
+  z-index: 99;
+}
+.huiliu_img{
+  bottom: 0.2rem;
+  left: 2.1rem;
+  width: 2.6rem;
+  position: absolute;
+  z-index: 99;
+}
+.nibian_img{
+  top: 0.2rem;
+  left: 3.8rem;
+  width: 2.6rem;
+  position: absolute;
+  z-index: 99;
+}
+.dianwang_img{
+  width: 2.6rem;
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 99;
+}
+.shengya_img{
+  width: 2.6rem;
+  bottom: 0.2rem;
+  right: 2.4rem;
+  position: absolute;
+  z-index: 99;
+}
+.arrow1{
+  width: 1.2rem;
+  position: absolute;
+  top: 1.3rem;
+  right: 2rem;
+}
+.arrow2{
+  width: 1.2rem;
+  position: absolute;
+  top: 1.4rem;
+  right: 6.4rem;
+}
+.arrow3{
+  width: 1rem;
+  position: absolute;
+  top: 1.3rem;
+  left: 1.8rem;
+}
+.arrow4{
+  width: 1rem;
+  position: absolute;
+  top: 1.25rem;
+  left: 5.7rem;
+}
