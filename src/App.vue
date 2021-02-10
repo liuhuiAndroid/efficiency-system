@@ -82,11 +82,18 @@ export default defineComponent({
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  background: url(./assets/background.png) no-repeat center;
+  background-size: 100% 100%;
 }
 
 #app {
@@ -97,14 +104,12 @@ html, body {
 }
 
 .el-header {
-  background-color: #D3DCE6;
   color: #333;
   text-align: center;
   line-height: 60px;
 }
 
 .el-aside {
-  background-color: #D3DCE6;
   color: #333;
   text-align: center;
 }
