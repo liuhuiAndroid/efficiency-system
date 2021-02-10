@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    overlay: {   //去除eslint报警告
+    overlay: { //去除eslint报警告
       warning: false,
       error: true
     },
@@ -12,12 +12,11 @@ module.exports = {
       '/simpleWeather': {
         target: 'http://apis.juhe.cn/simpleWeather/',
         ws: true,
-        changOrigin: true,//允许跨域
+        changOrigin: true, //允许跨域
         pathRewrite: {
           '^/simpleWeather': ''
         }
       }
-
     }
   }
 }

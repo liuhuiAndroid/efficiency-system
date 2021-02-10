@@ -1,6 +1,59 @@
 import axios from 'axios'
 import { createStore, Commit } from 'vuex'
 
+export interface StationInfo {
+  stationName: string;
+  stationPhoto: string;
+  capacity: string;
+  powerToday: string;
+  powerThisMonth: string;
+  powerTotal: string;
+}
+
+// 电站信息
+export interface PowerStationInfoProps {
+  stationInfo: StationInfo;
+  deviceOverview: string;
+}
+
+// 逆变器
+export interface InverterProps {
+  deviceName: string;
+  deviceId: string;
+  deviceStaus: number;
+  subDevices: string;
+  deviceInfos: string;
+}
+
+// 光伏组串
+export interface PvstringProps {
+  deviceName: string;
+  deviceId: string;
+  deviceStaus: number;
+  isStandard: string;
+  deviceInfos: string;
+}
+
+// 光伏组串详情
+export interface PvstringDetailProps {
+  deviceName: string;
+  deviceId: string;
+  deviceStaus: number;
+  isStandard: string;
+  deviceInfos: string;
+  deviceData: string;
+}
+
+// 标杆组串
+export interface StandardPvstringlist {
+  deviceName: string;
+  deviceId: string;
+  deviceStaus: number;
+  isStandard: string;
+  deviceInfos: string;
+  deviceData: string;
+}
+
 export interface ColumnProps {
   id: number;
   title: string;

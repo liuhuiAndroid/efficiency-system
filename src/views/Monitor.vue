@@ -1,5 +1,42 @@
 <template>
   <div class="container">
+    <div>升压变</div>
+    <el-row :gutter="10">
+      <el-col :span="5" v-for="column in testData" :key="column.id">
+        <el-card>
+          <div class="grid-content">
+            <h5>{{column.title}}</h5>
+            <p>{{column.description}}</p>
+            <el-button plain>进入专栏</el-button>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <div>逆变器</div>
+    <el-row :gutter="10">
+      <el-col :span="5" v-for="inverter in inverterList" :key="inverter.deviceId">
+        <el-card>
+          <div class="grid-content">
+            <h5>{{inverter.deviceName}}</h5>
+            <p>{{inverter.deviceId}}</p>
+            <el-button plain>{{inverter.subDevices}}</el-button>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <div>汇流箱</div>
+    <el-row :gutter="10">
+      <el-col :span="5" v-for="column in testData" :key="column.id">
+        <el-card>
+          <div class="grid-content">
+            <h5>{{column.title}}</h5>
+            <p>{{column.description}}</p>
+            <el-button plain>进入专栏</el-button>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <div>光伏组串</div>
     <el-row :gutter="10">
       <el-col :span="5" v-for="column in testData" :key="column.id">
         <el-card>
@@ -21,7 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance } from 'vue'
-import { ColumnProps } from '../store'
+import { ColumnProps, InverterProps } from '../store'
 
 export default defineComponent({
   name: 'Monitor',
@@ -88,9 +125,27 @@ export default defineComponent({
         avatar: 'http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5ee22dd58b3c4520912b9470.jpg?x-oss-process=image/resize,m_pad,h_100,w_100'
       }
     ]
+    // 逆变器
+    const inverterList: InverterProps[] = [
+      {
+        deviceName: 'INT-01',
+        deviceId: 'XXXX-XXXX',
+        deviceStaus: 1,
+        subDevices: '汇流箱(2)',
+        deviceInfos: 'string'
+      },
+      {
+        deviceName: 'INT-02',
+        deviceId: 'XXXX-XXXX',
+        deviceStaus: 1,
+        subDevices: '汇流箱(2)',
+        deviceInfos: 'string'
+      }
+    ]
     return {
       logout,
-      testData
+      testData,
+      inverterList
     }
   }
 })
