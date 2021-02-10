@@ -1,0 +1,72 @@
+{
+  "id": "1816439",
+  "name": "丽水",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7275446",
+      "name": "VR",
+      "font_class": "VR",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "4393043",
+      "name": "模型",
+      "font_class": "moxing",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "10334751",
+      "name": "水质",
+      "font_class": "shuizhi",
+      "unicode": "e7a5",
+      "unicode_decimal": 59301
+    },
+    {
+      "icon_id": "12828505",
+      "name": "地形高度",
+      "font_class": "dixinggaodu",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "431435",
+      "name": "渔业养殖水域批量录入",
+      "font_class": "yuyeyangzhishuiyupiliangluru",
+      "unicode": "e99d",
+      "unicode_decimal": 59805
+    },
+    {
+      "icon_id": "8837108",
+      "name": "林业资源",
+      "font_class": "zaixianquhao",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "14386474",
+      "name": "农业",
+      "font_class": "nongye",
+      "unicode": "e820",
+      "unicode_decimal": 59424
+    },
+    {
+      "icon_id": "10299452",
+      "name": "影像摄影",
+      "font_class": "yingxiangsheying-",
+      "unicode": "e77d",
+      "unicode_decimal": 59261
+    },
+    {
+      "icon_id": "14126417",
+      "name": "灯泡",
+      "font_class": "dengpao",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    }
+  ]
+}

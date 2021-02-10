@@ -9,6 +9,7 @@ import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
 import axios from 'axios'
+import './assets/font/iconfont.css'
 
 axios.defaults.baseURL = 'http://api.vikingship.xyz/api'
 // Add a request interceptor
