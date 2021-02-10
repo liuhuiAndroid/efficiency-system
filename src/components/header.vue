@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-warp" id="headerWarp">
     <el-row>
       <el-col :span="6">
         <el-image
@@ -8,7 +8,9 @@
           :fit="contain">
         </el-image>
       </el-col>
-      <el-col :span="12"><div>远东学校——光魄能效云系统</div></el-col>
+      <el-col :span="12">
+        <div class="header-title">远东学校——光魄能效云系统</div>
+      </el-col>
       <el-row :span="6" class="header-date">
         <p>2020年8月24日 星期一</p>
         <p>27 晴</p>
@@ -54,17 +56,17 @@ export default defineComponent({
 .header-warp{
   width: 100%;
   height: 0.8rem;
-  /* background: url(../analysis/header.png) no-repeat center; */
+  background: url(../assets/header.png) no-repeat center;
   background-size: 100% 100%;
   color: #fff;
 }
 
-.header-warp img{
+/* .header-warp img{
   width: 1.2rem;
   position: absolute;
   left: 0.2rem;
   top: 0.2rem;
-}
+} */
 
 .header-title{
   font-size: 0.3rem;
