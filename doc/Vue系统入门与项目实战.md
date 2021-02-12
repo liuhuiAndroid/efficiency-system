@@ -16,3 +16,5 @@ npm install normalize.css --save
 BEM CSS 规则学习
 
 Vue.js devtools
+
+fastmock

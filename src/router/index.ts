@@ -7,7 +7,7 @@ import Warning from '../views/Warning.vue'
 import Analysis from '../views/Analysis.vue'
 import Suggestion from '../views/Suggestion.vue'
 import Setting from '../views/Setting.vue'
-import Login from '../views/Login.vue'
+import Login from '../views/login/Login.vue'
 import store from '../store'
 import TestColumnList from '../views/TestColumnList.vue'
 
@@ -67,7 +67,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiredAlreadyLogin: false },
     beforeEnter(to, from, next) {
       const { isLogin } = store.state.user
-      isLogin ? next('/') : next()
+      isLogin ? next({ name: 'Home' }) : next()
     }
   },
   {

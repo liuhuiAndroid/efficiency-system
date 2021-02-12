@@ -11,7 +11,6 @@ import * as echarts from 'echarts'
 import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps, HomeProps } from '../store'
-import request from '@/utils/request'
 
 export default defineComponent({
   name: 'Home',
@@ -28,13 +27,6 @@ export default defineComponent({
     }
   },
   mounted () {
-    request({
-      url: 'wids?key=d9fbda784ccf58fc4d686dbec6a77455',
-      method: 'get'
-    }).then((response: any) => {
-      console.log('weather:' + response.reason)
-    })
-
     const myChartEle = document.getElementById('myChart')
     if (myChartEle) {
       const myChart = echarts.init(myChartEle)

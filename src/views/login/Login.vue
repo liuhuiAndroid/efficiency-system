@@ -17,34 +17,34 @@
 <script lang="ts">
 import { defineComponent, ref, unref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps } from '../store'
+import { GlobalDataProps } from '../../store'
 // 定义路由行为
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    const store = useStore<GlobalDataProps>()
+// 处理登录逻辑
+const useLoginEffect = () => {
+  const router = useRouter()
+  const store = useStore<GlobalDataProps>()
+  const loginForm = ref()
+  const loginFormObj = reactive({ username: '', password: '' })
+  const loginRules = {
+    username: [
+      { required: true, message: '请输入账号', trigger: 'blur' },
+      { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
+    ],
+    password: [
+      { required: true, message: '请输入密码', trigger: 'blur' },
+      { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
+    ]
+  }
 
-    const loginForm = ref()
-    const loginFormObj = reactive({
-      username: '',
-      password: ''
-    })
-
-    const loginRules = {
-      username: [
-        { required: true, message: '请输入账号', trigger: 'blur' },
-        { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
-      ],
-      password: [
-        { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
-      ]
+  const handleLogin = async () => {
+    const form = unref(loginForm)
+    if (!form) {
+      return
     }
-
-    const onSubmitAdd = async (values: any) => {
+    await form.validate(() => async (values: any) => {
       const payload = {
         username: loginFormObj.username,
         password: loginFormObj.password
@@ -58,25 +58,15 @@ export default defineComponent({
       }).catch(e => {
         console.log(e)
       })
-    }
+    })
+  }
+  return { loginForm, loginFormObj, loginRules, handleLogin }
+}
 
-    const handleLogin = async () => {
-      const form = unref(loginForm)
-      if (!form) {
-        console.log('form', false)
-        return
-      }
-      await form.validate(() => {
-        onSubmitAdd(loginFormObj)
-      })
-    }
-
-    return {
-      loginForm,
-      loginFormObj,
-      loginRules,
-      handleLogin
-    }
+export default defineComponent({
+  setup() {
+    const { loginForm, loginFormObj, loginRules, handleLogin } = useLoginEffect()
+    return { loginForm, loginFormObj, loginRules, handleLogin }
   }
 })
 </script>
