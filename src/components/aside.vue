@@ -1,9 +1,13 @@
 <template>
-  <div class="aside-container">
+  <div class="aside__container">
     <el-col>
       <el-row v-for="(val, index) of navs" :key="`nav-${val.path}-${index}`">
         <el-col :span="24">
-          <router-link :to="val.path">{{val.name}}</router-link>
+          <router-link :to="val.path">
+            <div>
+              {{val.name}}
+            </div>
+          </router-link>
         </el-col>
       </el-row>
     </el-col>
@@ -33,10 +37,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.aside__item {
-  flex: 1;
-  &--active {
-    color: #fff
+.aside__container {
+  // flex: 1;
+  // &--active {
+  //   color: #fff
+  // }
+  a {
+    text-decoration: none;
   }
 }
 </style>

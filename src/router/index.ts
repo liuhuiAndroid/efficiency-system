@@ -1,69 +1,59 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Benchmarking from '../views/Benchmarking.vue'
-import Monitor from '../views/Monitor.vue'
-import MonitorDetail from '../views/MonitorDetail.vue'
-import Warning from '../views/Warning.vue'
-import Analysis from '../views/Analysis.vue'
-import Suggestion from '../views/Suggestion.vue'
-import Setting from '../views/Setting.vue'
-import Login from '../views/login/Login.vue'
 import store from '../store'
-import TestColumnList from '../views/TestColumnList.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: '首页',
-    component: Home,
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/benchmarking',
     name: '标杆组串',
-    component: Benchmarking,
+    component: () => import(/* webpackChunkName: "benchmarking" */ '../views/Benchmarking.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/monitor',
     name: '实时监测',
-    component: Monitor,
+    component: () => import(/* webpackChunkName: "monitor" */ '../views/Monitor.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/monitordetail/:id',
     name: '实时监测详情',
-    component: MonitorDetail,
+    component: () => import(/* webpackChunkName: "monitordetail" */ '../views/MonitorDetail.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/warning',
     name: '设备预警',
-    component: Warning,
+    component: () => import(/* webpackChunkName: "warning" */ '../views/Warning.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/analysis',
     name: '能效分析',
-    component: Analysis,
+    component: () => import(/* webpackChunkName: "analysis" */ '../views/Analysis.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/suggestion',
     name: '运维建议',
-    component: Suggestion,
+    component: () => import(/* webpackChunkName: "suggestion" */ '../views/Suggestion.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/setting',
     name: '系统设置',
-    component: Setting,
+    component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/login',
     name: '登录',
-    component: Login,
+    component: () => import(/* webpackChunkName: "login" */ '../views/login/Login.vue'),
     meta: { requiredAlreadyLogin: false },
     beforeEnter(to, from, next) {
       const { isLogin } = store.state.user
@@ -73,7 +63,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/test',
     name: '登录',
-    component: TestColumnList,
+    component: () => import(/* webpackChunkName: "test" */ '../views/TestColumnList.vue'),
     meta: { requiredAlreadyLogin: false }
   }
 ]
