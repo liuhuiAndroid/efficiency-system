@@ -80,6 +80,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="scss" scoped>
 .login-container {
   display: inline-block;

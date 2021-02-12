@@ -64,7 +64,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: '登录',
     component: Login,
-    meta: { requiredAlreadyLogin: false }
+    meta: { requiredAlreadyLogin: false },
+    beforeEnter(to, from, next) {
+      const { isLogin } = store.state.user
+      isLogin ? next('/') : next()
+    }
   },
   {
     path: '/test',
@@ -82,9 +86,9 @@ const router = createRouter({
 
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
-  console.log('to', to)
-  console.log('to.meta', to.meta)
-  console.log('from', from)
+  // console.log('to', to)
+  // console.log('to.meta', to.meta)
+  // console.log('from', from)
   if (to.meta.requiredLogin && !store.state.user.isLogin) {
     next('/login')
   } else if (to.meta.requiredAlreadyLogin && store.state.user.isLogin) {
