@@ -81,7 +81,9 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="scss">
+@import './style/viriables.scss';
+@import './style/mixins.scss';
 * {
   margin: 0;
   padding: 0;
@@ -104,13 +106,13 @@ html, body {
 }
 
 .el-header {
-  color: #333;
+  color: $content-fontcolor;
   text-align: center;
   line-height: 60px;
 }
 
 .el-aside {
-  color: #333;
+  color: $content-fontcolor;
   text-align: center;
 }
 </style>

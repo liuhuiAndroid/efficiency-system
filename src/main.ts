@@ -10,8 +10,7 @@ import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
 import axios from 'axios'
 import 'normalize.css'
-import './style/base.scss'
-import './style/iconfont.scss'
+import './style/index.scss'
 
 axios.defaults.baseURL = 'http://api.vikingship.xyz/api'
 // Add a request interceptor

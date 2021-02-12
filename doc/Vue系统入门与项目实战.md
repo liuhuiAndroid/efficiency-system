@@ -12,3 +12,7 @@ npm install --dev sass sass-loader
 install plugin： ESLint Vetur
 
 npm install normalize.css --save
+
+BEM CSS 规则学习
+
+Vue.js devtools

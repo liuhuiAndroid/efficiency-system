@@ -41,7 +41,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="scss" scoped>
 .el-row .el-col {
   margin-bottom: 10px;
   &:last-child {

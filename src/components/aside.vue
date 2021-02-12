@@ -32,6 +32,11 @@ export default defineComponent({
 })
 </script>
 
-<style>
-
+<style lang="scss">
+.aside__item {
+  flex: 1;
+  &--active {
+    color: #fff
+  }
+}
 </style>
