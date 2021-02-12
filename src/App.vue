@@ -18,8 +18,8 @@
 import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from './store'
-import HeaderComponent from './components/header.vue'
-import AsideComponent from './components/aside.vue'
+import HeaderComponent from './components/Header.vue'
+import AsideComponent from './components/Aside.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { ElLoading, ElMessage } from 'element-plus'

@@ -1,5 +1,5 @@
 <template>
-  <div class="header-warp" id="headerWarp">
+  <div class="header__warp" id="headerWarp">
     <el-row>
       <el-col :span="6">
         <el-image
@@ -9,9 +9,9 @@
         </el-image>
       </el-col>
       <el-col :span="12">
-        <div class="header-title">远东学校——光魄能效云系统</div>
+        <div class="header__warp__title">远东学校——光魄能效云系统</div>
       </el-col>
-      <el-row :span="6" class="header-date">
+      <el-row :span="6" class="header__warp__date">
         <p>2020年8月24日 星期一</p>
         <p>27 晴</p>
         <p @click="logout()">退出系统</p>
@@ -53,7 +53,7 @@ export default defineComponent({
 </script>
 
 <style>
-.header-warp{
+.header__warp{
   width: 100%;
   height: 0.8rem;
   background: url(../assets/header.png) no-repeat center;
@@ -61,14 +61,7 @@ export default defineComponent({
   color: #fff;
 }
 
-/* .header-warp img{
-  width: 1.2rem;
-  position: absolute;
-  left: 0.2rem;
-  top: 0.2rem;
-} */
-
-.header-title{
+.header__warp__title{
   font-size: 0.3rem;
   line-height: 0.6rem;
   font-weight: 500;
@@ -78,7 +71,7 @@ export default defineComponent({
   width: 100%;
 }
 
-.header-date{
+.header__warp__date{
   font-size: 0.16rem;
   text-align: center;
   color: #17FFFF;
@@ -87,7 +80,7 @@ export default defineComponent({
   top: 0.4rem;
 }
 
-.header-date p{
+.header__warp__date p{
   float: left;
   margin-right: 10px;
 }

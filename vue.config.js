@@ -1,4 +1,11 @@
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require('sass'),
+      },
+    },
+  },
   devServer: {
     overlay: { //去除eslint报警告
       warning: false,

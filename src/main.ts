@@ -9,7 +9,9 @@ import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
 import axios from 'axios'
-import './assets/font/iconfont.css'
+import 'normalize.css'
+import './style/base.scss'
+import './style/iconfont.scss'
 
 axios.defaults.baseURL = 'http://api.vikingship.xyz/api'
 // Add a request interceptor
@@ -79,7 +81,9 @@ plugins.forEach(plugin => {
 app.config.globalProperties.$ELEMENT = { size: 'medium', zIndex: 2000 }
 app.use(ElButton)
 
-app.mount('#app')
+// vm 代表的就是 vue 应用的根组件
+const vm = app.mount('#app')
+console.log('vm', vm)
 
 async function hello () {
   const greeting = await Promise.resolve('Hello')
