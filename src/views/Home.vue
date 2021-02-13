@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed, onMounted } from 'vue'
+import { defineComponent, computed, onMounted, toRefs } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps, HomeProps } from '../store'
 
@@ -17,13 +17,13 @@ export default defineComponent({
   setup() {
     const store = useStore<GlobalDataProps>()
     const count = computed(() => store.state.count)
-    onMounted(() => {
-      // 请求数据
-      store.dispatch('getHomeData')
-    })
+    // 请求数据
+    store.dispatch('getHomeData')
     const homeData = computed(() => store.state.homeData)
+    // const { homeData } = toRefs(store.state)
     return {
-      count
+      count,
+      homeData
     }
   },
   mounted () {
