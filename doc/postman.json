@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "06e320c5-f5b4-4c19-b0a0-1fc59d45839e",
+		"name": "远东学校前端调用接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "当前气象数据",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://119.3.177.188:8080/api/web/sidebar/getmeteodata",
+					"protocol": "http",
+					"host": [
+						"119",
+						"3",
+						"177",
+						"188"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"web",
+						"sidebar",
+						"getmeteodata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取设备Bar信息",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/web/sidebar/getdevicesinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"web",
+						"sidebar",
+						"getdevicesinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取设备状态bar信息",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceTypeCode\": 0\n}"
+				},
+				"url": {
+					"raw": "http://119.3.177.188:8080/api/web/sidebar/getdevicestatusinfo",
+					"protocol": "http",
+					"host": [
+						"119",
+						"3",
+						"177",
+						"188"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"web",
+						"sidebar",
+						"getdevicestatusinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

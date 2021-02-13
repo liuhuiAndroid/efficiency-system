@@ -19,6 +19,8 @@ body, html {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
+  background: url(../analysis/background.png) no-repeat center;
+  background-size: 100% 100%;
 }
 
 .header-warp{
@@ -70,6 +72,7 @@ body, html {
   left: 0;
   right: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 
@@ -169,6 +172,7 @@ body, html {
   box-sizing: border-box;
   font-size: 0.16rem;
   color: #fff;
+  overflow: hidden;
 }
 .main-right-top{
   width: 100%;
@@ -212,8 +216,7 @@ body, html {
 .main-chart-item{
   float: left;
   width:  5rem;
-  height: 2.5rem;
-  margin-top: 0.05rem;
+  height: 2.2rem;
   position: relative;
 }
 
@@ -223,25 +226,25 @@ body, html {
 }
 
 .main-chart-item2{
-  width: 2.8rem;
-  margin-left: 0.2rem;
+  width: 2.2rem;
+  margin-left: 0.5rem;
 }
 
 .main-chart-item3{
-  width: 2.5rem;
-  margin-left: 1.9rem;
+  width: 2.2rem;
+  margin-left: 2.5rem;
 }
 
 .main-chart-item4{
-  width: 2.6rem;
-  height: 2rem;
-  margin-left: 3.4rem;
+  width: 2.2rem;
+  height: 1.4rem;
+  margin-left: 3.7rem;
 }
 
 .main-chart-item5{
-  width: 2.6rem;
-  height: 2rem;
-  margin-left: 1.3rem;
+  width: 2.2rem;
+  height: 1.4rem;
+  margin-left: 1.8rem;
 }
 
 .main-chart-box{
@@ -252,12 +255,12 @@ body, html {
   left: 0;
   color: #fff;
   font-size: 12px;
-  padding-left: 0.12rem;
+  padding-left: 0.08rem;
    box-sizing: border-box;
 }
 
 .main-chart-title{
-  margin: 0.04rem 0 0 0.06rem;
+  margin-top: 0.04rem;
   font-size: 0.16rem;
 }
 .main-chart-desc {
@@ -282,7 +285,7 @@ body, html {
 .main-chart-desc2 span{
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0.24rem;
+  margin-top: 0.12rem;
 }
 
 .main-chart-bottom{
@@ -299,7 +302,7 @@ body, html {
 .main--chart-bottom-title{
   width: 100%;
   font-size: 0.16rem;
-  height: 0.5rem;
+  height: 0.35rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,15 +310,15 @@ body, html {
 }
 .main-chart-img{
   width: 80%;
-  height: 3rem;
-  margin: 0.2rem auto 0;
+  height: 2.6rem;
+  margin: 0 auto 0;
   position: relative;
 }
 .main-chart-img1{
   width: 100%;
 }
 .main-chart-bottom-desc{
-  margin-top: 0.4rem;
+  margin-top: 0.28rem;
 }
 .guangfu_img{
   width: 2.6rem;
@@ -325,7 +328,7 @@ body, html {
   z-index: 99;
 }
 .huiliu_img{
-  bottom: 0.2rem;
+  bottom: 0;
   left: 2.1rem;
   width: 2.6rem;
   position: absolute;
@@ -353,7 +356,7 @@ body, html {
   z-index: 99;
 }
 .arrow1{
-  width: 1.2rem;
+  width: 0.8rem;
   position: absolute;
   top: 1.3rem;
   right: 2rem;
@@ -362,17 +365,17 @@ body, html {
   width: 1.2rem;
   position: absolute;
   top: 1.4rem;
-  right: 6.4rem;
+  left: 3.5rem;
 }
 .arrow3{
   width: 1rem;
   position: absolute;
-  top: 1.3rem;
+  top: 0.8rem;
   left: 1.8rem;
 }
 .arrow4{
   width: 1rem;
   position: absolute;
-  top: 1.25rem;
+  top: 0.7rem;
   left: 5.7rem;
 }
