@@ -25,12 +25,12 @@
     </div>
     <p>
       环境数据：
-      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
-      <span>{{`湿度：${meteoData.temperature}`}}</span>
-      <span>{{`压力：${meteoData.temperature}`}}</span>
-      <span>{{`风向：${meteoData.temperature}`}}</span>
-      <span>{{`风速：${meteoData.temperature}`}}</span>
-      <span>{{`Poa：${meteoData.temperature}`}}</span>
+      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}度`}}</span>
+      <span>{{`湿度：${meteoData.humidity}%`}}</span>
+      <span>{{`压力：${meteoData.pressure}`}}</span>
+      <span>{{`风向：${meteoData.windDirection}`}}</span>
+      <span>{{`风速：${meteoData.windSpeed}m/s`}}</span>
+      <span>{{`Poa：${meteoData.poa}`}}</span>
     </p>
   </div>
     <div class="main-right-center">
