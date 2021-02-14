@@ -286,6 +286,7 @@ export default {
   margin-top: 0.04rem;
   font-size: 0.16rem;
 }
+
 .main-chart-desc {
   width: 100%;
   overflow: hidden;
@@ -340,9 +341,11 @@ export default {
 .main-chart-img1{
   width: 100%;
 }
+
 .main-chart-bottom-desc{
   margin-top: 0.28rem;
 }
+
 .guangfu_img{
   width: 2.6rem;
   top: 0.3rem;
@@ -350,6 +353,7 @@ export default {
   position: absolute;
   z-index: 99;
 }
+
 .huiliu_img{
   bottom: 0;
   left: 2.1rem;
@@ -357,6 +361,7 @@ export default {
   position: absolute;
   z-index: 99;
 }
+
 .nibian_img{
   top: 0.2rem;
   left: 3.8rem;
@@ -364,6 +369,7 @@ export default {
   position: absolute;
   z-index: 99;
 }
+
 .dianwang_img{
   width: 2.6rem;
   top: 0;
@@ -371,6 +377,7 @@ export default {
   position: absolute;
   z-index: 99;
 }
+
 .shengya_img{
   width: 2.6rem;
   bottom: 0.2rem;
@@ -378,24 +385,28 @@ export default {
   position: absolute;
   z-index: 99;
 }
+
 .arrow1{
   width: 0.8rem;
   position: absolute;
   top: 1.3rem;
   right: 2rem;
 }
+
 .arrow2{
   width: 1.2rem;
   position: absolute;
   top: 1.4rem;
   left: 3.5rem;
 }
+
 .arrow3{
   width: 1rem;
   position: absolute;
   top: 0.8rem;
   left: 1.8rem;
 }
+
 .arrow4{
   width: 1rem;
   position: absolute;
