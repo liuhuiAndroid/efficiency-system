@@ -3,8 +3,7 @@
     <img class="header__warp__img" :src="require('../assets/logo.png')" alt="">
     <div class="header__warp__title">某某电站—光魄能效云系统</div>
     <div class="header__warp__date">
-      <p>2020年8月24日 星期一</p>
-      <p>27 晴</p>
+      <p>{{currentTime}}</p>
       <p @click="logout()">退出系统</p>
     </div>
   </div>
@@ -12,6 +11,8 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance } from 'vue'
+import { formatDate } from '../utils/DateUtils'
+
 export default defineComponent({
   name: 'Header',
   setup() {
@@ -33,8 +34,10 @@ export default defineComponent({
         })
       }
     }
+    const currentTime = formatDate(new Date())
     return {
-      logout
+      logout,
+      currentTime
     }
   }
 })

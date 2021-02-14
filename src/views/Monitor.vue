@@ -593,5 +593,4 @@ export default defineComponent({
 .page-warp1 p .page-item-active{
   background: #00B1FF;
 }
-
 </style>
