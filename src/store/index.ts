@@ -78,6 +78,15 @@ export interface GlobalErrorProps {
   message?: string;
 }
 
+export interface MeteoProps {
+  temperature?: number;
+  humidity?: number;
+  pressure?: number;
+  windDirection?: string;
+  windSpeed?: number;
+  poa?: number;
+}
+
 export interface GlobalDataProps {
   token: string;
   loading: boolean;
@@ -85,6 +94,7 @@ export interface GlobalDataProps {
   user: UserProps;
   homeData: HomeProps;
   error: GlobalErrorProps;
+  meteoData: MeteoProps;
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -109,7 +119,8 @@ export default createStore<GlobalDataProps>({
     loading: false,
     count: 0,
     user: { isLogin: false },
-    homeData: {}
+    homeData: {},
+    meteoData: {}
   },
   mutations: {
     add (state) {
@@ -133,6 +144,9 @@ export default createStore<GlobalDataProps>({
     },
     getHomeData (state, rawData) {
       state.homeData = rawData.data
+    },
+    getMeteoData (state, rawData) {
+      state.meteoData = rawData.entity
     },
     setLoading (state, status) {
       state.loading = status
@@ -163,6 +177,11 @@ export default createStore<GlobalDataProps>({
       return dispatch('login', loginData).then(() => {
         return dispatch('fetchCurrentUser')
       })
+    },
+    // 获取当前气象数据
+    async getMeteoData ({ commit }) {
+      const { data } = await axios.get('/web/sidebar/getmeteodata')
+      commit('getMeteoData', data)
     }
   },
   modules: {

@@ -3,9 +3,9 @@
   <div class="main-right-header">
     <div class="select-main">
       设备类型：
-      <p class="select-input" id="selectInput">全部</p>
-      <ul class="select-item" id="selectItem">
-        <li><span>全部</span><span>(231)</span></li>
+      <p class="select-input" @click="handleDeviceTypeChoose()">全部</p>
+      <ul class="select-item" v-show="showDeviceTypeChoose">
+        <li><span>全部</span><span>(2221)</span></li>
         <li><span>升压变</span><span>(1)</span></li>
         <li><span>逆变器</span><span>(10)</span></li>
         <li><span>汇流箱</span><span>(20)</span></li>
@@ -14,16 +14,24 @@
     </div>
     <div class="select-main">
       设备状态：
-      <p class="select-input">正常</p>
-      <!-- <ul class="select-item">
+      <p class="select-input" @click="handleDeviceStatusChoose()">正常</p>
+      <ul class="select-item" v-show="showDeviceStatusChoose">
         <li><span>全部</span><span>(231)</span></li>
         <li><span>升压变</span><span>(1)</span></li>
         <li><span>逆变器</span><span>(10)</span></li>
         <li><span>汇流箱</span><span>(20)</span></li>
         <li><span>光伏组串</span><span>(200)</span></li>
-      </ul> -->
+      </ul>
     </div>
-    <p>环境数据：<span style="margin-left: 0.2rem;">温度：4度</span><span>湿度：60%</span><span>风速：4m/s</span><span>GHI：120W/m</span><span>DHI：80W/m</span></p>
+    <p>
+      环境数据：
+      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
+      <span>{{`湿度：${meteoData.temperature}`}}</span>
+      <span>{{`压力：${meteoData.temperature}`}}</span>
+      <span>{{`风向：${meteoData.temperature}`}}</span>
+      <span>{{`风速：${meteoData.temperature}`}}</span>
+      <span>{{`Poa：${meteoData.temperature}`}}</span>
+    </p>
   </div>
     <div class="main-right-center">
       <div class="main-center-warp">
@@ -35,24 +43,6 @@
           <div class="center-item-content">
             <div class="content-title">
               <span>升压变01</span>
-              <img src="../assets/Hosting.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>升压变02</span>
               <img src="../assets/Hosting.png" alt="">
             </div>
             <p>
@@ -105,64 +95,10 @@
               <span>下级设备：逆变器</span>
             </p>
           </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>逆变器01</span>
-              <img src="../assets/Hosting2.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
           <div class="center-item-content center-item-error">
             <div class="content-title">
               <span>逆变器01</span>
               <img src="../assets/Hosting2_errror.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>逆变器01</span>
-              <img src="../assets/Hosting2.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>逆变器01</span>
-              <img src="../assets/Hosting2.png" alt="">
             </div>
             <p>
               <span>低压侧：289.1v</span>
@@ -191,60 +127,6 @@
           <p class="center-item-title">
             汇流箱（5）
           </p>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>汇流箱01</span>
-              <img src="../assets/Hosting3.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>汇流箱01</span>
-              <img src="../assets/Hosting3.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>汇流箱01</span>
-              <img src="../assets/Hosting3.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
           <div class="center-item-content">
             <div class="content-title">
               <span>汇流箱01</span>
@@ -300,78 +182,6 @@
             <p class="center-item-title">
               光伏组串（5）
             </p>
-            <div class="center-item-content">
-              <div class="content-title">
-                <span>光伏组串01</span>
-                <img src="../assets/Hosting4.png" alt="">
-              </div>
-              <p>
-                <span>低压侧：289.1v</span>
-                <span>高压侧：10v</span>
-              </p>
-              <p>
-                <span>频率：50HZ</span>
-                <span>功率： 0.19MW</span>
-              </p>
-              <p>
-                <span>功率因数：0.95</span>
-                <span>下级设备：逆变器</span>
-              </p>
-            </div>
-            <div class="center-item-content">
-              <div class="content-title">
-                <span>光伏组串01</span>
-                <img src="../assets/Hosting4.png" alt="">
-              </div>
-              <p>
-                <span>低压侧：289.1v</span>
-                <span>高压侧：10v</span>
-              </p>
-              <p>
-                <span>频率：50HZ</span>
-                <span>功率： 0.19MW</span>
-              </p>
-              <p>
-                <span>功率因数：0.95</span>
-                <span>下级设备：逆变器</span>
-              </p>
-            </div>
-            <div class="center-item-content">
-              <div class="content-title">
-                <span>光伏组串01</span>
-                <img src="../assets/Hosting4.png" alt="">
-              </div>
-              <p>
-                <span>低压侧：289.1v</span>
-                <span>高压侧：10v</span>
-              </p>
-              <p>
-                <span>频率：50HZ</span>
-                <span>功率： 0.19MW</span>
-              </p>
-              <p>
-                <span>功率因数：0.95</span>
-                <span>下级设备：逆变器</span>
-              </p>
-            </div>
-            <div class="center-item-content">
-              <div class="content-title">
-                <span>光伏组串01</span>
-                <img src="../assets/Hosting4.png" alt="">
-              </div>
-              <p>
-                <span>低压侧：289.1v</span>
-                <span>高压侧：10v</span>
-              </p>
-              <p>
-                <span>频率：50HZ</span>
-                <span>功率： 0.19MW</span>
-              </p>
-              <p>
-                <span>功率因数：0.95</span>
-                <span>下级设备：逆变器</span>
-              </p>
-            </div>
             <div class="center-item-content">
               <div class="content-title">
                 <span>光伏组串01</span>
@@ -467,8 +277,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from 'vue'
-import { ColumnProps, InverterProps } from '../store'
+import { defineComponent, computed, getCurrentInstance, ref } from 'vue'
+import { ColumnProps, InverterProps, GlobalDataProps, MeteoProps } from '../store'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Monitor',
@@ -508,9 +319,41 @@ export default defineComponent({
         deviceInfos: 'string'
       }
     ]
+    const showDeviceTypeChoose = ref(false)
+    const handleDeviceTypeChoose = () => {
+      showDeviceTypeChoose.value = !showDeviceTypeChoose.value
+      console.log('showDeviceTypeChoose', showDeviceTypeChoose)
+    }
+
+    const showDeviceStatusChoose = ref(false)
+    const handleDeviceStatusChoose = () => {
+      showDeviceStatusChoose.value = !showDeviceStatusChoose.value
+      console.log('showDeviceStatusChoose', showDeviceStatusChoose)
+    }
+
+    const store = useStore<GlobalDataProps>()
+    // 获取当前气象数据
+    store.dispatch('getMeteoData')
+    // TODO 跨域
+    // const meteoData = computed(() => store.state.meteoData)
+    const meteoData: MeteoProps = {
+      temperature: 13.5,
+      humidity: 85.4,
+      pressure: 101153.0,
+      windDirection: '西风',
+      windSpeed: 0.0,
+      poa: 0.0
+    }
+    console.log('meteoData', meteoData)
+
     return {
       logout,
-      inverterList
+      inverterList,
+      handleDeviceTypeChoose,
+      showDeviceTypeChoose,
+      handleDeviceStatusChoose,
+      showDeviceStatusChoose,
+      meteoData // 环境数据
     }
   }
 })
@@ -559,44 +402,18 @@ export default defineComponent({
   left: 0;
   right: 0;
   overflow-y: scroll;
-  /*三角箭头的颜色*/
-  /* scrollbar-arrow-color: #00B1FF; */
-  /*滚动条滑块按钮的颜色*/
-  /* scrollbar-face-color: #00B1FF; */
-  /*滚动条整体颜色*/
-  /* scrollbar-highlight-color: #3c3e3f; */
-  /*滚动条阴影*/
-  /* scrollbar-shadow-color: #2a2b2c; */
-  /*滚动条轨道颜色*/
-  /* scrollbar-track-color: #2a2e30; */
-  /*滚动条3d亮色阴影边框的外观颜色——左边和上边的阴影色*/
-  /* scrollbar-3dlight-color:#242627; */
-  /*滚动条3d暗色阴影边框的外观颜色——右边和下边的阴影色*/
-  /* scrollbar-darkshadow-color: #2f3131; */
-  /*滚动条基准颜色*/
-  /* scrollbar-base-color: #3d4244; */
-  }
-  /* chrome & safari 浏览器 */
-  /*滚动条整体部分,必须要设置*/
-  .main-center-warp::-webkit-scrollbar{
-    background-color: #2b2f31;
-    border-radius: 3px;
-    width: 5px;
-  }
-  /*滚动条的轨道*/
-  /* .main-center-warp::-webkit-scrollbar-track{
-  background-color: #00B1FF;
-  } */
-  /*滚动条的滑块按钮*/
-  .main-center-warp::-webkit-scrollbar-thumb{
+}
+
+.main-center-warp::-webkit-scrollbar{
+  background-color: #2b2f31;
+  border-radius: 3px;
+  width: 5px;
+}
+.main-center-warp::-webkit-scrollbar-thumb{
   border-radius: 3px;
   background-color: #00B1FF;
-  /* box-shadow: inset 0 0 5px #00B1FF; */
-  }
-  /*滚动条的上下两端的按钮*/
-  /* .main-center-warp::-webkit-scrollbar-button{
-  background-color: #00B1FF;
-  } */
+}
+
 .main-center-box{
   width: 100%;
   overflow: hidden;
@@ -631,7 +448,6 @@ export default defineComponent({
   top: 0.47rem;
   right: 0;
   z-index: 99;
-  display: none;
   cursor: pointer;
 }
 .select-item li{

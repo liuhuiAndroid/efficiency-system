@@ -3,9 +3,9 @@
     <el-col>
       <el-row v-for="(val, index) of navs" :key="`nav-${val.path}-${index}`">
         <router-link :to="val.to">
-            <div :class="{'aside__container__item': true, 'aside__container__item--active': index === currentIndex}">
-              <p><img :src="val.img" alt=""><span>{{val.name}}</span></p>
-            </div>
+          <div :class="{'aside__container__item': true, 'aside__container__item--active': index === currentIndex}">
+            <p><img :src="val.img" alt=""><span>{{val.name}}</span></p>
+          </div>
           </router-link>
       </el-row>
     </el-col>
