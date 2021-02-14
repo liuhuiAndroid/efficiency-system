@@ -88,36 +88,36 @@
                 <p class="main-chart-bottom main-chart-bottom1">电网</p>
               </div>
             </div>
-            <div class="main-chart-img">
-              <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
-              <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
-              <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
-              <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
-              <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
-              <img class="arrow1" :src="require('../assets/arrow.png')" alt="">
-              <img class="arrow2" :src="require('../assets/arrow.png')" alt="">
-              <img class="arrow3" :src="require('../assets/arrow3.png')" alt="">
-              <img class="arrow4" :src="require('../assets/arrow3.png')" alt="">
-            </div>
-            <div class="main-chart-top">
-              <div class="main-chart-item main-chart-item4">
-              <img :src="require('../assets/shengya.png')" alt="">
-                <div class="main-chart-box">
-                  <p class="main--chart-bottom-title">汇流箱</p>
-                  <p class="main-chart-bottom-desc">汇流箱消耗</p>
-                  <div class="main-chart-desc main-chart-desc2">
-                    <span>功率预测不准确的罚款：0%</span>
-                  </div>
+          </div>
+          <div class="main-chart-img">
+            <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
+            <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
+            <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
+            <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
+            <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
+            <img class="arrow1" :src="require('../assets/arrow.png')" alt="">
+            <img class="arrow2" :src="require('../assets/arrow.png')" alt="">
+            <img class="arrow3" :src="require('../assets/arrow3.png')" alt="">
+            <img class="arrow4" :src="require('../assets/arrow3.png')" alt="">
+          </div>
+          <div class="main-chart-top">
+            <div class="main-chart-item main-chart-item4">
+            <img :src="require('../assets/shengya.png')" alt="">
+              <div class="main-chart-box">
+                <p class="main--chart-bottom-title">汇流箱</p>
+                <p class="main-chart-bottom-desc">汇流箱消耗</p>
+                <div class="main-chart-desc main-chart-desc2">
+                  <span>功率预测不准确的罚款：0%</span>
                 </div>
               </div>
-              <div class="main-chart-item main-chart-item5">
-                <img :src="require('../assets/shengya.png')" alt="">
-                <div class="main-chart-box">
-                  <p class="main--chart-bottom-title">升压变</p>
-                  <p class="main-chart-bottom-desc">升压变消耗</p>
-                  <div class="main-chart-desc main-chart-desc2">
-                    <span>功率预测不准确的罚款：0%</span>
-                  </div>
+            </div>
+            <div class="main-chart-item main-chart-item5">
+              <img :src="require('../assets/shengya.png')" alt="">
+              <div class="main-chart-box">
+                <p class="main--chart-bottom-title">升压变</p>
+                <p class="main-chart-bottom-desc">升压变消耗</p>
+                <div class="main-chart-desc main-chart-desc2">
+                  <span>功率预测不准确的罚款：0%</span>
                 </div>
               </div>
             </div>
