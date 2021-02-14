@@ -4,55 +4,55 @@ import store from '../store'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: '首页',
+    name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/benchmarking',
-    name: '标杆组串',
+    name: 'Benchmarking',
     component: () => import(/* webpackChunkName: "benchmarking" */ '../views/Benchmarking.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/monitor',
-    name: '实时监测',
+    name: 'Monitor',
     component: () => import(/* webpackChunkName: "monitor" */ '../views/Monitor.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/monitordetail/:id',
-    name: '实时监测详情',
+    name: 'MonitorDetail',
     component: () => import(/* webpackChunkName: "monitordetail" */ '../views/MonitorDetail.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/warning',
-    name: '设备预警',
+    name: 'Warning',
     component: () => import(/* webpackChunkName: "warning" */ '../views/Warning.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/analysis',
-    name: '能效分析',
+    name: 'Analysis',
     component: () => import(/* webpackChunkName: "analysis" */ '../views/Analysis.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/suggestion',
-    name: '运维建议',
+    name: 'Suggestion',
     component: () => import(/* webpackChunkName: "suggestion" */ '../views/Suggestion.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/setting',
-    name: '系统设置',
+    name: 'Setting',
     component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
     meta: { requiredLogin: false }
   },
   {
     path: '/login',
-    name: '登录',
+    name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/login/Login.vue'),
     meta: { requiredAlreadyLogin: false },
     beforeEnter(to, from, next) {
@@ -62,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/test',
-    name: '登录',
+    name: 'TestColumnList',
     component: () => import(/* webpackChunkName: "test" */ '../views/TestColumnList.vue'),
     meta: { requiredAlreadyLogin: false }
   }

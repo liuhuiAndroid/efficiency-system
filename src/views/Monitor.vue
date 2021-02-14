@@ -520,7 +520,7 @@ export default defineComponent({
 .main-right{
   position: absolute;
   top: 1rem;
-  bottom: 0;
+  bottom: .2rem;
   left: 2.2rem;
   right: 0.2rem;
   border-radius: 6px;
