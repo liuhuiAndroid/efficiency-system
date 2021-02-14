@@ -29,3 +29,15 @@ GET http://api.vikingship.xyz/api/columns/5f3e86d62c56ee13bb83096c
 GET http://api.vikingship.xyz/api/columns?currentPage=1&pageSize=3
 
 
+
+### 当前气象数据
+POST http://119.3.177.188:8080/api/web/sidebar/getmeteodata
+
+### 获取设备Bar信息
+POST http://119.3.177.188:8080/api/web/sidebar/getdevicesinfo
+
+### 获取设备状态Bar信息
+POST http://119.3.177.188:8080/api/web/sidebar/getdevicestatusinfo
+Content-Type: application/json
+
+{"deviceTypeCode": 0}

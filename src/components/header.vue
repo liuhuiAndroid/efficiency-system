@@ -1,5 +1,14 @@
 <template>
-  <div class="header__warp" id="headerWarp">
+  <div class="header-warp" id="headerWarp">
+    <img src="require('../assets/logo.png')" alt="">
+    <div class="header-title">某某电站—光魄能效云系统</div>
+    <div class="header-date">
+        <p>2020年8月24日 星期一</p>
+        <p>27 晴</p>
+        <p>退出系统</p>
+    </div>
+  </div>
+  <!-- <div class="header__warp" id="headerWarp">
     <el-row>
       <el-col :span="6">
         <el-image
@@ -17,7 +26,7 @@
         <p @click="logout()">退出系统</p>
       </el-row>
     </el-row>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
@@ -52,8 +61,49 @@ export default defineComponent({
 })
 </script>
 
-<style>
-.header__warp{
+<style lang="scss">
+.header-warp{
+  max-width: 1920px;
+  min-width: 1200px;
+  width: 100%;
+  height: 0.8rem;
+  background: url(../assets/header.png) no-repeat center;
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+.header-warp img{
+  width: 1.2rem;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+
+.header-title{
+  font-size: 0.3rem;
+  line-height: 0.6rem;
+  font-weight: 500;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.header-date{
+  font-size: 0.16rem;
+  text-align: center;
+  color: #17FFFF;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.4rem;
+}
+
+.header-date p{
+  float: left;
+  margin-right: 10px;
+}
+
+/* .header__warp{
   width: 100%;
   height: 0.8rem;
   background: url(../assets/header.png) no-repeat center;
@@ -83,5 +133,5 @@ export default defineComponent({
 .header__warp__date p{
   float: left;
   margin-right: 10px;
-}
+} */
 </style>

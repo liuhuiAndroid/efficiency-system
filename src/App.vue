@@ -94,21 +94,25 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  position: relative;
+  font-family: Noto Sans S Chinese;
   background: url(./assets/background.png) no-repeat center;
   background-size: 100% 100%;
 }
 
 #app {
-  width: 100%;
+  max-width: 1920px;
+  min-width: 1200px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
 }
 
 .el-header {
+  width: 100%;
   color: $content-fontcolor;
   text-align: center;
-  line-height: 60px;
 }
 
 .el-aside {
