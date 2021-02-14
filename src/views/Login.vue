@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, ref, unref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps } from '../../store'
+import { GlobalDataProps } from '../store'
 // 定义路由行为
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'

@@ -53,7 +53,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/login/Login.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
     meta: { requiredAlreadyLogin: false },
     beforeEnter(to, from, next) {
       const { isLogin } = store.state.user

@@ -3,25 +3,23 @@
   <div class="main-right-header">
     <div class="select-main">
       设备类型：
-      <p class="select-input" @click="handleDeviceTypeChoose()">全部</p>
-      <ul class="select-item" v-show="showDeviceTypeChoose">
-        <li><span>全部</span><span>(2221)</span></li>
-        <li><span>升压变</span><span>(1)</span></li>
-        <li><span>逆变器</span><span>(10)</span></li>
-        <li><span>汇流箱</span><span>(20)</span></li>
-        <li><span>光伏组串</span><span>(200)</span></li>
-      </ul>
+      <dropdown :title="titleDeviceStatus">
+        <dropdown-item>全部(2221)</dropdown-item>
+        <dropdown-item>升压变(1)</dropdown-item>
+        <dropdown-item>逆变器(10)</dropdown-item>
+        <dropdown-item>汇流箱(20)</dropdown-item>
+        <dropdown-item>光伏组串(200)</dropdown-item>
+      </dropdown>
     </div>
     <div class="select-main">
       设备状态：
-      <p class="select-input" @click="handleDeviceStatusChoose()">正常</p>
-      <ul class="select-item" v-show="showDeviceStatusChoose">
-        <li><span>全部</span><span>(231)</span></li>
-        <li><span>升压变</span><span>(1)</span></li>
-        <li><span>逆变器</span><span>(10)</span></li>
-        <li><span>汇流箱</span><span>(20)</span></li>
-        <li><span>光伏组串</span><span>(200)</span></li>
-      </ul>
+      <dropdown :title="titleDeviceStatus">
+        <dropdown-item>全部(2221)</dropdown-item>
+        <dropdown-item>升压变(1)</dropdown-item>
+        <dropdown-item>逆变器(10)</dropdown-item>
+        <dropdown-item>汇流箱(20)</dropdown-item>
+        <dropdown-item>光伏组串(200)</dropdown-item>
+      </dropdown>
     </div>
     <p>
       环境数据：
@@ -277,12 +275,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, getCurrentInstance, ref } from 'vue'
+import { defineComponent, computed, getCurrentInstance, ref, watch } from 'vue'
 import { ColumnProps, InverterProps, GlobalDataProps, MeteoProps } from '../store'
 import { useStore } from 'vuex'
+import useClickOutside from '../hooks/useClickOutside'
+import Dropdown from '../components/Dropdown.vue'
+import DropdownItem from '../components/DropdownItem.vue'
 
 export default defineComponent({
   name: 'Monitor',
+  components: {
+    Dropdown,
+    DropdownItem
+  },
   setup() {
     const currentInstance = getCurrentInstance()
     const logout = () => {
@@ -345,7 +350,7 @@ export default defineComponent({
       poa: 0.0
     }
     console.log('meteoData', meteoData)
-
+    const titleDeviceStatus = '全部'
     return {
       logout,
       inverterList,
@@ -353,7 +358,8 @@ export default defineComponent({
       showDeviceTypeChoose,
       handleDeviceStatusChoose,
       showDeviceStatusChoose,
-      meteoData // 环境数据
+      meteoData, // 环境数据
+      titleDeviceStatus
     }
   }
 })
