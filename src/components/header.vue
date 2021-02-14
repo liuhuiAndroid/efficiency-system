@@ -51,6 +51,7 @@ export default defineComponent({
   background: url(../assets/header.png) no-repeat center;
   background-size: 100% 100%;
   color: #fff;
+  margin-bottom: 0.2rem;
   &__img{
     width: 1.2rem;
     position: absolute;

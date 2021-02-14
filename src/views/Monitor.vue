@@ -24,6 +24,7 @@
       </ul> -->
     </div>
     <p>环境数据：<span style="margin-left: 0.2rem;">温度：4度</span><span>湿度：60%</span><span>风速：4m/s</span><span>GHI：120W/m</span><span>DHI：80W/m</span></p>
+  </div>
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
@@ -407,7 +408,6 @@
       </div>
     </div>
     </div>
-  </div>
 </div>
   <!-- <div class="container">
     <div>升压变</div>
@@ -519,7 +519,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .main-right{
   position: absolute;
-  top: .8rem;
+  top: 1rem;
   bottom: 0;
   left: 2.2rem;
   right: 0.2rem;
@@ -579,9 +579,9 @@ export default defineComponent({
   /* chrome & safari 浏览器 */
   /*滚动条整体部分,必须要设置*/
   .main-center-warp::-webkit-scrollbar{
-  background-color: #2b2f31;
-  border-radius: 3px;
-  width: 5px;
+    background-color: #2b2f31;
+    border-radius: 3px;
+    width: 5px;
   }
   /*滚动条的轨道*/
   /* .main-center-warp::-webkit-scrollbar-track{

@@ -47,77 +47,79 @@
   </div>
   <div class="main-right-center">
     <p class="main-right-top">环境数据：<span style="margin-left: 0.2rem;">温度：4度</span><span>湿度：60%</span><span>风速：4m/s</span><span>GHI：120W/m</span><span>DHI：80W/m</span></p>
-    <div class="main-chart">
-      <div class="main-chart-box1">
-        <div class="main-chart-box2">
-          <div class="main-chart-top">
-            <div class="main-chart-item">
-              <img :src="require('../assets/guangfu.png')" alt="">
-              <div class="main-chart-box">
-                <p class="main-chart-title">光伏消耗</p>
-                <div class="main-chart-desc">
-                  <span>组件效率衰减：1.2万元（2.1%）</span>
-                  <span>预期遮挡：1.2万元（2.1%）</span>
-                  <span>组件效率衰减：1.2万元（2.1%）</span>
-                  <span>预期遮挡：1.2万元（2.1%）</span>
-                  <span>组件效率衰减：1.2万元（2.1%）</span>
-                  <span>预期遮挡：1.2万元（2.1%）</span>
+    <div class="main-center-warp">
+      <div class="main-chart">
+        <div class="main-chart-box1">
+          <div class="main-chart-box2">
+            <div class="main-chart-top">
+              <div class="main-chart-item">
+                <img :src="require('../assets/guangfu.png')" alt="">
+                <div class="main-chart-box">
+                  <p class="main-chart-title">光伏消耗</p>
+                  <div class="main-chart-desc">
+                    <span>组件效率衰减：1.2万元（2.1%）</span>
+                    <span>预期遮挡：1.2万元（2.1%）</span>
+                    <span>组件效率衰减：1.2万元（2.1%）</span>
+                    <span>预期遮挡：1.2万元（2.1%）</span>
+                    <span>组件效率衰减：1.2万元（2.1%）</span>
+                    <span>预期遮挡：1.2万元（2.1%）</span>
+                  </div>
+                  <p class="main-chart-bottom">光伏板</p>
                 </div>
-                <p class="main-chart-bottom">光伏板</p>
               </div>
-            </div>
-            <div class="main-chart-item main-chart-item2">
-              <img :src="require('../assets/nibian.png')" alt="">
-              <div class="main-chart-box">
-                <p class="main-chart-title">逆变器消耗</p>
-                <div class="main-chart-desc main-chart-desc1">
-                  <span>逆变器损耗：15100元（2.1%）</span>
-                  <span>故障险检修损耗：11.2万元（2.1%）</span>
+              <div class="main-chart-item main-chart-item2">
+                <img :src="require('../assets/nibian.png')" alt="">
+                <div class="main-chart-box">
+                  <p class="main-chart-title">逆变器消耗</p>
+                  <div class="main-chart-desc main-chart-desc1">
+                    <span>逆变器损耗：15100元（2.1%）</span>
+                    <span>故障险检修损耗：11.2万元（2.1%）</span>
+                  </div>
+                  <p class="main-chart-bottom main-chart-bottom1">逆变器</p>
                 </div>
-                <p class="main-chart-bottom main-chart-bottom1">逆变器</p>
               </div>
-            </div>
-            <div class="main-chart-item main-chart-item3">
-              <img :src="require('../assets/nibian.png')" alt="">
-              <div class="main-chart-box">
-                <p class="main-chart-title">电网消耗</p>
-                <div class="main-chart-desc main-chart-desc1">
-                  <span>限电损失：0%</span>
-                  <span>功率预测不准确的罚款：0%</span>
-                </div>
-                <p class="main-chart-bottom main-chart-bottom1">电网</p>
-              </div>
-            </div>
-          </div>
-          <div class="main-chart-img">
-            <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
-            <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
-            <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
-            <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
-            <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
-            <img class="arrow1" :src="require('../assets/arrow.png')" alt="">
-            <img class="arrow2" :src="require('../assets/arrow.png')" alt="">
-            <img class="arrow3" :src="require('../assets/arrow3.png')" alt="">
-            <img class="arrow4" :src="require('../assets/arrow3.png')" alt="">
-          </div>
-          <div class="main-chart-top">
-            <div class="main-chart-item main-chart-item4">
-            <img :src="require('../assets/shengya.png')" alt="">
-              <div class="main-chart-box">
-                <p class="main--chart-bottom-title">汇流箱</p>
-                <p class="main-chart-bottom-desc">汇流箱消耗</p>
-                <div class="main-chart-desc main-chart-desc2">
-                  <span>功率预测不准确的罚款：0%</span>
+              <div class="main-chart-item main-chart-item3">
+                <img :src="require('../assets/nibian.png')" alt="">
+                <div class="main-chart-box">
+                  <p class="main-chart-title">电网消耗</p>
+                  <div class="main-chart-desc main-chart-desc1">
+                    <span>限电损失：0%</span>
+                    <span>功率预测不准确的罚款：0%</span>
+                  </div>
+                  <p class="main-chart-bottom main-chart-bottom1">电网</p>
                 </div>
               </div>
             </div>
-            <div class="main-chart-item main-chart-item5">
+            <div class="main-chart-img">
+              <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
+              <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
+              <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
+              <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
+              <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
+              <img class="arrow1" :src="require('../assets/arrow.png')" alt="">
+              <img class="arrow2" :src="require('../assets/arrow.png')" alt="">
+              <img class="arrow3" :src="require('../assets/arrow3.png')" alt="">
+              <img class="arrow4" :src="require('../assets/arrow3.png')" alt="">
+            </div>
+            <div class="main-chart-top">
+              <div class="main-chart-item main-chart-item4">
               <img :src="require('../assets/shengya.png')" alt="">
-              <div class="main-chart-box">
-                <p class="main--chart-bottom-title">升压变</p>
-                <p class="main-chart-bottom-desc">升压变消耗</p>
-                <div class="main-chart-desc main-chart-desc2">
-                  <span>功率预测不准确的罚款：0%</span>
+                <div class="main-chart-box">
+                  <p class="main--chart-bottom-title">汇流箱</p>
+                  <p class="main-chart-bottom-desc">汇流箱消耗</p>
+                  <div class="main-chart-desc main-chart-desc2">
+                    <span>功率预测不准确的罚款：0%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="main-chart-item main-chart-item5">
+                <img :src="require('../assets/shengya.png')" alt="">
+                <div class="main-chart-box">
+                  <p class="main--chart-bottom-title">升压变</p>
+                  <p class="main-chart-bottom-desc">升压变消耗</p>
+                  <div class="main-chart-desc main-chart-desc2">
+                    <span>功率预测不准确的罚款：0%</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -198,6 +200,7 @@ export default {
   color: #fff;
   overflow: hidden;
 }
+
 .main-right-top{
   width: 100%;
   height: 0.3rem;
@@ -215,7 +218,6 @@ export default {
   right: 0;
   bottom: 0;
   position: absolute;
-  overflow-y: scroll;
 }
 
 .main-chart-box1{
