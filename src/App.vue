@@ -1,17 +1,17 @@
 <template>
-  <el-container>
-    <el-header>
+  <div class="main__wrap" id="app">
+    <div class="main__warp__header" id="headerWarp">
       <header-component v-show="$route.name!=='login'"/>
-    </el-header>
-    <el-container>
-      <el-aside width="200px">
+    </div>
+    <div class="main__warp__content">
+      <div class="main__warp__content__left">
         <aside-component />
-      </el-aside>
-      <el-main>
+      </div>
+      <div class="main__warp__content__right">
         <router-view class="main-container"/>
-      </el-main>
-    </el-container>
-  </el-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -81,7 +81,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" sco>
 @import './style/viriables.scss';
 @import './style/mixins.scss';
 * {
@@ -107,6 +107,42 @@ html, body {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
+}
+
+.main__wrap{
+  max-width: 1920px;
+  min-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  &__header{
+    max-width: 1920px;
+    min-width: 1200px;
+    width: 100%;
+    height: 0.8rem;
+    background: url(./assets/header.png) no-repeat center;
+    background-size: 100% 100%;
+    color: #fff;
+  }
+  &__content{
+    &__left{
+      width: 2rem;
+      height: 100%;
+      font-size: 0.16rem;
+      color: #D2FFFF;
+    }
+    &__right{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 2.2rem;
+      right: 0.2rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #00B1FF;
+    }
+  }
 }
 
 .el-header {

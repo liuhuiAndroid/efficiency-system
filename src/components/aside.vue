@@ -36,7 +36,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .aside__container {
   &__item{
     width: 2rem;

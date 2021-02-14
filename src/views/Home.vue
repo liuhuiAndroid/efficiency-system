@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
+    <!-- <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
     <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
-    <div>{{count}}</div>
+    <div>{{count}}</div> -->
   </div>
 </template>
 
