@@ -34,7 +34,11 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-        <div class="center-item">
+        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
+        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
+        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
+        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
+        <!-- <div class="center-item">
           <p class="center-item-title">
           升压变（01）
           </p>
@@ -58,18 +62,18 @@
           </div>
         </div>
         <div class="page-warp1">
-            <p>
-              <span>1</span>
-              <span class="page-item-active">2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>
-              <span>6</span>
-              <span>7</span>
-              <span>8</span>
-              <span>9</span>
-              <span>></span>
-            </p>
+          <p>
+            <span>1</span>
+            <span class="page-item-active">2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>></span>
+          </p>
         </div>
         <div class="center-item">
           <p class="center-item-title">
@@ -212,7 +216,7 @@
             <span>9</span>
             <span>></span>
           </p>
-        </div>
+        </div> -->
       </div>
     </div>
     </div>
@@ -278,15 +282,16 @@
 import { defineComponent, computed, getCurrentInstance, ref, watch } from 'vue'
 import { ColumnProps, InverterProps, GlobalDataProps, MeteoProps } from '../store'
 import { useStore } from 'vuex'
-import useClickOutside from '../hooks/useClickOutside'
 import Dropdown from '../components/Dropdown.vue'
 import DropdownItem from '../components/DropdownItem.vue'
+import MonitorColumnList from '../components/MonitorColumnList.vue'
 
 export default defineComponent({
   name: 'Monitor',
   components: {
     Dropdown,
-    DropdownItem
+    DropdownItem,
+    MonitorColumnList
   },
   setup() {
     const currentInstance = getCurrentInstance()
@@ -351,6 +356,19 @@ export default defineComponent({
     }
     console.log('meteoData', meteoData)
     const titleDeviceStatus = '全部'
+
+    const columnListTitle = '啊啊啊啊啊'
+    const columnList = [{
+      id: 1,
+      title: '',
+      avatar: '',
+      description: ''
+    }, {
+      id: 2,
+      title: '',
+      avatar: '',
+      description: ''
+    }]
     return {
       logout,
       inverterList,
@@ -359,7 +377,9 @@ export default defineComponent({
       handleDeviceStatusChoose,
       showDeviceStatusChoose,
       meteoData, // 环境数据
-      titleDeviceStatus
+      titleDeviceStatus,
+      columnListTitle,
+      columnList
     }
   }
 })

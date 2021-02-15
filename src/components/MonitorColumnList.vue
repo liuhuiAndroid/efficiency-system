@@ -1,0 +1,204 @@
+<template>
+  <div class="center-item">
+    <p class="center-item-title">
+      {{title}}
+    </p>
+    <div class="center-item-content" v-for="column in columnList" :key="column.id">
+      <div class="content-title">
+        <span>升压变01</span>
+        <img src="../assets/Hosting.png" alt="">
+      </div>
+      <p>
+        <span>低压侧：289.1v</span>
+        <span>高压侧：10v</span>
+      </p>
+      <p>
+        <span>频率：50HZ</span>
+        <span>功率： 0.19MW</span>
+        </p>
+      <p>
+        <span>功率因数：0.95</span>
+        <span>下级设备：逆变器</span>
+      </p>
+    </div>
+    <div class="page-warp1">
+      <p>
+        <span>1</span>
+        <span class="page-item-active">2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span>></span>
+      </p>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, PropType, computed } from 'vue'
+import { ColumnProps } from '../store'
+
+export default defineComponent({
+  name: 'MonitorColumnList',
+  props: {
+    list: {
+      type: Array as PropType<ColumnProps[]>,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props) {
+    const columnList = computed(() => {
+      console.log('list', props.list)
+      return props.list
+    })
+    return {
+      columnList
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+.center-item{
+  width: 100%;
+  height: 24%;
+  padding: 0.14rem 0 0 0.25rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 12px;
+  color: #fff;
+}
+
+.center-item-title{
+  width: 1.5rem;
+  height: 0.28rem;
+  line-height: 0.23rem;
+  background: url(../assets/title_icon.png) no-repeat center;
+  background-size: 100% 100%;
+  overflow: hidden;
+  text-align: right;
+  margin-bottom: 0.2rem;
+  font-size: 0.16rem;
+  box-sizing: border-box;
+}
+
+.center-item-content{
+  width: 3rem;
+  height: 2rem;
+  background: url(../assets/center_bg.png) no-repeat center;
+  background-size: 100% 100%;
+  float: left;
+  margin-right: 0.25rem;
+}
+
+.center-item-error{
+  background: url(../assets/center_bg_error.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.center-item-error .content-title{
+  color: #FF0000;
+}
+.center-item-error .content-title::after{
+  content: '';
+  clear: both;
+  background: url(../assets/error_icon.png) no-repeat center;
+  width: 0.2rem;
+  height: 0.2rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+}
+
+.center-item-warning{
+  background: url(../assets/center_bg_warning.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.center-item-warning .content-title{
+  color: #FFBE02;
+}
+
+.center-item-warning .content-title::after{
+  content: '';
+  clear: both;
+  background: url(../assets/warning_icon.png) no-repeat center;
+  width: 0.2rem;
+  height: 0.2rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+}
+
+.content-title{
+  width: 100%;
+  height: 50%;
+  color: #10C5F3;
+  position: relative;
+  padding: 4% 0 0 4%;
+  box-sizing: border-box;
+}
+
+.content-title img{
+  width: 1rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.5rem;
+}
+
+.center-item-content p{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.08rem;
+}
+
+.center-item-content p span{
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
+}
+.page-warp1{
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 0.3rem;
+  height: 0.4rem;
+  margin-top: 0.1rem;
+  color: #fff;
+  font-size: 0.16rem;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-warp1 p{
+  float: right;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.page-warp1 p span{
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #013D63;
+  border-radius: 2px;
+  margin-left: 0.02rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-warp1 p .page-item-active{
+  background: #00B1FF;
+}
+</style>
