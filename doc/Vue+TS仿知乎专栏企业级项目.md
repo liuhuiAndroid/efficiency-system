@@ -22,3 +22,4 @@ VSCode插件：
 
 - 项目参考: https://github.com/LCL121/zheye
 
+TypeScript 官方文档: https://www.tslang.cn/docs/handbook/basic-types.html
