@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import { createStore, Commit } from 'vuex'
+import { arrToObj, objToArr } from '../utils/helper'
 
 export interface StationInfo {
   stationName: string;
@@ -87,14 +88,18 @@ export interface MeteoProps {
   poa?: number;
 }
 
+interface ListProps<P> {
+  [id: string]: P;
+}
+
 export interface GlobalDataProps {
   token: string;
   loading: boolean;
-  count: number;
   user: UserProps;
   homeData: HomeProps;
   error: GlobalErrorProps;
   meteoData: MeteoProps;
+  columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -112,20 +117,28 @@ const postAndCommit = async (url: string, mutationName: string, commit: Commit, 
   return data
 }
 
+const asyncAndCommit = async(url: string, mutationName: string, commit: Commit,
+  config: AxiosRequestConfig = { method: 'get' }, extraData?: any) => {
+  const { data } = await axios(url, config)
+  if (extraData) {
+    commit(mutationName, { data, extraData })
+  } else {
+    commit(mutationName, data)
+  }
+  return data
+}
+
 export default createStore<GlobalDataProps>({
   state: {
     token: localStorage.getItem('token') || '',
     error: { status: false },
     loading: false,
-    count: 0,
     user: { isLogin: false },
     homeData: {},
-    meteoData: {}
+    meteoData: {},
+    columns: { data: {}, currentPage: 0, total: 0 }
   },
   mutations: {
-    add (state) {
-      state.count++
-    },
     login (state, rawData) {
       const { token } = rawData.data
       state.token = token
@@ -153,6 +166,18 @@ export default createStore<GlobalDataProps>({
     },
     setError (state, e: GlobalErrorProps) {
       state.error = e
+    },
+    fetchColumn(state, rawData) {
+      state.columns.data[rawData.data._id] = rawData.data
+    },
+    fetchColumns(state, rawData) {
+      const { data } = state.columns
+      const { list, count, currentPage } = rawData.data
+      state.columns = {
+        data: { ...data }, // , ...arrToObj(list)
+        total: count,
+        currentPage: currentPage * 1
+      }
     }
   },
   actions: {
@@ -182,10 +207,27 @@ export default createStore<GlobalDataProps>({
     async getMeteoData ({ commit }) {
       const { data } = await axios.get('/web/sidebar/getmeteodata')
       commit('getMeteoData', data)
+    },
+    fetchColumns({ state, commit }, params = {}) {
+      const { currentPage = 1, pageSize = 6 } = params
+      if (state.columns.currentPage < currentPage) {
+        return asyncAndCommit(`/columns?currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchColumns', commit)
+      }
+    },
+    fetchColumn({ state, commit }, cid) {
+      if (!state.columns.data[cid]) {
+        return asyncAndCommit(`/columns/${cid}`, 'fetchColumn', commit)
+      }
     }
   },
   modules: {
   },
   getters: {
+    getColumns: (state) => {
+      return objToArr(state.columns.data)
+    },
+    getColumnById: (state) => (id: string) => {
+      return state.columns.data[id]
+    }
   }
 })

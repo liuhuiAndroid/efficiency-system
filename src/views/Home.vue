@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <!-- <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
-    <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
-    <div>{{count}}</div> -->
+    <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>-->
   </div>
 </template>
 
@@ -16,13 +15,11 @@ export default defineComponent({
   name: 'Home',
   setup() {
     const store = useStore<GlobalDataProps>()
-    const count = computed(() => store.state.count)
     // 请求数据
     store.dispatch('getHomeData')
     const homeData = computed(() => store.state.homeData)
     // const { homeData } = toRefs(store.state)
     return {
-      count,
       homeData
     }
   },
