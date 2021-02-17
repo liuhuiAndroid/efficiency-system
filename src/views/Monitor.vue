@@ -357,6 +357,17 @@ export default defineComponent({
     console.log('meteoData', meteoData)
     const titleDeviceStatus = '全部'
 
+    // 监听选项修改
+    const options1 = { }
+    watch(options1, (oldValue, newValue) => {
+      console.log('')
+    })
+    // 监听选项修改
+    const options2 = { }
+    watch(options2, (oldValue, newValue) => {
+      console.log('')
+    })
+
     const columnListTitle = '啊啊啊啊啊'
     const columnList = [{
       id: 1,

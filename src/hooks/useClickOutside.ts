@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
+import { ref, Ref, onMounted, onUnmounted } from 'vue'
 
 const useClickOutside = (elementRef: Ref<null | HTMLElement>) => {
   const isClickOutside = ref(false)

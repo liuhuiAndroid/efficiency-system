@@ -86,9 +86,3 @@ app.use(ElButton)
 // vm 代表的就是 vue 应用的根组件
 const vm = app.mount('#app')
 console.log('vm', vm)
-
-async function hello () {
-  const greeting = await Promise.resolve('Hello')
-  return greeting
-}
-hello().then(value => console.log(value))
