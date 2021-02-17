@@ -88,6 +88,18 @@ export interface MeteoProps {
   poa?: number;
 }
 
+export interface DeviceInfo{
+  deviceType: string,
+  deviceTypeCode: number,
+  deviceCount: number
+}
+
+export interface DeviceStatusInfo{
+  deviceStauts: string,
+  deviceStautsCode: number,
+  deviceCount: number
+}
+
 interface ListProps<P> {
   [id: string]: P;
 }
@@ -99,6 +111,8 @@ export interface GlobalDataProps {
   homeData: HomeProps;
   error: GlobalErrorProps;
   meteoData: MeteoProps;
+  deviceInfos: ListProps<DeviceInfo>;
+  dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
 }
 
@@ -109,10 +123,9 @@ const getAndCommit = async (url: string, mutationName: string, commit: Commit) =
   commit(mutationName, data)
 }
 
-const postAndCommit = async (url: string, mutationName: string, commit: Commit, payload: any) => {
+const postAndCommit = async (url: string, mutationName: string, commit: Commit, payload?: any) => {
   const { data } = await axios.post(url, payload)
-  // todo
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  // await new Promise(resolve => setTimeout(resolve, 3000))
   commit(mutationName, data)
   return data
 }
@@ -136,6 +149,8 @@ export default createStore<GlobalDataProps>({
     user: { isLogin: false },
     homeData: {},
     meteoData: {},
+    deviceInfos: {},
+    dviceStatusInfos: {},
     columns: { data: {}, currentPage: 0, total: 0 }
   },
   mutations: {
@@ -160,6 +175,12 @@ export default createStore<GlobalDataProps>({
     },
     getMeteoData (state, rawData) {
       state.meteoData = rawData.entity
+    },
+    getDevicesInfo (state, rawData) {
+      state.deviceInfos = rawData
+    },
+    getDeviceStatusInfo (state, rawData) {
+      state.dviceStatusInfos = rawData
     },
     setLoading (state, status) {
       state.loading = status
@@ -204,9 +225,21 @@ export default createStore<GlobalDataProps>({
       })
     },
     // 获取当前气象数据
-    async getMeteoData ({ commit }) {
-      const { data } = await axios.get('/web/sidebar/getmeteodata')
-      commit('getMeteoData', data)
+    // async getMeteoData ({ commit }) {
+    //   const { data } = await axios.post('/web/sidebar/getmeteodata')
+    //   commit('getMeteoData', data)
+    // },
+    // 获取当前气象数据
+    getMeteoData ({ commit }, payload) {
+      return postAndCommit('/web/sidebar/getmeteodata', 'getMeteoData', commit, payload)
+    },
+    // 获取设备Bar信息
+    getDevicesInfo ({ commit }, payload) {
+      return postAndCommit('/web/sidebar/getdevicesinfo', 'getDevicesInfo', commit, payload)
+    },
+    // 获取设备状态Bar信息
+    getDeviceStatusInfo ({ commit }, payload) {
+      return postAndCommit('/web/sidebar/getdevicestatusinfo', 'getDeviceStatusInfo', commit, payload)
     },
     fetchColumns({ state, commit }, params = {}) {
       const { currentPage = 1, pageSize = 6 } = params

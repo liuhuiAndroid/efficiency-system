@@ -3,22 +3,18 @@
   <div class="main-right-header">
     <div class="select-main">
       设备类型：
-      <dropdown :title="titleDeviceStatus">
-        <dropdown-item>全部(2221)</dropdown-item>
-        <dropdown-item>升压变(1)</dropdown-item>
-        <dropdown-item>逆变器(10)</dropdown-item>
-        <dropdown-item>汇流箱(20)</dropdown-item>
-        <dropdown-item>光伏组串(200)</dropdown-item>
+      <dropdown :title="deviceInfoChoose.deviceType">
+        <dropdown-item v-for="item in deviceInfos" :key="item.deviceTypeCode" @click="handleDeviceInfoChoose(item)">
+          <span>{{item.deviceType}}</span><span>({{item.deviceCount}})</span>
+        </dropdown-item>
       </dropdown>
     </div>
     <div class="select-main">
       设备状态：
-      <dropdown :title="titleDeviceStatus">
-        <dropdown-item>全部(2221)</dropdown-item>
-        <dropdown-item>升压变(1)</dropdown-item>
-        <dropdown-item>逆变器(10)</dropdown-item>
-        <dropdown-item>汇流箱(20)</dropdown-item>
-        <dropdown-item>光伏组串(200)</dropdown-item>
+      <dropdown :title="deviceStatusInfoChoose.deviceStauts">
+        <dropdown-item v-for="item in dviceStatusInfos" :key="item.deviceStautsCode" @click="handleDeviceStatusInfoChoose(item)">
+          <span>{{item.deviceStauts}}</span><span>({{item.deviceCount}})</span>
+        </dropdown-item>
       </dropdown>
     </div>
     <p>
@@ -279,8 +275,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, getCurrentInstance, ref, watch } from 'vue'
-import { ColumnProps, InverterProps, GlobalDataProps, MeteoProps } from '../store'
+import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted } from 'vue'
+import { InverterProps, GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
 import { useStore } from 'vuex'
 import Dropdown from '../components/Dropdown.vue'
 import DropdownItem from '../components/DropdownItem.vue'
@@ -329,42 +325,58 @@ export default defineComponent({
         deviceInfos: 'string'
       }
     ]
-    const showDeviceTypeChoose = ref(false)
-    const handleDeviceTypeChoose = () => {
-      showDeviceTypeChoose.value = !showDeviceTypeChoose.value
-      console.log('showDeviceTypeChoose', showDeviceTypeChoose)
-    }
 
-    const showDeviceStatusChoose = ref(false)
-    const handleDeviceStatusChoose = () => {
-      showDeviceStatusChoose.value = !showDeviceStatusChoose.value
-      console.log('showDeviceStatusChoose', showDeviceStatusChoose)
+    const deviceInfoChoose = ref<DeviceInfo>()
+    deviceInfoChoose.value = {
+      deviceType: '',
+      deviceTypeCode: 0,
+      deviceCount: 0
+    }
+    const deviceStatusInfoChoose = ref<DeviceStatusInfo>()
+    deviceStatusInfoChoose.value = {
+      deviceStauts: '',
+      deviceStautsCode: 0,
+      deviceCount: 0
     }
 
     const store = useStore<GlobalDataProps>()
-    // 获取当前气象数据
-    store.dispatch('getMeteoData')
-    // TODO 跨域
-    // const meteoData = computed(() => store.state.meteoData)
-    const meteoData: MeteoProps = {
-      temperature: 13.5,
-      humidity: 85.4,
-      pressure: 101153.0,
-      windDirection: '西风',
-      windSpeed: 0.0,
-      poa: 0.0
-    }
-    console.log('meteoData', meteoData)
-    const titleDeviceStatus = '全部'
+    const meteoData = computed(() => store.state.meteoData)
+    const deviceInfos = computed(() => store.state.deviceInfos)
+    const dviceStatusInfos = computed(() => store.state.dviceStatusInfos)
 
-    // 监听选项修改
-    const options1 = { }
-    watch(options1, (oldValue, newValue) => {
+    const handleDeviceInfoChoose = (item: DeviceInfo) => {
+      deviceInfoChoose.value = item
+    }
+    const handleDeviceStatusInfoChoose = (item: DeviceStatusInfo) => {
+      deviceStatusInfoChoose.value = item
+    }
+
+    watch(deviceInfos, () => {
+      deviceInfoChoose.value = store.state.deviceInfos[0]
+      // 获取设备状态Bar信息
+      if (deviceInfoChoose.value) {
+        store.dispatch('getDeviceStatusInfo', {
+          deviceTypeCode: deviceInfoChoose.value.deviceTypeCode
+        })
+      }
+    })
+    watch(dviceStatusInfos, () => {
+      deviceStatusInfoChoose.value = store.state.dviceStatusInfos[0]
+    })
+
+    onMounted(() => {
+      // 获取当前气象数据
+      store.dispatch('getMeteoData')
+      // 获取设备Bar信息
+      store.dispatch('getDevicesInfo')
+    })
+
+    watch(deviceInfoChoose, () => {
+      // 刷新列表数据
       console.log('')
     })
-    // 监听选项修改
-    const options2 = { }
-    watch(options2, (oldValue, newValue) => {
+    watch(deviceStatusInfoChoose, () => {
+      // 刷新列表数据
       console.log('')
     })
 
@@ -383,14 +395,15 @@ export default defineComponent({
     return {
       logout,
       inverterList,
-      handleDeviceTypeChoose,
-      showDeviceTypeChoose,
-      handleDeviceStatusChoose,
-      showDeviceStatusChoose,
       meteoData, // 环境数据
-      titleDeviceStatus,
       columnListTitle,
-      columnList
+      columnList,
+      deviceInfos,
+      dviceStatusInfos,
+      deviceInfoChoose,
+      deviceStatusInfoChoose,
+      handleDeviceInfoChoose,
+      handleDeviceStatusInfoChoose
     }
   }
 })

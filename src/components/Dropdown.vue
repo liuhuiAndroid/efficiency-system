@@ -1,7 +1,7 @@
 <template>
 <div class="select-main" ref="dropdownRef">
   <p class="select-input" @click.prevent="toggleOpen">{{title}}</p>
-  <ul class="select-item" v-if="isOpen">
+  <ul class="select-item" v-if="isOpen" @click.prevent="handleChoose">
     <slot></slot>
   </ul>
 </div>
@@ -24,8 +24,10 @@ export default defineComponent({
     const toggleOpen = () => {
       isOpen.value = !isOpen.value
     }
+    const handleChoose = () => {
+      isOpen.value = false
+    }
     const isClickOutside = useClickOutside(dropdownRef)
-
     watch(isClickOutside, () => {
       if (isOpen.value && isClickOutside.value) {
         isOpen.value = false
@@ -34,6 +36,7 @@ export default defineComponent({
     return {
       isOpen,
       toggleOpen,
+      handleChoose,
       dropdownRef
     }
   }
