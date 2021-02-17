@@ -1,5 +1,6 @@
 <template>
-  <div class="login-container">
+<div class="login-container">
+  <el-card>
     <el-form ref="loginForm" :model="loginFormObj" :rules="loginRules" label-width="100px">
       <el-form-item label="账号" prop="username">
         <el-input v-model="loginFormObj.username" placeholder="请输入账号" prefix-icon="el-icon-user" clearable maxlength="10"></el-input>
@@ -11,7 +12,8 @@
         <el-button :loading="loading" type="primary" round @click="handleLogin()">登录</el-button>
       </el-form-item>
     </el-form>
-  </div>
+  </el-card>
+</div>
 </template>
 
 <script lang="ts">
@@ -40,6 +42,7 @@ const useLoginEffect = () => {
   }
 
   const handleLogin = async () => {
+    router.push('/')
     const form = unref(loginForm)
     if (!form) {
       return
@@ -73,8 +76,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .login-container {
-  display: inline-block;
-  width: 300px;
-  background-color: #2d3a4b;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
 }
 </style>

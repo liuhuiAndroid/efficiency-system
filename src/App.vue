@@ -1,12 +1,6 @@
 <template>
-  <div class="main__wrap" id="app">
-    <div class="main__warp__header" id="headerWarp">
-      <header-component v-show="$route.name!=='login'"/>
-    </div>
-    <div class="main__warp__content">
-      <aside-component />
-      <router-view class="main__warp__content__container"/>
-    </div>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
@@ -14,8 +8,6 @@
 import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from './store'
-import HeaderComponent from './components/Header.vue'
-import AsideComponent from './components/Aside.vue'
 // 获取路由信息
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { ElLoading, ElMessage } from 'element-plus'
@@ -66,13 +58,6 @@ export default defineComponent({
         }
       }
     })
-    return {
-      routename
-    }
-  },
-  components: {
-    HeaderComponent,
-    AsideComponent
   }
 })
 </script>
@@ -84,7 +69,6 @@ export default defineComponent({
   margin: 0;
   padding: 0;
 }
-
 html, body {
   margin: 0;
   padding: 0;
@@ -95,7 +79,6 @@ html, body {
   background: url(./assets/background.png) no-repeat center;
   background-size: 100% 100%;
 }
-
 #app {
   max-width: 1920px;
   min-width: 1200px;
@@ -104,14 +87,4 @@ html, body {
   overflow: hidden;
   position: relative;
 }
-
-.main__wrap{
-  max-width: 1920px;
-  min-width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-}
-
 </style>
