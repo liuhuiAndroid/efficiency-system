@@ -1,6 +1,7 @@
 <template>
-<div class="login-container">
+<div class="login__container">
   <el-card>
+    <h2>光魄能效云系统</h2>
     <el-form ref="loginForm" :model="loginFormObj" :rules="loginRules" label-width="100px">
       <el-form-item label="账号" prop="username">
         <el-input v-model="loginFormObj.username" placeholder="请输入账号" prefix-icon="el-icon-user" clearable maxlength="10"></el-input>
@@ -75,9 +76,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.login-container {
+.login__container {
   display: flex;
   justify-content: center;
   margin-top: 150px;
+}
+h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #000;
+  text-align: center;
 }
 </style>

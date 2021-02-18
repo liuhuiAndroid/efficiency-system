@@ -157,6 +157,7 @@ export default createStore<GlobalDataProps>({
     login (state, rawData) {
       const { token } = rawData.data
       state.token = token
+      state.user = { ...state.user, isLogin: true }
       localStorage.setItem('token', token)
       // axios 设置通用 header
       axios.defaults.headers.common.Authorization = `Bearer ${token}`

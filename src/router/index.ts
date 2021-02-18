@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
-    meta: { requiredAlreadyLogin: false },
+    meta: { redirectAlreadyLogin: true },
     beforeEnter (to, from, next) {
       const { isLogin } = store.state.user
       isLogin ? next({ name: 'Home' }) : next()
@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
   // console.log('from', from)
   if (to.meta.requiredLogin && !store.state.user.isLogin) {
     next('/login')
-  } else if (to.meta.requiredAlreadyLogin && store.state.user.isLogin) {
+  } else if (to.meta.redirectAlreadyLogin && store.state.user.isLogin) {
     next('/')
   } else {
     next()

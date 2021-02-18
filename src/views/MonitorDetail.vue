@@ -14,7 +14,7 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
   setup() {
     const route = useRoute()
-    const currentId = +route.params.id // string convert to int
+    const currentId = route.params.id
     console.log('currentId', currentId)
     return {
       route

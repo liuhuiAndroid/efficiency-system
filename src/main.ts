@@ -78,6 +78,4 @@ plugins.forEach(plugin => {
 app.config.globalProperties.$ELEMENT = { size: 'medium', zIndex: 2000 }
 app.use(ElButton)
 
-// vm 代表的就是 vue 应用的根组件
-const vm = app.mount('#app')
-console.log('vm', vm)
+app.mount('#app')
