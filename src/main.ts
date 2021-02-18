@@ -21,10 +21,7 @@ axios.interceptors.request.use(config => {
   return config
 })
 axios.interceptors.response.use(config => {
-  // todo
-  setTimeout(() => {
-    store.commit('setLoading', false)
-  }, 2000)
+  store.commit('setLoading', false)
   return config
 }, e => {
   const error = { status: false, message: e.response.data.msg }

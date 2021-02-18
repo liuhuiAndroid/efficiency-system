@@ -118,8 +118,7 @@ export interface GlobalDataProps {
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
   const { data } = await axios.get(url)
-  // todo
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  // await new Promise(resolve => setTimeout(resolve, 3000))
   commit(mutationName, data)
 }
 
@@ -153,6 +152,7 @@ export default createStore<GlobalDataProps>({
     dviceStatusInfos: {},
     columns: { data: {}, currentPage: 0, total: 0 }
   },
+  // mutations 不可以包含异步操作
   mutations: {
     login (state, rawData) {
       const { token } = rawData.data
