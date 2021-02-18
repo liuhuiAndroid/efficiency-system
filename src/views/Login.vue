@@ -47,13 +47,13 @@ const useLoginEffect = () => {
     if (!form) {
       return
     }
-    await form.validate(() => async (values: any) => {
+    await form.validate(() => async () => {
       const payload = {
         username: loginFormObj.username,
         password: loginFormObj.password
       }
       // 请求数据
-      store.dispatch('loginAndFetch', payload).then(data => {
+      store.dispatch('loginAndFetch', payload).then(() => {
         ElMessage.success('登录成功 2秒后跳转首页')
         setTimeout(() => {
           router.push('/')

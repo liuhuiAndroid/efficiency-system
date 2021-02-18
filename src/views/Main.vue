@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, toRefs } from 'vue'
+import { defineComponent } from 'vue'
 import HeaderComponent from '../components/Header.vue'
 import AsideComponent from '../components/Aside.vue'
 

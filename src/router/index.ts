@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
     meta: { requiredAlreadyLogin: false },
-    beforeEnter(to, from, next) {
+    beforeEnter (to, from, next) {
       const { isLogin } = store.state.user
       isLogin ? next({ name: 'Home' }) : next()
     }
@@ -65,12 +65,6 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Setting',
         component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
         meta: { requiredLogin: true }
-      },
-      {
-        path: '/test',
-        name: 'TestColumnList',
-        component: () => import(/* webpackChunkName: "test" */ '../views/TestColumnList.vue'),
-        meta: { requiredAlreadyLogin: false }
       }
     ]
   }

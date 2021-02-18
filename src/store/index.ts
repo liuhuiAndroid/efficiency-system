@@ -88,13 +88,13 @@ export interface MeteoProps {
   poa?: number;
 }
 
-export interface DeviceInfo{
+export interface DeviceInfo {
   deviceType: string,
   deviceTypeCode: number,
   deviceCount: number
 }
 
-export interface DeviceStatusInfo{
+export interface DeviceStatusInfo {
   deviceStauts: string,
   deviceStautsCode: number,
   deviceCount: number
@@ -130,7 +130,7 @@ const postAndCommit = async (url: string, mutationName: string, commit: Commit, 
   return data
 }
 
-const asyncAndCommit = async(url: string, mutationName: string, commit: Commit,
+const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
   config: AxiosRequestConfig = { method: 'get' }, extraData?: any) => {
   const { data } = await axios(url, config)
   if (extraData) {
@@ -177,10 +177,10 @@ export default createStore<GlobalDataProps>({
       state.meteoData = rawData.entity
     },
     getDevicesInfo (state, rawData) {
-      state.deviceInfos = rawData
+      state.deviceInfos = rawData.entity
     },
     getDeviceStatusInfo (state, rawData) {
-      state.dviceStatusInfos = rawData
+      state.dviceStatusInfos = rawData.entity
     },
     setLoading (state, status) {
       state.loading = status
@@ -188,10 +188,10 @@ export default createStore<GlobalDataProps>({
     setError (state, e: GlobalErrorProps) {
       state.error = e
     },
-    fetchColumn(state, rawData) {
+    fetchColumn (state, rawData) {
       state.columns.data[rawData.data._id] = rawData.data
     },
-    fetchColumns(state, rawData) {
+    fetchColumns (state, rawData) {
       const { data } = state.columns
       const { list, count, currentPage } = rawData.data
       state.columns = {
@@ -241,13 +241,13 @@ export default createStore<GlobalDataProps>({
     getDeviceStatusInfo ({ commit }, payload) {
       return postAndCommit('/web/sidebar/getdevicestatusinfo', 'getDeviceStatusInfo', commit, payload)
     },
-    fetchColumns({ state, commit }, params = {}) {
+    fetchColumns ({ state, commit }, params = {}) {
       const { currentPage = 1, pageSize = 6 } = params
       if (state.columns.currentPage < currentPage) {
         return asyncAndCommit(`/columns?currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchColumns', commit)
       }
     },
-    fetchColumn({ state, commit }, cid) {
+    fetchColumn ({ state, commit }, cid) {
       if (!state.columns.data[cid]) {
         return asyncAndCommit(`/columns/${cid}`, 'fetchColumn', commit)
       }

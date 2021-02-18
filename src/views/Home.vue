@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <!-- <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
-    <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>-->
+    <div id="myChart" :style="{ width: '200px', height: '200px' }"></div>
+    <div id="pieChart" :style="{ width: '350px', height: '300px' }"></div>
   </div>
 </template>
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed, onMounted, toRefs } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps, HomeProps } from '../store'
+import { GlobalDataProps } from '../store'
 
 export default defineComponent({
   name: 'Home',

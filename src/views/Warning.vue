@@ -5,12 +5,13 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+export default defineComponent({
   name: 'Warning',
   setup() {
     console.log('Warning')
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

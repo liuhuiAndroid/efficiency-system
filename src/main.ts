@@ -27,14 +27,9 @@ axios.interceptors.response.use(config => {
   }, 2000)
   return config
 }, e => {
-  // todo
-  // const { error } = e.response.data
-  const error = { status: false, message: '' }
-  setTimeout(() => {
-    // store.commit('setError', { status: true, message: error })
-    store.commit('setError', { status: true, message: 'error' })
-    store.commit('setLoading', false)
-  }, 2000)
+  const error = { status: false, message: e.response.data.msg }
+  store.commit('setError', error)
+  store.commit('setLoading', false)
   return Promise.reject(error)
 })
 
