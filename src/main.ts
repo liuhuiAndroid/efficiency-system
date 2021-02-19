@@ -24,6 +24,7 @@ axios.interceptors.response.use(config => {
   store.commit('setLoading', false)
   return config
 }, e => {
+  // 统一错误处理
   const error = { status: false, message: e.response.data.msg }
   store.commit('setError', error)
   store.commit('setLoading', false)

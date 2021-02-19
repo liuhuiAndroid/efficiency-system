@@ -31,6 +31,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      // 登录持久化 
       if (!currentUser.value.isLogin && token.value) {
         // axios 设置通用 header
         axios.defaults.headers.common.Authorization = `Bearer ${token.value}`
