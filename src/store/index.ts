@@ -38,6 +38,15 @@ export interface PvstringInfo {
   standard: boolean;
 }
 
+// 光伏组串
+export interface PvstringInfos {
+  pageNum?: number;
+  pageSize?: number;
+  pageCount?: number;
+  totalCount?: number;
+  pvStringDatas?: PvstringInfo[];
+}
+
 // 光伏组串详情
 export interface PvstringDetailProps {
   deviceName: string;
@@ -128,7 +137,7 @@ export interface GlobalDataProps {
   dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
   powerStationInfo: PowerStationInfo;
-  pvstringInfos: ListProps<PvstringInfo>;
+  pvstringInfos: PvstringInfos;
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -222,7 +231,7 @@ export default createStore<GlobalDataProps>({
       state.powerStationInfo = rawData.entity
     },
     setPvstringInfos (state, rawData) {
-      state.pvstringInfos = rawData.entity.pvStringDatas
+      state.pvstringInfos = rawData.entity
     }
   },
   actions: {

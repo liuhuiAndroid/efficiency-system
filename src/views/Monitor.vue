@@ -30,7 +30,7 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos"></monitor-column-list>
+        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos.pvStringDatas" :totalCount="pvstringInfos.totalCount"></monitor-column-list>
         <!-- <div class="center-item">
           <p class="center-item-title">
           升压变（01）
@@ -272,12 +272,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted } from 'vue'
+import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted, onUnmounted } from 'vue'
 import { InverterProps, GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
 import { useStore } from 'vuex'
 import Dropdown from '../components/Dropdown.vue'
 import DropdownItem from '../components/DropdownItem.vue'
 import MonitorColumnList from '../components/MonitorColumnList.vue'
+import mitt from 'mitt'
+
+export const emitter = mitt()
 
 export default defineComponent({
   name: 'Monitor',
@@ -366,18 +369,29 @@ export default defineComponent({
       deviceStatusInfoChoose.value = store.state.dviceStatusInfos[0]
     })
 
+    const sendData = {
+      deviceStatus: 0,
+      pageNum: 1,
+      pageSize: 5
+    }
     onMounted(() => {
       // 获取当前气象数据
       store.dispatch('getMeteoData')
       // 获取设备Bar信息
       store.dispatch('getDevicesInfo')
       // 获取设备Bar信息
-      const sendData = {
-        deviceStatus: 0,
-        pageNum: 1,
-        pageSize: 5
-      }
       store.dispatch('getPvstringInfos', sendData)
+    })
+
+    const handleCurrentChangeCallback = (e: any) => {
+      sendData.pageNum = e.currentPage
+      console.log('cahandleCurrentChangeCallbackllback', e.currentPage)
+      store.dispatch('getPvstringInfos', sendData)
+    }
+    emitter.on('handleCurrentChange', handleCurrentChangeCallback)
+
+    onUnmounted(() => {
+      emitter.off('handleCurrentChange', handleCurrentChangeCallback)
     })
 
     watch(deviceInfoChoose, () => {

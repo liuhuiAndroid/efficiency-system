@@ -9,11 +9,11 @@
         <img src="../assets/Hosting4.png" alt="">
       </div>
       <p>
-        <span>电压：{{column.u}}V</span>
-        <span>电流：{{column.i}}A</span>
+        <span>电压：{{column.u.toFixed(1)}}V</span>
+        <span>电流：{{column.i.toFixed(1)}}A</span>
       </p>
       <p>
-        <span>功率：{{column.p}}W</span>
+        <span>功率：{{column.p.toFixed(1)}}W</span>
         <span></span>
       </p>
       <p>
@@ -22,25 +22,23 @@
       </p>
     </div>
     <div class="page-warp1">
-      <p>
-        <span>1</span>
-        <span class="page-item-active">2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>></span>
-      </p>
+      <el-pagination
+        small background
+        layout="prev, pager, next"
+        :page-size="pageSize"
+        :hide-on-single-page="hideOnSinglePage"
+        :total="totalCount"
+        @current-change="handleCurrentChange"
+        v-model:currentPage="currentPage">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
+import { defineComponent, PropType, computed, ref } from 'vue'
 import { PvstringInfo } from '../store'
+import { emitter } from '../views/Monitor.vue'
 
 export default defineComponent({
   name: 'MonitorColumnList',
@@ -52,15 +50,31 @@ export default defineComponent({
     title: {
       type: String,
       required: true
+    },
+    totalCount: {
+      type: Number,
+      required: true
     }
   },
   setup(props) {
     const columnList = computed(() => {
-      console.log('list', props.list.length)
+      console.log('list', props.list)
       return props.list
     })
+    const hideOnSinglePage = true
+
+    const currentPage = ref(1)
+    const pageSize = 5
+    const handleCurrentChange = () => {
+      console.log('handleCurrentChange', currentPage.value)
+      emitter.emit('handleCurrentChange', { currentPage: currentPage.value })
+    }
     return {
-      columnList
+      columnList,
+      hideOnSinglePage,
+      handleCurrentChange,
+      currentPage,
+      pageSize
     }
   }
 })
