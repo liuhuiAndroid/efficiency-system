@@ -21,7 +21,7 @@
         <span></span>
       </p>
     </div>
-    <div class="page-warp1">
+    <div class="page-warp">
       <el-pagination
         small background
         layout="prev, pager, next"
@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent, PropType, computed, ref } from 'vue'
 import { PvstringInfo } from '../store'
-import { emitter } from '../views/Monitor.vue'
+import { emitter } from '@/views/Monitor.vue'
 
 export default defineComponent({
   name: 'MonitorColumnList',
@@ -181,7 +181,7 @@ export default defineComponent({
   padding-left: 0.1rem;
   box-sizing: border-box;
 }
-.page-warp1{
+.page-warp{
   width: 100%;
   box-sizing: border-box;
   padding-right: 0.3rem;
@@ -192,27 +192,5 @@ export default defineComponent({
   align-items: center;
   display: flex;
   justify-content: flex-end;
-}
-
-.page-warp1 p{
-  float: right;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-}
-
-.page-warp1 p span{
-  width: 0.3rem;
-  height: 0.3rem;
-  background: #013D63;
-  border-radius: 2px;
-  margin-left: 0.02rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.page-warp1 p .page-item-active{
-  background: #00B1FF;
 }
 </style>

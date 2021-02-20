@@ -31,244 +31,10 @@
       <div class="main-center-warp">
         <div class="main-center-box">
         <monitor-column-list :title="pvstringTitle" :list="pvstringInfos.pvStringDatas" :totalCount="pvstringInfos.totalCount"></monitor-column-list>
-        <!-- <div class="center-item">
-          <p class="center-item-title">
-          升压变（01）
-          </p>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>升压变01</span>
-              <img src="../assets/Hosting.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-        </div>
-        <div class="page-warp1">
-          <p>
-            <span>1</span>
-            <span class="page-item-active">2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
-            <span>9</span>
-            <span>></span>
-          </p>
-        </div>
-        <div class="center-item">
-          <p class="center-item-title">
-              逆变器（01）
-          </p>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>逆变器01</span>
-              <img src="../assets/Hosting2.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content center-item-error">
-            <div class="content-title">
-              <span>逆变器01</span>
-              <img src="../assets/Hosting2_errror.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-        </div>
-        <div class="page-warp1">
-          <p>
-            <span>1</span>
-            <span class="page-item-active">2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-          </p>
-        </div>
-        <div class="center-item">
-          <p class="center-item-title">
-            汇流箱（5）
-          </p>
-          <div class="center-item-content">
-            <div class="content-title">
-              <span>汇流箱01</span>
-              <img src="../assets/Hosting3.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-          <div class="center-item-content center-item-warning">
-            <div class="content-title">
-              <span>汇流箱01</span>
-              <img src="../assets/Hosting3_warning.png" alt="">
-            </div>
-            <p>
-              <span>低压侧：289.1v</span>
-              <span>高压侧：10v</span>
-            </p>
-            <p>
-              <span>频率：50HZ</span>
-              <span>功率： 0.19MW</span>
-            </p>
-            <p>
-              <span>功率因数：0.95</span>
-              <span>下级设备：逆变器</span>
-            </p>
-          </div>
-        </div>
-        <div class="page-warp1">
-          <p>
-            <span>1</span>
-            <span class="page-item-active">2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
-            <span>9</span>
-            <span>></span>
-          </p>
-        </div>
-          <div class="center-item">
-            <p class="center-item-title">
-              光伏组串（5）
-            </p>
-            <div class="center-item-content">
-              <div class="content-title">
-                <span>光伏组串01</span>
-                <img src="../assets/Hosting4.png" alt="">
-              </div>
-              <p>
-                <span>低压侧：289.1v</span>
-                <span>高压侧：10v</span>
-              </p>
-              <p>
-                <span>频率：50HZ</span>
-                <span>功率： 0.19MW</span>
-              </p>
-              <p>
-                <span>功率因数：0.95</span>
-                <span>下级设备：逆变器</span>
-              </p>
-            </div>
-        </div>
-        <div class="page-warp1">
-          <p>
-            <span>1</span>
-            <span class="page-item-active">2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
-            <span>9</span>
-            <span>></span>
-          </p>
-        </div> -->
       </div>
     </div>
     </div>
 </div>
-  <!-- <div class="container">
-    <div>升压变</div>
-    <el-row :gutter="10">
-      <el-col :span="5" v-for="inverter in inverterList" :key="inverter.deviceId">
-        <el-card>
-          <div class="grid-content">
-            <h5>{{inverter.deviceName}}</h5>
-            <p>{{inverter.deviceId}}</p>
-            <el-button plain>{{inverter.subDevices}}</el-button>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <div>逆变器</div>
-    <el-row :gutter="10">
-      <el-col :span="5" v-for="inverter in inverterList" :key="inverter.deviceId">
-        <el-card>
-          <div class="grid-content">
-            <h5>{{inverter.deviceName}}</h5>
-            <p>{{inverter.deviceId}}</p>
-            <el-button plain>{{inverter.subDevices}}</el-button>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <div>汇流箱</div>
-    <el-row :gutter="10">
-      <el-col :span="5" v-for="inverter in inverterList" :key="inverter.deviceId">
-        <el-card>
-          <div class="grid-content">
-            <h5>{{inverter.deviceName}}</h5>
-            <p>{{inverter.deviceId}}</p>
-            <el-button plain>{{inverter.subDevices}}</el-button>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <div>光伏组串</div>
-    <el-row :gutter="10">
-      <el-col :span="5" v-for="inverter in inverterList" :key="inverter.deviceId">
-        <el-card>
-          <div class="grid-content">
-            <h5>{{inverter.deviceName}}</h5>
-            <p>{{inverter.deviceId}}</p>
-            <el-button plain>{{inverter.subDevices}}</el-button>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-pagination
-      layout="prev, pager, next"
-      :total="50">
-    </el-pagination>
-    <router-link :to="`/monitordetail/1`">跳转实时监测详情页面</router-link>
-  </div> -->
 </template>
 
 <script lang="ts">
@@ -308,24 +74,6 @@ export default defineComponent({
         })
       }
     }
-    // 逆变器
-    const inverterList: InverterProps[] = [
-      {
-        deviceName: 'INT-01',
-        deviceId: 'XXXX-XXXX',
-        deviceStaus: 1,
-        subDevices: '汇流箱(2)',
-        deviceInfos: 'string'
-      },
-      {
-        deviceName: 'INT-02',
-        deviceId: 'XXXX-XXXX',
-        deviceStaus: 1,
-        subDevices: '汇流箱(2)',
-        deviceInfos: 'string'
-      }
-    ]
-
     const deviceInfoChoose = ref<DeviceInfo>()
     deviceInfoChoose.value = {
       deviceType: '',
@@ -337,6 +85,11 @@ export default defineComponent({
       deviceStauts: '',
       deviceStautsCode: 0,
       deviceCount: 0
+    }
+    const sendData = {
+      deviceStatus: 0,
+      pageNum: 1,
+      pageSize: 5
     }
 
     const store = useStore<GlobalDataProps>()
@@ -368,12 +121,11 @@ export default defineComponent({
     watch(dviceStatusInfos, () => {
       deviceStatusInfoChoose.value = store.state.dviceStatusInfos[0]
     })
-
-    const sendData = {
-      deviceStatus: 0,
-      pageNum: 1,
-      pageSize: 5
-    }
+    watch(deviceStatusInfoChoose, () => {
+      sendData.deviceStatus = deviceStatusInfoChoose.value?.deviceStautsCode
+      console.log('deviceStatusInfoChoose', deviceStatusInfoChoose.value)
+      store.dispatch('getPvstringInfos', sendData)
+    })
     onMounted(() => {
       // 获取当前气象数据
       store.dispatch('getMeteoData')
@@ -385,7 +137,6 @@ export default defineComponent({
 
     const handleCurrentChangeCallback = (e: any) => {
       sendData.pageNum = e.currentPage
-      console.log('cahandleCurrentChangeCallbackllback', e.currentPage)
       store.dispatch('getPvstringInfos', sendData)
     }
     emitter.on('handleCurrentChange', handleCurrentChangeCallback)
@@ -406,7 +157,6 @@ export default defineComponent({
     const pvstringTitle = '光伏组串'
     return {
       logout,
-      inverterList,
       meteoData, // 环境数据
       pvstringTitle,
       pvstringInfos,
