@@ -122,9 +122,11 @@ export default defineComponent({
       deviceStatusInfoChoose.value = store.state.dviceStatusInfos[0]
     })
     watch(deviceStatusInfoChoose, () => {
-      sendData.deviceStatus = deviceStatusInfoChoose.value?.deviceStautsCode
-      console.log('deviceStatusInfoChoose', deviceStatusInfoChoose.value)
-      store.dispatch('getPvstringInfos', sendData)
+      if (deviceStatusInfoChoose.value?.deviceStautsCode) {
+        sendData.deviceStatus = deviceStatusInfoChoose.value?.deviceStautsCode
+        console.log('deviceStatusInfoChoose', deviceStatusInfoChoose.value)
+        store.dispatch('getPvstringInfos', sendData)
+      }
     })
     onMounted(() => {
       // 获取当前气象数据

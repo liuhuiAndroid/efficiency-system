@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import axios from 'axios'
 import store from '../store'
 
@@ -71,7 +71,7 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-const history = createWebHistory(process.env.BASE_URL)
+const history = createWebHashHistory()
 const router = createRouter({
   history,
   routes
