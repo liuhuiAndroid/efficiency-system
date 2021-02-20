@@ -3,22 +3,22 @@
     <p class="center-item-title">
       {{title}}
     </p>
-    <div class="center-item-content" v-for="column in columnList" :key="column.id">
+    <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div class="content-title">
-        <span>升压变01</span>
-        <img src="../assets/Hosting.png" alt="">
+        <span>{{column.deviceName}}</span>
+        <img src="../assets/Hosting4.png" alt="">
       </div>
       <p>
-        <span>低压侧：289.1v</span>
-        <span>高压侧：10v</span>
+        <span>电压：{{column.u}}V</span>
+        <span>电流：{{column.i}}A</span>
       </p>
       <p>
-        <span>频率：50HZ</span>
-        <span>功率： 0.19MW</span>
-        </p>
+        <span>功率：{{column.p}}W</span>
+        <span></span>
+      </p>
       <p>
-        <span>功率因数：0.95</span>
-        <span>下级设备：逆变器</span>
+        <span></span>
+        <span></span>
       </p>
     </div>
     <div class="page-warp1">
@@ -40,13 +40,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
-import { ColumnProps } from '../store'
+import { PvstringInfo } from '../store'
 
 export default defineComponent({
   name: 'MonitorColumnList',
   props: {
     list: {
-      type: Array as PropType<ColumnProps[]>,
+      type: Array as PropType<PvstringInfo[]>,
       required: true
     },
     title: {
@@ -56,7 +56,7 @@ export default defineComponent({
   },
   setup(props) {
     const columnList = computed(() => {
-      console.log('list', props.list)
+      console.log('list', props.list.length)
       return props.list
     })
     return {

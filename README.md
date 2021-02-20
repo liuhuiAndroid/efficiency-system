@@ -32,6 +32,8 @@ element-plus github: https://github.com/element-plus/element-plus
 animate.css: https://animate.style/
 animate.css github: https://github.com/animate-css/animate.css
 
+蓝湖：https://lanhuapp.com/url/t2GAm-XfcaS
+
 ```shell
 winpty vue.cmd create efficiency-system
 // Project setup

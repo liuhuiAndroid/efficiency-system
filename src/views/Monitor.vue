@@ -30,10 +30,7 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
-        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
-        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
-        <monitor-column-list :title="columnListTitle" :list="columnList"></monitor-column-list>
+        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos"></monitor-column-list>
         <!-- <div class="center-item">
           <p class="center-item-title">
           升压变（01）
@@ -343,6 +340,11 @@ export default defineComponent({
     const meteoData = computed(() => store.state.meteoData)
     const deviceInfos = computed(() => store.state.deviceInfos)
     const dviceStatusInfos = computed(() => store.state.dviceStatusInfos)
+    // 光伏组串列表
+    const pvstringInfos = computed(() => {
+      console.log('pvstringInfos', store.state.pvstringInfos)
+      return store.state.pvstringInfos
+    })
 
     const handleDeviceInfoChoose = (item: DeviceInfo) => {
       deviceInfoChoose.value = item
@@ -369,6 +371,13 @@ export default defineComponent({
       store.dispatch('getMeteoData')
       // 获取设备Bar信息
       store.dispatch('getDevicesInfo')
+      // 获取设备Bar信息
+      const sendData = {
+        deviceStatus: 0,
+        pageNum: 1,
+        pageSize: 5
+      }
+      store.dispatch('getPvstringInfos', sendData)
     })
 
     watch(deviceInfoChoose, () => {
@@ -380,24 +389,13 @@ export default defineComponent({
       console.log('')
     })
 
-    const columnListTitle = '啊啊啊啊啊'
-    const columnList = [{
-      id: 1,
-      title: '',
-      avatar: '',
-      description: ''
-    }, {
-      id: 2,
-      title: '',
-      avatar: '',
-      description: ''
-    }]
+    const pvstringTitle = '光伏组串'
     return {
       logout,
       inverterList,
       meteoData, // 环境数据
-      columnListTitle,
-      columnList,
+      pvstringTitle,
+      pvstringInfos,
       deviceInfos,
       dviceStatusInfos,
       deviceInfoChoose,

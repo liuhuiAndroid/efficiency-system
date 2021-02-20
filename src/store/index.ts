@@ -27,12 +27,15 @@ export interface InverterProps {
 }
 
 // 光伏组串
-export interface PvstringProps {
+export interface PvstringInfo {
   deviceName: string;
   deviceId: string;
-  deviceStaus: number;
-  isStandard: string;
-  deviceInfos: string;
+  status: number;
+  u: number;
+  i: number;
+  p: number;
+  temperature: number;
+  standard: boolean;
 }
 
 // 光伏组串详情
@@ -125,6 +128,7 @@ export interface GlobalDataProps {
   dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
   powerStationInfo: PowerStationInfo;
+  pvstringInfos: ListProps<PvstringInfo>;
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -162,7 +166,8 @@ export default createStore<GlobalDataProps>({
     deviceInfos: {},
     dviceStatusInfos: {},
     columns: { data: {}, currentPage: 0, total: 0 },
-    powerStationInfo: {}
+    powerStationInfo: {},
+    pvstringInfos: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -215,6 +220,9 @@ export default createStore<GlobalDataProps>({
     },
     setPowerStationInfo (state, rawData) {
       state.powerStationInfo = rawData.entity
+    },
+    setPvstringInfos (state, rawData) {
+      state.pvstringInfos = rawData.entity.pvStringDatas
     }
   },
   actions: {
@@ -241,11 +249,6 @@ export default createStore<GlobalDataProps>({
       })
     },
     // 获取当前气象数据
-    // async getMeteoData ({ commit }) {
-    //   const { data } = await axios.post('/web/sidebar/getmeteodata')
-    //   commit('getMeteoData', data)
-    // },
-    // 获取当前气象数据
     getMeteoData ({ commit }, payload) {
       return postAndCommit('/web/sidebar/getmeteodata', 'getMeteoData', commit, payload)
     },
@@ -269,8 +272,12 @@ export default createStore<GlobalDataProps>({
       }
     },
     // 获取电站信息
-    setPowerStationInfo ({ commit }, payload) {
+    getPowerStationInfo ({ commit }, payload) {
       return postAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, payload)
+    },
+    // 获取光伏组串列表
+    getPvstringInfos ({ commit }, payload) {
+      return postAndCommit('/web/monitor/getpvstringlist', 'setPvstringInfos', commit, payload)
     }
   },
   modules: {
