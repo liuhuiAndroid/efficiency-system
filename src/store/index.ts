@@ -100,6 +100,16 @@ export interface DeviceStatusInfo {
   deviceCount: number
 }
 
+// 电站信息
+export interface PowerStationInfo {
+  stationName?: string,
+  capacity?: string,
+  powerToday?: string,
+  powerThisMonth?: string,
+  powerThisYear?: string,
+  powerTotal?: string
+}
+
 interface ListProps<P> {
   [id: string]: P;
 }
@@ -114,6 +124,7 @@ export interface GlobalDataProps {
   deviceInfos: ListProps<DeviceInfo>;
   dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
+  powerStationInfo: PowerStationInfo;
 }
 
 const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
@@ -150,7 +161,8 @@ export default createStore<GlobalDataProps>({
     meteoData: {},
     deviceInfos: {},
     dviceStatusInfos: {},
-    columns: { data: {}, currentPage: 0, total: 0 }
+    columns: { data: {}, currentPage: 0, total: 0 },
+    powerStationInfo: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -200,6 +212,9 @@ export default createStore<GlobalDataProps>({
         total: count,
         currentPage: currentPage * 1
       }
+    },
+    setPowerStationInfo (state, rawData) {
+      state.powerStationInfo = rawData.entity
     }
   },
   actions: {
@@ -252,6 +267,10 @@ export default createStore<GlobalDataProps>({
       if (!state.columns.data[cid]) {
         return asyncAndCommit(`/columns/${cid}`, 'fetchColumn', commit)
       }
+    },
+    // 获取电站信息
+    setPowerStationInfo ({ commit }, payload) {
+      return postAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, payload)
     }
   },
   modules: {
