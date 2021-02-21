@@ -6,24 +6,24 @@
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div class="content-title">
         <span>{{column.deviceName}}</span>
-        <img src="../assets/Hosting4.png" alt="">
+        <img src="../assets/Hosting.png" alt="">
       </div>
       <p>
-        <span>电压：{{column.fac.toFixed(1)}}V</span>
-        <span></span>
+        <span>低压侧：{{column.lU}}</span>
+        <span>高压侧：{{column.hU}}</span>
       </p>
       <p>
-        <span></span>
-        <span></span>
+        <span>频率：{{column.fac}}</span>
+        <span>功率：{{column.pac}}</span>
       </p>
       <p>
-        <span></span>
-        <span></span>
+        <span>功率因数：{{column.pFactor}}</span>
+        <span>下级设备：逆变器({{column.inverterCount}})</span>
       </p>
     </div>
     <div class="page-warp">
       <el-pagination
-        small background
+        background
         layout="prev, pager, next"
         :page-size="pageSize"
         :hide-on-single-page="hideOnSinglePage"
@@ -192,5 +192,12 @@ export default defineComponent({
   align-items: center;
   display: flex;
   justify-content: flex-end;
+}
+::v-deep {
+  .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+    /*对页数的样式进行修改*/
+    background-color: #013D63;
+    color: #FFF;
+  }
 }
 </style>

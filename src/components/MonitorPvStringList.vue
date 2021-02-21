@@ -9,11 +9,11 @@
         <img src="../assets/Hosting4.png" alt="">
       </div>
       <p>
-        <span>电压：{{column.u.toFixed(1)}}V</span>
-        <span>电流：{{column.i.toFixed(1)}}A</span>
+        <span>电压：{{column.u}}</span>
+        <span>电流：{{column.i}}</span>
       </p>
       <p>
-        <span>功率：{{column.p.toFixed(1)}}W</span>
+        <span>功率：{{column.p}}</span>
         <span></span>
       </p>
       <p>
@@ -23,7 +23,7 @@
     </div>
     <div class="page-warp">
       <el-pagination
-        small background
+        background
         layout="prev, pager, next"
         :page-size="pageSize"
         :hide-on-single-page="hideOnSinglePage"
@@ -192,5 +192,12 @@ export default defineComponent({
   align-items: center;
   display: flex;
   justify-content: flex-end;
+}
+::v-deep {
+  .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+    /*对页数的样式进行修改*/
+    background-color: #013D63;
+    color: #FFF;
+  }
 }
 </style>

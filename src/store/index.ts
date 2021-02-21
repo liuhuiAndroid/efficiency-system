@@ -22,11 +22,11 @@ export interface TransformerInfo {
   deviceName: string;
   deviceId: string;
   status: boolean;
-  fac: number;
-  hU: number;
-  lU: number;
-  pFactor: number;
-  pac: boolean;
+  fac: string; // 频率
+  hU: string; // 高压侧电压
+  lU: string; // 低压侧电压
+  pFactor: string; // 功率因子
+  pac: string; // 功率
   inverterCount: number;
 }
 
@@ -44,9 +44,9 @@ export interface InverterInfo {
   deviceName: string;
   deviceId: string;
   status: number;
-  u: number;
-  i: number;
-  p: number;
+  u: string;
+  i: string;
+  p: string;
   combinerBoxCount: number;
 }
 
@@ -64,10 +64,10 @@ export interface CombinerBoxInfo {
   deviceName: string;
   deviceId: string;
   status: number;
-  u: number;
-  i: number;
-  p: number;
-  temperature: number;
+  u: string;
+  i: string;
+  p: string;
+  temperature: string;
   pvStringCount: number;
 }
 
@@ -85,10 +85,9 @@ export interface PvstringInfo {
   deviceName: string;
   deviceId: string;
   status: number;
-  u: number;
-  i: number;
-  p: number;
-  temperature: number;
+  u: string;
+  i: string;
+  p: string;
   standard: boolean;
 }
 
@@ -146,12 +145,12 @@ export interface GlobalErrorProps {
 }
 
 export interface MeteoProps {
-  temperature?: number;
-  humidity?: number;
-  pressure?: number;
+  temperature?: string;
+  humidity?: string;
+  pressure?: string;
   windDirection?: string;
-  windSpeed?: number;
-  poa?: number;
+  windSpeed?: string;
+  poa?: string;
 }
 
 export interface DeviceInfo {
@@ -342,19 +341,19 @@ export default createStore<GlobalDataProps>({
     },
     // 获取升压变列表
     getTransformerList ({ commit }, payload) {
-      return asyncAndCommit('/web/monitor/gettransformerlist', 'setTransformerList', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/device/gettransformerlist', 'setTransformerList', commit, { method: 'post', data: payload })
     },
     // 获取逆变器列表
     getInverterList ({ commit }, payload) {
-      return asyncAndCommit('/web/monitor/getinverterlist', 'setInverterList', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/device/getinverterlist', 'setInverterList', commit, { method: 'post', data: payload })
     },
     // 获取汇流箱列表
     getCombinerBoxList ({ commit }, payload) {
-      return asyncAndCommit('/web/monitor/getcombinerboxlist', 'setCombinerBoxList', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/device/getcombinerboxlist', 'setCombinerBoxList', commit, { method: 'post', data: payload })
     },
     // 获取光伏组串列表
     getPvStringList ({ commit }, payload) {
-      return asyncAndCommit('/web/monitor/getpvstringlist', 'setPvstringList', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/device/getpvstringlist', 'setPvstringList', commit, { method: 'post', data: payload })
     }
   },
   modules: {
