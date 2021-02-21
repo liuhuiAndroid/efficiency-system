@@ -30,7 +30,7 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos.pvStringDatas" :totalCount="pvstringInfos.totalCount"></monitor-column-list>
+        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos.pvStringInfos" :totalCount="pvstringInfos.totalCount"></monitor-column-list>
       </div>
     </div>
     </div>

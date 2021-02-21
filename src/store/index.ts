@@ -140,19 +140,6 @@ export interface GlobalDataProps {
   pvstringInfos: PvstringInfos;
 }
 
-const getAndCommit = async (url: string, mutationName: string, commit: Commit) => {
-  const { data } = await axios.get(url)
-  // await new Promise(resolve => setTimeout(resolve, 3000))
-  commit(mutationName, data)
-}
-
-const postAndCommit = async (url: string, mutationName: string, commit: Commit, payload?: any) => {
-  const { data } = await axios.post(url, payload)
-  // await new Promise(resolve => setTimeout(resolve, 3000))
-  commit(mutationName, data)
-  return data
-}
-
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
   config: AxiosRequestConfig = { method: 'get' }, extraData?: any) => {
   const { data } = await axios(url, config)
@@ -237,10 +224,10 @@ export default createStore<GlobalDataProps>({
   actions: {
     login ({ commit }, payload) {
       // 异步请求改造
-      return postAndCommit('/user/login', 'login', commit, payload)
+      return asyncAndCommit('/user/login', 'login', commit, { method: 'post' }, payload)
     },
     fetchCurrentUser ({ commit }) {
-      return getAndCommit('/user/current', 'fetchCurrentUser', commit)
+      return asyncAndCommit('/user/current', 'fetchCurrentUser', commit)
     },
     async getHomeData ({ commit }, cid) {
       const { data } = await axios.get(`/columns/${cid}`)
@@ -259,15 +246,15 @@ export default createStore<GlobalDataProps>({
     },
     // 获取当前气象数据
     getMeteoData ({ commit }, payload) {
-      return postAndCommit('/web/sidebar/getmeteodata', 'getMeteoData', commit, payload)
+      return asyncAndCommit('/web/sidebar/getmeteodata', 'getMeteoData', commit, { method: 'post' }, payload)
     },
     // 获取设备Bar信息
     getDevicesInfo ({ commit }, payload) {
-      return postAndCommit('/web/sidebar/getdevicesinfo', 'getDevicesInfo', commit, payload)
+      return asyncAndCommit('/web/sidebar/getdevicesinfo', 'getDevicesInfo', commit, { method: 'post' }, payload)
     },
     // 获取设备状态Bar信息
     getDeviceStatusInfo ({ commit }, payload) {
-      return postAndCommit('/web/sidebar/getdevicestatusinfo', 'getDeviceStatusInfo', commit, payload)
+      return asyncAndCommit('/web/sidebar/getdevicestatusinfo', 'getDeviceStatusInfo', commit, { method: 'post', data: payload })
     },
     fetchColumns ({ state, commit }, params = {}) {
       const { currentPage = 1, pageSize = 6 } = params
@@ -282,11 +269,11 @@ export default createStore<GlobalDataProps>({
     },
     // 获取电站信息
     getPowerStationInfo ({ commit }, payload) {
-      return postAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, payload)
+      return asyncAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, { method: 'post', data: payload })
     },
     // 获取光伏组串列表
     getPvstringInfos ({ commit }, payload) {
-      return postAndCommit('/web/monitor/getpvstringlist', 'setPvstringInfos', commit, payload)
+      return asyncAndCommit('/web/monitor/getpvstringlist', 'setPvstringInfos', commit, { method: 'post', data: payload })
     }
   },
   modules: {
