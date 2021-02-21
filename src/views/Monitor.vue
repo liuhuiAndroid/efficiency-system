@@ -122,9 +122,11 @@ export default defineComponent({
       deviceStatusInfoChoose.value = store.state.dviceStatusInfos[0]
     })
     watch(deviceStatusInfoChoose, () => {
-      if (deviceStatusInfoChoose.value?.deviceStautsCode) {
-        sendData.deviceStatus = deviceStatusInfoChoose.value?.deviceStautsCode
-        console.log('deviceStatusInfoChoose', deviceStatusInfoChoose.value)
+      const deviceStautsCode = deviceStatusInfoChoose.value?.deviceStautsCode
+      console.log('deviceStautsCode', deviceStautsCode)
+      if (deviceStautsCode !== undefined) {
+        console.log('deviceStautsCode', true)
+        sendData.deviceStatus = deviceStautsCode
         store.dispatch('getPvstringInfos', sendData)
       }
     })
