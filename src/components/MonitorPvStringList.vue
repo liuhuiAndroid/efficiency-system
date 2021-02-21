@@ -41,7 +41,7 @@ import { PvstringInfo } from '../store'
 import { emitter } from '@/views/Monitor.vue'
 
 export default defineComponent({
-  name: 'MonitorColumnList',
+  name: 'MonitorPvStringList',
   props: {
     list: {
       type: Array as PropType<PvstringInfo[]>,

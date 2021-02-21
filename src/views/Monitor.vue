@@ -30,7 +30,10 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-        <monitor-column-list :title="pvstringTitle" :list="pvstringInfos.pvStringInfos" :totalCount="pvstringInfos.totalCount"></monitor-column-list>
+          <monitor-transformer-list :title="transformerTitle" :list="transformerListInfo.transformerInfos" :totalCount="transformerListInfo.totalCount"/>
+          <monitor-inverter-list :title="inverterTitle" :list="inverterListInfo.inverterInfos" :totalCount="inverterListInfo.totalCount"/>
+          <monitor-combiner-box-list :title="combinerBoxTitle" :list="combinerBoxListInfo.combinerBoxInfos" :totalCount="combinerBoxListInfo.totalCount"/>
+          <monitor-pv-string-list :title="pvstringTitle" :list="pvstringListInfo.pvStringInfos" :totalCount="pvstringListInfo.totalCount"/>
       </div>
     </div>
     </div>
@@ -39,11 +42,14 @@
 
 <script lang="ts">
 import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted, onUnmounted } from 'vue'
-import { InverterProps, GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
+import { GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
 import { useStore } from 'vuex'
 import Dropdown from '../components/Dropdown.vue'
 import DropdownItem from '../components/DropdownItem.vue'
-import MonitorColumnList from '../components/MonitorColumnList.vue'
+import MonitorTransformerList from '../components/MonitorTransformerList.vue'
+import MonitorInverterList from '../components/MonitorInverterList.vue'
+import MonitorCombinerBoxList from '../components/MonitorCombinerBoxList.vue'
+import MonitorPvStringList from '../components/MonitorPvStringList.vue'
 import mitt from 'mitt'
 
 export const emitter = mitt()
@@ -53,7 +59,10 @@ export default defineComponent({
   components: {
     Dropdown,
     DropdownItem,
-    MonitorColumnList
+    MonitorTransformerList,
+    MonitorInverterList,
+    MonitorCombinerBoxList,
+    MonitorPvStringList
   },
   setup() {
     const currentInstance = getCurrentInstance()
@@ -96,10 +105,21 @@ export default defineComponent({
     const meteoData = computed(() => store.state.meteoData)
     const deviceInfos = computed(() => store.state.deviceInfos)
     const dviceStatusInfos = computed(() => store.state.dviceStatusInfos)
+    // 升压变列表数据
+    const transformerListInfo = computed(() => {
+      return store.state.transformerListInfo
+    })
+    // 逆变器列表数据
+    const inverterListInfo = computed(() => {
+      return store.state.inverterListInfo
+    })
+    // 汇流箱列表数据
+    const combinerBoxListInfo = computed(() => {
+      return store.state.combinerBoxListInfo
+    })
     // 光伏组串列表
-    const pvstringInfos = computed(() => {
-      console.log('pvstringInfos', store.state.pvstringInfos)
-      return store.state.pvstringInfos
+    const pvstringListInfo = computed(() => {
+      return store.state.pvstringListInfo
     })
 
     const handleDeviceInfoChoose = (item: DeviceInfo) => {
@@ -127,7 +147,8 @@ export default defineComponent({
       if (deviceStautsCode !== undefined) {
         console.log('deviceStautsCode', true)
         sendData.deviceStatus = deviceStautsCode
-        store.dispatch('getPvstringInfos', sendData)
+        // 获取光伏组串列表
+        store.dispatch('getPvStringList', sendData)
       }
     })
     onMounted(() => {
@@ -135,13 +156,20 @@ export default defineComponent({
       store.dispatch('getMeteoData')
       // 获取设备Bar信息
       store.dispatch('getDevicesInfo')
-      // 获取设备Bar信息
-      store.dispatch('getPvstringInfos', sendData)
+      // 获取升压变列表
+      store.dispatch('getTransformerList', sendData)
+      // 获取逆变器列表
+      store.dispatch('getInverterList', sendData)
+      // 获取汇流箱列表
+      store.dispatch('getCombinerBoxList', sendData)
+      // 获取光伏组串列表
+      store.dispatch('getPvStringList', sendData)
     })
 
     const handleCurrentChangeCallback = (e: any) => {
       sendData.pageNum = e.currentPage
-      store.dispatch('getPvstringInfos', sendData)
+      // 获取光伏组串列表
+      store.dispatch('getPvStringList', sendData)
     }
     emitter.on('handleCurrentChange', handleCurrentChangeCallback)
 
@@ -158,18 +186,27 @@ export default defineComponent({
       console.log('')
     })
 
+    const transformerTitle = '升压变'
+    const inverterTitle = '逆变器'
+    const combinerBoxTitle = '汇流箱'
     const pvstringTitle = '光伏组串'
     return {
       logout,
       meteoData, // 环境数据
-      pvstringTitle,
-      pvstringInfos,
       deviceInfos,
       dviceStatusInfos,
       deviceInfoChoose,
       deviceStatusInfoChoose,
       handleDeviceInfoChoose,
-      handleDeviceStatusInfoChoose
+      handleDeviceStatusInfoChoose,
+      transformerTitle,
+      inverterTitle,
+      combinerBoxTitle,
+      pvstringTitle,
+      transformerListInfo,
+      inverterListInfo,
+      combinerBoxListInfo,
+      pvstringListInfo
     }
   }
 })

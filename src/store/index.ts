@@ -17,13 +17,67 @@ export interface PowerStationInfoProps {
   deviceOverview: string;
 }
 
-// 逆变器
-export interface InverterProps {
+// 升压变
+export interface TransformerInfo {
   deviceName: string;
   deviceId: string;
-  deviceStaus: number;
-  subDevices: string;
-  deviceInfos: string;
+  status: boolean;
+  fac: number;
+  hU: number;
+  lU: number;
+  pFactor: number;
+  pac: boolean;
+  inverterCount: number;
+}
+
+// 升压变列表数据
+export interface TransformerListInfo {
+  pageNum?: number;
+  pageSize?: number;
+  pageCount?: number;
+  totalCount?: number;
+  pvStringDatas?: TransformerInfo[];
+}
+
+// 逆变器
+export interface InverterInfo {
+  deviceName: string;
+  deviceId: string;
+  status: number;
+  u: number;
+  i: number;
+  p: number;
+  combinerBoxCount: number;
+}
+
+// 逆变器列表数据
+export interface InverterListInfo {
+  pageNum?: number;
+  pageSize?: number;
+  pageCount?: number;
+  totalCount?: number;
+  pvStringDatas?: InverterInfo[];
+}
+
+// 汇流箱
+export interface CombinerBoxInfo {
+  deviceName: string;
+  deviceId: string;
+  status: number;
+  u: number;
+  i: number;
+  p: number;
+  temperature: number;
+  pvStringCount: number;
+}
+
+// 汇流箱列表数据
+export interface CombinerBoxListInfo {
+  pageNum?: number;
+  pageSize?: number;
+  pageCount?: number;
+  totalCount?: number;
+  pvStringDatas?: CombinerBoxInfo[];
 }
 
 // 光伏组串
@@ -38,8 +92,8 @@ export interface PvstringInfo {
   standard: boolean;
 }
 
-// 光伏组串
-export interface PvstringInfos {
+// 光伏组串列表数据
+export interface PvstringListInfo {
   pageNum?: number;
   pageSize?: number;
   pageCount?: number;
@@ -137,7 +191,10 @@ export interface GlobalDataProps {
   dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
   powerStationInfo: PowerStationInfo;
-  pvstringInfos: PvstringInfos;
+  transformerListInfo: TransformerListInfo;
+  inverterListInfo: InverterListInfo;
+  combinerBoxListInfo: CombinerBoxListInfo;
+  pvstringListInfo: PvstringListInfo;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -163,7 +220,10 @@ export default createStore<GlobalDataProps>({
     dviceStatusInfos: {},
     columns: { data: {}, currentPage: 0, total: 0 },
     powerStationInfo: {},
-    pvstringInfos: {}
+    transformerListInfo: {},
+    inverterListInfo: {},
+    combinerBoxListInfo: {},
+    pvstringListInfo: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -217,8 +277,17 @@ export default createStore<GlobalDataProps>({
     setPowerStationInfo (state, rawData) {
       state.powerStationInfo = rawData.entity
     },
-    setPvstringInfos (state, rawData) {
-      state.pvstringInfos = rawData.entity
+    setTransformerList (state, rawData) {
+      state.transformerListInfo = rawData.entity
+    },
+    setInverterList (state, rawData) {
+      state.inverterListInfo = rawData.entity
+    },
+    setCombinerBoxList (state, rawData) {
+      state.combinerBoxListInfo = rawData.entity
+    },
+    setPvstringList (state, rawData) {
+      state.pvstringListInfo = rawData.entity
     }
   },
   actions: {
@@ -271,9 +340,21 @@ export default createStore<GlobalDataProps>({
     getPowerStationInfo ({ commit }, payload) {
       return asyncAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, { method: 'post', data: payload })
     },
+    // 获取升压变列表
+    getTransformerList ({ commit }, payload) {
+      return asyncAndCommit('/web/monitor/gettransformerlist', 'setTransformerList', commit, { method: 'post', data: payload })
+    },
+    // 获取逆变器列表
+    getInverterList ({ commit }, payload) {
+      return asyncAndCommit('/web/monitor/getinverterlist', 'setInverterList', commit, { method: 'post', data: payload })
+    },
+    // 获取汇流箱列表
+    getCombinerBoxList ({ commit }, payload) {
+      return asyncAndCommit('/web/monitor/getcombinerboxlist', 'setCombinerBoxList', commit, { method: 'post', data: payload })
+    },
     // 获取光伏组串列表
-    getPvstringInfos ({ commit }, payload) {
-      return asyncAndCommit('/web/monitor/getpvstringlist', 'setPvstringInfos', commit, { method: 'post', data: payload })
+    getPvStringList ({ commit }, payload) {
+      return asyncAndCommit('/web/monitor/getpvstringlist', 'setPvstringList', commit, { method: 'post', data: payload })
     }
   },
   modules: {
