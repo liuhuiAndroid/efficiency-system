@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/monitordetail/:id',
         name: 'MonitorDetail',
         component: () => import(/* webpackChunkName: "monitordetail" */ '../views/MonitorDetail.vue'),
-        meta: { requiredLogin: true }
+        meta: { requiredLogin: false }
       },
       {
         path: '/warning',

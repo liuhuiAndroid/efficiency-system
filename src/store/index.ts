@@ -100,14 +100,25 @@ export interface PvstringListInfo {
   pvStringDatas?: PvstringInfo[];
 }
 
+export interface DeviceDataOfToday {
+  time: string;
+  u: number;
+  i?: number;
+  p?: number;
+}
+
 // 光伏组串详情
 export interface PvstringDetailProps {
-  deviceName: string;
-  deviceId: string;
-  deviceStaus: number;
-  isStandard: string;
-  deviceInfos: string;
-  deviceData: string;
+  deviceName?: string;
+  deviceId?: string;
+  status?: number;
+  u?: string;
+  i?: string;
+  p?: string;
+  decayRate?: string;
+  dustLossRate?: string;
+  deviceDataOfToday?: DeviceDataOfToday[];
+  standard?: boolean; // 是否是标杆组串
 }
 
 // 标杆组串
@@ -194,6 +205,7 @@ export interface GlobalDataProps {
   inverterListInfo: InverterListInfo;
   combinerBoxListInfo: CombinerBoxListInfo;
   pvstringListInfo: PvstringListInfo;
+  pvstringDetailProps: PvstringDetailProps;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -222,7 +234,8 @@ export default createStore<GlobalDataProps>({
     transformerListInfo: {},
     inverterListInfo: {},
     combinerBoxListInfo: {},
-    pvstringListInfo: {}
+    pvstringListInfo: {},
+    pvstringDetailProps: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -287,6 +300,9 @@ export default createStore<GlobalDataProps>({
     },
     setPvstringList (state, rawData) {
       state.pvstringListInfo = rawData.entity
+    },
+    setPvstringDetail (state, rawData) {
+      state.pvstringDetailProps = rawData.entity
     }
   },
   actions: {
@@ -354,6 +370,10 @@ export default createStore<GlobalDataProps>({
     // 获取光伏组串列表
     getPvStringList ({ commit }, payload) {
       return asyncAndCommit('/web/device/getpvstringlist', 'setPvstringList', commit, { method: 'post', data: payload })
+    },
+    // 获取光伏组详情
+    getPvStringDetail ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getpvstringdetail', 'setPvstringDetail', commit, { method: 'post', data: payload })
     }
   },
   modules: {
