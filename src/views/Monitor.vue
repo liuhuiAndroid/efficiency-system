@@ -30,10 +30,10 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-          <monitor-transformer-list :title="transformerTitle" :list="transformerListInfo.transformerInfos" :totalCount="transformerListInfo.totalCount"/>
-          <monitor-inverter-list :title="inverterTitle" :list="inverterListInfo.inverterInfos" :totalCount="inverterListInfo.totalCount"/>
-          <monitor-combiner-box-list :title="combinerBoxTitle" :list="combinerBoxListInfo.combinerBoxInfos" :totalCount="combinerBoxListInfo.totalCount"/>
-          <monitor-pv-string-list :title="pvstringTitle" :list="pvstringListInfo.pvStringInfos" :totalCount="pvstringListInfo.totalCount"/>
+          <monitor-transformer-list v-show="deviceInfoChoose.deviceTypeCode == 4" :title="transformerTitle" :list="transformerListInfo.transformerInfos" :totalCount="transformerListInfo.totalCount"/>
+          <monitor-inverter-list v-show="deviceInfoChoose.deviceTypeCode == 3" :title="inverterTitle" :list="inverterListInfo.inverterInfos" :totalCount="inverterListInfo.totalCount"/>
+          <monitor-combiner-box-list v-show="deviceInfoChoose.deviceTypeCode == 2" :title="combinerBoxTitle" :list="combinerBoxListInfo.combinerBoxInfos" :totalCount="combinerBoxListInfo.totalCount"/>
+          <monitor-pv-string-list v-show="deviceInfoChoose.deviceTypeCode == 1" :title="pvstringTitle" :list="pvstringListInfo.pvStringInfos" :totalCount="pvstringListInfo.totalCount"/>
       </div>
     </div>
     </div>
@@ -124,6 +124,9 @@ export default defineComponent({
 
     const handleDeviceInfoChoose = (item: DeviceInfo) => {
       deviceInfoChoose.value = item
+      store.dispatch('getDeviceStatusInfo', {
+        deviceTypeCode: deviceInfoChoose.value.deviceTypeCode
+      })
     }
     const handleDeviceStatusInfoChoose = (item: DeviceStatusInfo) => {
       deviceStatusInfoChoose.value = item
@@ -147,6 +150,12 @@ export default defineComponent({
       if (deviceStautsCode !== undefined) {
         console.log('deviceStautsCode', true)
         sendData.deviceStatus = deviceStautsCode
+        // 获取升压变列表
+        store.dispatch('getTransformerList', sendData)
+        // 获取逆变器列表
+        store.dispatch('getInverterList', sendData)
+        // 获取汇流箱列表
+        store.dispatch('getCombinerBoxList', sendData)
         // 获取光伏组串列表
         store.dispatch('getPvStringList', sendData)
       }
