@@ -1,32 +1,48 @@
 <template>
-  <div class="container">
-    <h1>实时监测详情</h1>
-    <div ref="mycharts" style="margin-left:200px;width:600px;height:400px;"></div>
+<div class="container">
+  <div class="container__title">
+    <p>{{pvstringDetailProps.deviceName}}：<span>电压：{{pvstringDetailProps.u}}</span><span>电流：{{pvstringDetailProps.i}}</span><span>功率：{{pvstringDetailProps.p}}</span></p>
   </div>
+  <div class="container__content">
+    <div class="container__content__chart" ref="uCharts"></div>
+    <div class="container__content__chart" ref="iCharts"></div>
+    <div class="container__content__chart" ref="pCharts"></div>
+    <div class="container__content__chart" ref="tempCharts"></div>
+  </div>
+</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
-import { GlobalDataProps } from '../store'
+import { GlobalDataProps, PvstringDetailProps } from '../store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
 
 export default defineComponent({
   setup() {
-    const mycharts = ref(null)
+    const uCharts = ref(null)
+    const iCharts = ref(null)
+    const pCharts = ref(null)
     const mTimeList = ref<string[]>()
     const mUList = ref<number[]>()
+    const mIList = ref<number[]>()
+    const mPList = ref<number[]>()
     // echart 初始化
     const initCharts = () => {
-      var mycharts2 = mycharts.value
-      if (mycharts2) {
-        var myChart = echarts.init(mycharts2)
+      // 电压
+      const muCharts = uCharts.value
+      if (muCharts) {
+        var myuChart = echarts.init(muCharts)
         // 绘制图表
-        myChart.setOption({
+        myuChart.setOption({
           title: {
-            text: 'DC电压'
+            left: 'center',
+            text: 'DC电压',
+            textStyle: {
+              color: '#fff'
+            }
           },
           xAxis: {
             type: 'category',
@@ -40,6 +56,68 @@ export default defineComponent({
           },
           series: [{
             data: mUList.value,
+            type: 'line',
+            smooth: true
+          }]
+        })
+      }
+
+      // 电流
+      const miCharts = iCharts.value
+      if (miCharts) {
+        var myiChart = echarts.init(miCharts)
+        // 绘制图表
+        myiChart.setOption({
+          title: {
+            left: 'center',
+            text: 'DC电流',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: mTimeList.value
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              formatter: '{value} A'
+            }
+          },
+          series: [{
+            data: mIList.value,
+            type: 'line',
+            smooth: true
+          }]
+        })
+      }
+
+      // 功率
+      const mpCharts = pCharts.value
+      if (mpCharts) {
+        var mypCharts = echarts.init(mpCharts)
+        // 绘制图表
+        mypCharts.setOption({
+          title: {
+            left: 'center',
+            text: '组串功率',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: mTimeList.value
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              formatter: '{value} kW'
+            }
+          },
+          series: [{
+            data: mPList.value,
             type: 'line',
             smooth: true
           }]
@@ -59,6 +137,14 @@ export default defineComponent({
       if (uList) {
         mUList.value = uList
       }
+      const iList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.i)
+      if (iList) {
+        mIList.value = iList
+      }
+      const pList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.p)
+      if (pList) {
+        mPList.value = pList
+      }
       initCharts()
     })
     onMounted(() => {
@@ -67,7 +153,9 @@ export default defineComponent({
     })
     return {
       pvstringDetailProps,
-      mycharts
+      uCharts,
+      iCharts,
+      pCharts
     }
   }
 })
@@ -76,5 +164,36 @@ export default defineComponent({
 <style lang="scss" scoped>
 h1{
   color: white;
+}
+.container{
+  margin-left: 2rem;
+  &__title{
+    height: 0.3rem;
+    p{
+      width: 100%;
+      height: 0.3rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: white;
+    }
+    span{
+      display: inline-block;
+      margin-left: 0.4rem;
+      color: white;
+    }
+  }
+  &__content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    &__chart{
+      width: 600px;
+      height: 300px;
+    }
+  }
 }
 </style>

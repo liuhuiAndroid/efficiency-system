@@ -103,8 +103,8 @@ export interface PvstringListInfo {
 export interface DeviceDataOfToday {
   time: string;
   u: number;
-  i?: number;
-  p?: number;
+  i: number;
+  p: number;
 }
 
 // 光伏组串详情
