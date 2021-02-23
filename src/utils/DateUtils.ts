@@ -22,3 +22,11 @@ export const formatDate = (time: Date) => {
   }
   return year + '年' + month + '月' + day + '日 ' + weekString
 }
+
+export const currentTime = () => {
+  const Dates = new Date()
+  const Year : number = Dates.getFullYear()
+  const Months : any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1)
+  const Day : any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate()
+  return Year + '-' + Months + '-' + Day
+}

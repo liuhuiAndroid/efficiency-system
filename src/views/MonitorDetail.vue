@@ -19,6 +19,7 @@ import { useRoute } from 'vue-router'
 import { GlobalDataProps, PvstringDetailProps } from '../store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
+import { currentTime } from '../utils/DateUtils'
 
 export default defineComponent({
   setup() {
@@ -54,16 +55,13 @@ export default defineComponent({
             splitLine: {
               show: false
             },
-            min: '2019-11-1 00:00:00',
-            max: '2019-11-1 24:00:00',
+            min: '2021-02-23 00:00:00',
+            max: '2021-02-23 24:00:00',
             axisLabel: {
               formatter: function (value:any) {
-                console.log('value', value)
                 var data = new Date(value)
-                console.log('data', data)
                 var hours = data.getHours()
                 var minutes = data.getMinutes()
-                console.log('hours', hours)
                 var hourString = hours + ''
                 var minuteString = minutes + ''
                 if (hours < 10) {
@@ -92,6 +90,9 @@ export default defineComponent({
         })
       }
 
+      const min = `${currentTime()} 00:00:00`
+      const max = `${currentTime()} 24:00:00`
+
       // 电流
       const miCharts = iCharts.value
       if (miCharts) {
@@ -116,16 +117,13 @@ export default defineComponent({
             splitLine: {
               show: false
             },
-            min: '2019-11-1 00:00:00',
-            max: '2019-11-1 24:00:00',
+            min,
+            max,
             axisLabel: {
               formatter: function (value:any) {
-                console.log('value', value)
                 var data = new Date(value)
-                console.log('data', data)
                 var hours = data.getHours()
                 var minutes = data.getMinutes()
-                console.log('hours', hours)
                 var hourString = hours + ''
                 var minuteString = minutes + ''
                 if (hours < 10) {
@@ -176,16 +174,13 @@ export default defineComponent({
             splitLine: {
               show: false
             },
-            min: '2019-11-1 00:00:00',
-            max: '2019-11-1 24:00:00',
+            min,
+            max,
             axisLabel: {
               formatter: function (value:any) {
-                console.log('value', value)
                 var data = new Date(value)
-                console.log('data', data)
                 var hours = data.getHours()
                 var minutes = data.getMinutes()
-                console.log('hours', hours)
                 var hourString = hours + ''
                 var minuteString = minutes + ''
                 if (hours < 10) {
@@ -218,10 +213,11 @@ export default defineComponent({
     watch(pvstringDetailProps, () => {
       const pvstringDetailProps = store.state.pvstringDetailProps
       const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
+        console.log('time', item.time)
         return {
           name: 'a',
           value: [
-            '2019-11-1 ' + item.time + ':00',
+            item.time,
             item.u
           ]
         }
@@ -233,7 +229,7 @@ export default defineComponent({
         return {
           name: 'a',
           value: [
-            '2019-11-1 ' + item.time + ':00',
+            item.time,
             item.i
           ]
         }
@@ -245,7 +241,7 @@ export default defineComponent({
         return {
           name: 'a',
           value: [
-            '2019-11-1 ' + item.time + ':00',
+            item.time,
             item.p
           ]
         }
