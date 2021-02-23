@@ -25,10 +25,9 @@ export default defineComponent({
     const uCharts = ref(null)
     const iCharts = ref(null)
     const pCharts = ref(null)
-    const mTimeList = ref<string[]>()
-    const mUList = ref<number[]>()
-    const mIList = ref<number[]>()
-    const mPList = ref<number[]>()
+    const mUList = ref()
+    const mIList = ref()
+    const mPList = ref()
     // echart 初始化
     const initCharts = () => {
       // 电压
@@ -44,9 +43,38 @@ export default defineComponent({
               color: '#fff'
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross'
+            }
+          },
           xAxis: {
-            type: 'category',
-            data: mTimeList.value
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            min: '2019-11-1 00:00:00',
+            max: '2019-11-1 24:00:00',
+            axisLabel: {
+              formatter: function (value:any) {
+                console.log('value', value)
+                var data = new Date(value)
+                console.log('data', data)
+                var hours = data.getHours()
+                var minutes = data.getMinutes()
+                console.log('hours', hours)
+                var hourString = hours + ''
+                var minuteString = minutes + ''
+                if (hours < 10) {
+                  hourString = '0' + hours
+                }
+                if (minutes < 10) {
+                  minuteString = '0' + minutes
+                }
+                return hourString + ':' + minuteString
+              }
+            }
           },
           yAxis: {
             type: 'value',
@@ -55,9 +83,11 @@ export default defineComponent({
             }
           },
           series: [{
-            data: mUList.value,
             type: 'line',
-            smooth: true
+            smooth: true,
+            data: mUList.value,
+            showSymbol: false,
+            hoverAnimation: false
           }]
         })
       }
@@ -75,9 +105,38 @@ export default defineComponent({
               color: '#fff'
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross'
+            }
+          },
           xAxis: {
-            type: 'category',
-            data: mTimeList.value
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            min: '2019-11-1 00:00:00',
+            max: '2019-11-1 24:00:00',
+            axisLabel: {
+              formatter: function (value:any) {
+                console.log('value', value)
+                var data = new Date(value)
+                console.log('data', data)
+                var hours = data.getHours()
+                var minutes = data.getMinutes()
+                console.log('hours', hours)
+                var hourString = hours + ''
+                var minuteString = minutes + ''
+                if (hours < 10) {
+                  hourString = '0' + hours
+                }
+                if (minutes < 10) {
+                  minuteString = '0' + minutes
+                }
+                return hourString + ':' + minuteString
+              }
+            }
           },
           yAxis: {
             type: 'value',
@@ -106,9 +165,38 @@ export default defineComponent({
               color: '#fff'
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross'
+            }
+          },
           xAxis: {
-            type: 'category',
-            data: mTimeList.value
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            min: '2019-11-1 00:00:00',
+            max: '2019-11-1 24:00:00',
+            axisLabel: {
+              formatter: function (value:any) {
+                console.log('value', value)
+                var data = new Date(value)
+                console.log('data', data)
+                var hours = data.getHours()
+                var minutes = data.getMinutes()
+                console.log('hours', hours)
+                var hourString = hours + ''
+                var minuteString = minutes + ''
+                if (hours < 10) {
+                  hourString = '0' + hours
+                }
+                if (minutes < 10) {
+                  minuteString = '0' + minutes
+                }
+                return hourString + ':' + minuteString
+              }
+            }
           },
           yAxis: {
             type: 'value',
@@ -129,19 +217,39 @@ export default defineComponent({
     const pvstringDetailProps = computed(() => store.state.pvstringDetailProps)
     watch(pvstringDetailProps, () => {
       const pvstringDetailProps = store.state.pvstringDetailProps
-      const timeList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.time)
-      if (timeList) {
-        mTimeList.value = timeList
-      }
-      const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.u)
+      const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
+        return {
+          name: 'a',
+          value: [
+            '2019-11-1 ' + item.time + ':00',
+            item.u
+          ]
+        }
+      })
       if (uList) {
         mUList.value = uList
       }
-      const iList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.i)
+      const iList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
+        return {
+          name: 'a',
+          value: [
+            '2019-11-1 ' + item.time + ':00',
+            item.i
+          ]
+        }
+      })
       if (iList) {
         mIList.value = iList
       }
-      const pList = pvstringDetailProps.deviceDataOfToday?.map((item) => item.p)
+      const pList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
+        return {
+          name: 'a',
+          value: [
+            '2019-11-1 ' + item.time + ':00',
+            item.p
+          ]
+        }
+      })
       if (pList) {
         mPList.value = pList
       }
