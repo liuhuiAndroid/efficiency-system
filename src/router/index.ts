@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requiredLogin: true }
       },
       {
-        path: '/monitor',
+        path: '/device',
         name: 'Monitor',
         component: () => import(/* webpackChunkName: "monitor" */ '../views/Monitor.vue'),
         meta: { requiredLogin: false }

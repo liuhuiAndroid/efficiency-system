@@ -21,7 +21,7 @@ export default defineComponent({
     const navs = [
       { name: '首页', to: '/', img: require('../assets/left1.png'), img_active: require('../assets/left1_active.png') },
       { name: '标杆组串', to: '/benchmarking', img: require('../assets/left2.png'), img_active: require('../assets/left2_active.png') },
-      { name: '实时监测', to: '/monitor', img: require('../assets/left3.png'), img_active: require('../assets/left3_active.png') },
+      { name: '实时监测', to: '/device', img: require('../assets/left3.png'), img_active: require('../assets/left3_active.png') },
       { name: '设备预警', to: '/warning', img: require('../assets/left4.png'), img_active: require('../assets/left4_active.png') },
       { name: '能效分析', to: '/analysis', img: require('../assets/left5.png'), img_active: require('../assets/left5_active.png') },
       { name: '运维建议', to: { name: 'Suggestion' }, img: require('../assets/left6.png'), img_active: require('../assets/left6_active.png') },
