@@ -9,7 +9,7 @@ import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
 import axios from 'axios'
-import 'normalize.css'
+import 'normalize.css/normalize.css'
 import './style/index.scss'
 
 axios.defaults.baseURL = 'http://119.3.177.188:8080/api'

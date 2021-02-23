@@ -64,10 +64,6 @@ export default defineComponent({
 <style lang="scss" sco>
 @import './style/viriables.scss';
 @import './style/mixins.scss';
-* {
-  margin: 0;
-  padding: 0;
-}
 html, body {
   margin: 0;
   padding: 0;
