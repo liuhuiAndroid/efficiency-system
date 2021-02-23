@@ -30,10 +30,10 @@
     <div class="main-right-center">
       <div class="main-center-warp">
         <div class="main-center-box">
-          <monitor-transformer-list v-show="deviceInfoChoose.deviceTypeCode == 4" :title="transformerTitle" :list="transformerListInfo.transformerInfos" :totalCount="transformerListInfo.totalCount"/>
-          <monitor-inverter-list v-show="deviceInfoChoose.deviceTypeCode == 3" :title="inverterTitle" :list="inverterListInfo.inverterInfos" :totalCount="inverterListInfo.totalCount"/>
-          <monitor-combiner-box-list v-show="deviceInfoChoose.deviceTypeCode == 2" :title="combinerBoxTitle" :list="combinerBoxListInfo.combinerBoxInfos" :totalCount="combinerBoxListInfo.totalCount"/>
-          <monitor-pv-string-list v-show="deviceInfoChoose.deviceTypeCode == 1" :title="pvstringTitle" :list="pvstringListInfo.pvStringInfos" :totalCount="pvstringListInfo.totalCount"/>
+          <monitor-transformer-list v-show="deviceInfoChoose.deviceTypeCode == 4 || deviceInfoChoose.deviceTypeCode == 0" :title="transformerTitle" :list="transformerListInfo.transformerInfos" :totalCount="transformerListInfo.totalCount"/>
+          <monitor-inverter-list v-show="deviceInfoChoose.deviceTypeCode == 3 || deviceInfoChoose.deviceTypeCode == 0" :title="inverterTitle" :list="inverterListInfo.inverterInfos" :totalCount="inverterListInfo.totalCount"/>
+          <monitor-combiner-box-list v-show="deviceInfoChoose.deviceTypeCode == 2 || deviceInfoChoose.deviceTypeCode == 0" :title="combinerBoxTitle" :list="combinerBoxListInfo.combinerBoxInfos" :totalCount="combinerBoxListInfo.totalCount"/>
+          <monitor-pv-string-list v-show="deviceInfoChoose.deviceTypeCode == 1 || deviceInfoChoose.deviceTypeCode == 0" :title="pvstringTitle" :list="pvstringListInfo.pvStringInfos" :totalCount="pvstringListInfo.totalCount"/>
       </div>
     </div>
     </div>
