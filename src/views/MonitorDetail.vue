@@ -1,7 +1,23 @@
 <template>
 <div class="container">
   <div class="container__title">
-    <p>{{pvstringDetailProps.deviceName}}：<span>电压：{{pvstringDetailProps.u}}</span><span>电流：{{pvstringDetailProps.i}}</span><span>功率：{{pvstringDetailProps.p}}</span></p>
+    <p>
+      {{pvstringDetailProps.deviceName}}：
+      <span>电压：{{pvstringDetailProps.u}}</span>
+      <span>电流：{{pvstringDetailProps.i}}</span>
+      <span>功率：{{pvstringDetailProps.p}}</span>
+    </p>
+  </div>
+  <div class="container__title">
+    <p>
+      环境数据：
+      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
+      <span>{{`湿度：${meteoData.humidity}`}}</span>
+      <span>{{`压力：${meteoData.pressure}`}}</span>
+      <span>{{`风向：${meteoData.windDirection}`}}</span>
+      <span>{{`风速：${meteoData.windSpeed}`}}</span>
+      <span>{{`Poa：${meteoData.poa}`}}</span>
+    </p>
   </div>
   <div class="container__content">
     <div class="container__content__chart" ref="uCharts"></div>
@@ -257,15 +273,19 @@ export default defineComponent({
       initCharts()
     })
 
+    const meteoData = computed(() => store.state.meteoData)
+
     var refreshUI = function() {
       // 获取当前气象数据
+      store.dispatch('getMeteoData')
+      // 获取光伏组串详情
       store.dispatch('getPvStringDetail', { deviceId: route.params.id })
     }
     let intervalTask: number
 
     onMounted(() => {
       refreshUI()
-      intervalTask = window.setInterval(refreshUI, 8000)
+      intervalTask = window.setInterval(refreshUI, 300000)
     })
 
     onBeforeUnmount(() => {
@@ -278,7 +298,8 @@ export default defineComponent({
       pvstringDetailProps,
       uCharts,
       iCharts,
-      pCharts
+      pCharts,
+      meteoData
     }
   }
 })
@@ -313,6 +334,7 @@ h1{
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    margin-top: .5rem;
     &__chart{
       width: 600px;
       height: 300px;
