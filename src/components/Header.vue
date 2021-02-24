@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from 'vue'
+import { defineComponent, getCurrentInstance, ref, onMounted, onBeforeUnmount } from 'vue'
 import { formatDate } from '../utils/DateUtils'
 
 export default defineComponent({
@@ -34,7 +34,13 @@ export default defineComponent({
         })
       }
     }
-    const currentTime = formatDate(new Date())
+    const currentTime = ref('')
+    currentTime.value = formatDate(new Date())
+    onMounted(() => {
+      const chatTimer = setInterval(() => {
+        currentTime.value = formatDate(new Date())
+      }, 1000)
+    })
     return {
       logout,
       currentTime

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted, onUnmounted } from 'vue'
+import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted, onUnmounted, onBeforeUnmount } from 'vue'
 import { GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
 import { useStore } from 'vuex'
 import Dropdown from '../components/Dropdown.vue'
@@ -160,21 +160,43 @@ export default defineComponent({
         store.dispatch('getPvStringList', sendData)
       }
     })
-    onMounted(() => {
+
+    var refreshUI = function() {
+      if (sendData.deviceStatus === 1 || sendData.deviceStatus === 0) {
+        // 获取汇流箱列表
+        store.dispatch('getCombinerBoxList', sendData)
+      }
+      if (sendData.deviceStatus === 2 || sendData.deviceStatus === 0) {
+        // 获取光伏组串列表
+        store.dispatch('getPvStringList', sendData)
+      }
+      if (sendData.deviceStatus === 3 || sendData.deviceStatus === 0) {
+        // 获取逆变器列表
+        store.dispatch('getInverterList', sendData)
+      }
+      if (sendData.deviceStatus === 4 || sendData.deviceStatus === 0) {
+        // 获取升压变列表
+        store.dispatch('getTransformerList', sendData)
+      }
       // 获取当前气象数据
       store.dispatch('getMeteoData')
-      // 获取设备Bar信息
-      store.dispatch('getDevicesInfo')
-      // 获取升压变列表
-      store.dispatch('getTransformerList', sendData)
-      // 获取逆变器列表
-      store.dispatch('getInverterList', sendData)
-      // 获取汇流箱列表
-      store.dispatch('getCombinerBoxList', sendData)
-      // 获取光伏组串列表
-      store.dispatch('getPvStringList', sendData)
+    }
+
+    let intervalTask: number
+
+    onMounted(() => {
+      refreshUI()
+      intervalTask = window.setInterval(refreshUI, 300000)
     })
 
+    onBeforeUnmount(() => {
+      if (intervalTask) {
+        window.clearInterval(intervalTask)
+      }
+    })
+
+    // 获取设备Bar信息
+    store.dispatch('getDevicesInfo')
     const handleCurrentChangeCallback = (e: any) => {
       sendData.pageNum = e.currentPage
       // 获取光伏组串列表

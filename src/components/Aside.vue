@@ -34,7 +34,7 @@ export default defineComponent({
         currentIndex.value = 0
       } else if (to === '/benchmarking') {
         currentIndex.value = 1
-      } else if (to === '/monitor') {
+      } else if (to === '/device') {
         currentIndex.value = 2
       } else if (to === '/warning') {
         currentIndex.value = 3

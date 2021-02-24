@@ -1,9 +1,12 @@
 export const formatDate = (time: Date) => {
-  const Dates = new Date(time)
-  const year: number = Dates.getFullYear()
-  const month: any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1)
-  const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate()
-  const week: number = Dates.getDay()
+  const dateTime = new Date(time)
+  const year: number = dateTime.getFullYear()
+  const month: any = (dateTime.getMonth() + 1) < 10 ? '0' + (dateTime.getMonth() + 1) : (dateTime.getMonth() + 1)
+  const day: any = dateTime.getDate() < 10 ? '0' + dateTime.getDate() : dateTime.getDate()
+  const hours: any = dateTime.getHours() < 10 ? '0' + dateTime.getHours() : dateTime.getHours()
+  const minutes: any = dateTime.getMinutes() < 10 ? '0' + dateTime.getMinutes() : dateTime.getMinutes()
+  const seconds: any = dateTime.getSeconds() < 10 ? '0' + dateTime.getSeconds() : dateTime.getSeconds()
+  const week: number = dateTime.getDay()
   let weekString = ''
   if (week === 0) {
     weekString = '星期天'
@@ -20,7 +23,7 @@ export const formatDate = (time: Date) => {
   } else if (week === 6) {
     weekString = '星期六'
   }
-  return year + '年' + month + '月' + day + '日 ' + weekString
+  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds + '  ' + weekString
 }
 
 export const currentTime = () => {

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, reactive, ref, watch } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
 import { GlobalDataProps, PvstringDetailProps } from '../store'
@@ -251,10 +251,24 @@ export default defineComponent({
       }
       initCharts()
     })
-    onMounted(() => {
+
+    var refreshUI = function() {
       // 获取当前气象数据
       store.dispatch('getPvStringDetail', { deviceId: route.params.id })
+    }
+    let intervalTask: number
+
+    onMounted(() => {
+      refreshUI()
+      intervalTask = window.setInterval(refreshUI, 8000)
     })
+
+    onBeforeUnmount(() => {
+      if (intervalTask) {
+        window.clearInterval(intervalTask)
+      }
+    })
+
     return {
       pvstringDetailProps,
       uCharts,
