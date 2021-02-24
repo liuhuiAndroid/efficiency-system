@@ -23,6 +23,9 @@ import { currentTime } from '../utils/DateUtils'
 
 export default defineComponent({
   setup() {
+    const min = `${currentTime()} 00:00:00`
+    const max = `${currentTime()} 24:00:00`
+
     const uCharts = ref(null)
     const iCharts = ref(null)
     const pCharts = ref(null)
@@ -44,19 +47,19 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'cross'
-            }
-          },
+          // tooltip: {
+          //   trigger: 'axis',
+          //   axisPointer: {
+          //     type: 'cross'
+          //   }
+          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
               show: false
             },
-            min: '2021-02-23 00:00:00',
-            max: '2021-02-23 24:00:00',
+            min,
+            max,
             axisLabel: {
               formatter: function (value:any) {
                 var data = new Date(value)
@@ -90,9 +93,6 @@ export default defineComponent({
         })
       }
 
-      const min = `${currentTime()} 00:00:00`
-      const max = `${currentTime()} 24:00:00`
-
       // 电流
       const miCharts = iCharts.value
       if (miCharts) {
@@ -106,12 +106,12 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'cross'
-            }
-          },
+          // tooltip: {
+          //   trigger: 'axis',
+          //   axisPointer: {
+          //     type: 'cross'
+          //   }
+          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
@@ -145,7 +145,9 @@ export default defineComponent({
           series: [{
             data: mIList.value,
             type: 'line',
-            smooth: true
+            smooth: true,
+            showSymbol: false,
+            hoverAnimation: false
           }]
         })
       }
@@ -163,12 +165,12 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'cross'
-            }
-          },
+          // tooltip: {
+          //   trigger: 'axis',
+          //   axisPointer: {
+          //     type: 'cross'
+          //   }
+          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
@@ -202,7 +204,9 @@ export default defineComponent({
           series: [{
             data: mPList.value,
             type: 'line',
-            smooth: true
+            smooth: true,
+            showSymbol: false,
+            hoverAnimation: false
           }]
         })
       }
@@ -224,6 +228,7 @@ export default defineComponent({
       })
       if (uList) {
         mUList.value = uList
+        console.log('ulist', mUList)
       }
       const iList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
         return {
