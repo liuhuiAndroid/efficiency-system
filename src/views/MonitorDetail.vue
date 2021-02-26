@@ -45,9 +45,11 @@ export default defineComponent({
     const uCharts = ref(null)
     const iCharts = ref(null)
     const pCharts = ref(null)
+    const tempCharts = ref(null)
     const mUList = ref()
     const mIList = ref()
     const mPList = ref()
+    const mTempList = ref()
     // echart 初始化
     const initCharts = () => {
       // 电压
@@ -214,7 +216,7 @@ export default defineComponent({
           yAxis: {
             type: 'value',
             axisLabel: {
-              formatter: '{value} kW'
+              formatter: '{value} W'
             }
           },
           series: [{
@@ -226,14 +228,75 @@ export default defineComponent({
           }]
         })
       }
+
+      // 温度
+      const mtempCharts = tempCharts.value
+      console.log('mtempCharts', mtempCharts)
+      if (mtempCharts && mTempList.value) {
+        var mytempCharts = echarts.init(mtempCharts)
+        // 绘制图表
+        mytempCharts.setOption({
+          title: {
+            left: 'center',
+            text: '背板温度',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          // tooltip: {
+          //   trigger: 'axis',
+          //   axisPointer: {
+          //     type: 'cross'
+          //   }
+          // },
+          xAxis: {
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            min,
+            max,
+            axisLabel: {
+              formatter: function (value:any) {
+                var data = new Date(value)
+                var hours = data.getHours()
+                var minutes = data.getMinutes()
+                var hourString = hours + ''
+                var minuteString = minutes + ''
+                if (hours < 10) {
+                  hourString = '0' + hours
+                }
+                if (minutes < 10) {
+                  minuteString = '0' + minutes
+                }
+                return hourString + ':' + minuteString
+              }
+            }
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              formatter: '{value} ℃'
+            }
+          },
+          series: [{
+            data: mTempList.value,
+            type: 'line',
+            smooth: true,
+            showSymbol: false,
+            hoverAnimation: false
+          }]
+        })
+      }
     }
     const route = useRoute()
     const store = useStore<GlobalDataProps>()
-    const pvstringDetailProps = computed(() => store.state.pvstringDetailProps)
+    const pvstringDetailProps = computed(() => {
+      return store.state.pvstringDetailProps
+    })
     watch(pvstringDetailProps, () => {
       const pvstringDetailProps = store.state.pvstringDetailProps
       const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
-        console.log('time', item.time)
         return {
           name: 'a',
           value: [
@@ -270,6 +333,17 @@ export default defineComponent({
       if (pList) {
         mPList.value = pList
       }
+      if (pvstringDetailProps.isStandard) {
+        mTempList.value = pvstringDetailProps.deviceDataOfToday?.map((item) => {
+          return {
+            name: 'a',
+            value: [
+              item.time,
+              item.temperature
+            ]
+          }
+        })
+      }
       initCharts()
     })
 
@@ -294,11 +368,13 @@ export default defineComponent({
       }
     })
 
+    console.log('isStandard---------', pvstringDetailProps.value.isStandard)
     return {
       pvstringDetailProps,
       uCharts,
       iCharts,
       pCharts,
+      tempCharts,
       meteoData
     }
   }

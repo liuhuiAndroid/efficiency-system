@@ -48,14 +48,15 @@ export default defineComponent({
 
     let loadingInstance: ILoadingInstance | undefined
     watch(() => isLoading.value, () => {
-      console.log('isLoading', isLoading.value)
-      if (isLoading.value) {
-        loadingInstance = ElLoading.service({ fullscreen: true, text: '拼命加载中' })
-      } else {
-        if (loadingInstance) {
-          loadingInstance.close()
-        }
-      }
+      // loading 效果暂时先去了
+      // console.log('isLoading', isLoading.value)
+      // if (isLoading.value) {
+      //   loadingInstance = ElLoading.service({ fullscreen: true, text: '拼命加载中' })
+      // } else {
+      //   if (loadingInstance) {
+      //     loadingInstance.close()
+      //   }
+      // }
     })
   }
 })

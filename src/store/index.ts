@@ -105,6 +105,7 @@ export interface DeviceDataOfToday {
   u: number;
   i: number;
   p: number;
+  temperature: number;
 }
 
 // 光伏组串详情
@@ -118,7 +119,7 @@ export interface PvstringDetailProps {
   decayRate?: string;
   dustLossRate?: string;
   deviceDataOfToday?: DeviceDataOfToday[];
-  standard?: boolean; // 是否是标杆组串
+  isStandard?: boolean; // 是否是标杆组串
 }
 
 // 标杆组串
