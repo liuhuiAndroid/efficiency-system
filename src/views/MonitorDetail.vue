@@ -6,6 +6,8 @@
       <span>电压：{{pvstringDetailProps.u}}</span>
       <span>电流：{{pvstringDetailProps.i}}</span>
       <span>功率：{{pvstringDetailProps.p}}</span>
+      <span v-if="pvstringDetailProps.isStandard">组件衰减率：{{pvstringDetailProps.degradationRatio}}</span>
+      <span v-if="pvstringDetailProps.isStandard">灰尘损失率：{{pvstringDetailProps.soilingRatio}}</span>
     </p>
   </div>
   <div class="container__title">

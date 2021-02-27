@@ -116,8 +116,8 @@ export interface PvstringDetailProps {
   u?: string;
   i?: string;
   p?: string;
-  decayRate?: string;
-  dustLossRate?: string;
+  degradationRatio?: string; // 组件衰减率
+  soilingRatio?: string; // 灰尘损失率
   deviceDataOfToday?: DeviceDataOfToday[];
   isStandard?: boolean; // 是否是标杆组串
 }

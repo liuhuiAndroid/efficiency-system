@@ -17,8 +17,7 @@
         <span>测温点：{{column.temperature}}</span>
       </p>
       <p>
-        <span>下级设备：光伏组串({{column.pvStringCount}})</span>
-        <span></span>
+        <a class="pvstring">下级设备：光伏组串({{column.pvStringCount}})</a>
       </p>
     </div>
     <div class="page-warp">
@@ -181,6 +180,15 @@ export default defineComponent({
   padding-left: 0.1rem;
   box-sizing: border-box;
 }
+
+.pvstring {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
+}
+
 .page-warp{
   width: 100%;
   box-sizing: border-box;
