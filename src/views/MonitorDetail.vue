@@ -384,9 +384,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h1{
-  color: white;
-}
 .container{
   margin-left: 2rem;
   &__title{
