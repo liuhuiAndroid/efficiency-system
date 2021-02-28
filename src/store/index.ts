@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { createStore, Commit } from 'vuex'
-import { arrToObj, objToArr } from '../utils/helper'
+import { objToArr } from '../utils/helper'
 
 export interface StationInfo {
   stationName: string;
@@ -145,12 +145,6 @@ export interface UserProps {
   _id?: string;
 }
 
-export interface HomeProps {
-  _id?: string;
-  url?: string;
-  createdAt?: string;
-}
-
 export interface GlobalErrorProps {
   status: boolean;
   message?: string;
@@ -195,7 +189,6 @@ export interface GlobalDataProps {
   token: string;
   loading: boolean;
   user: UserProps;
-  homeData: HomeProps;
   error: GlobalErrorProps;
   meteoData: MeteoProps;
   deviceInfos: ListProps<DeviceInfo>;
@@ -226,7 +219,6 @@ export default createStore<GlobalDataProps>({
     error: { status: false },
     loading: false,
     user: { isLogin: false },
-    homeData: {},
     meteoData: {},
     deviceInfos: {},
     dviceStatusInfos: {},
@@ -257,9 +249,6 @@ export default createStore<GlobalDataProps>({
     fetchCurrentUser (state, rawData) {
       state.user = { isLogin: true, ...rawData.data }
     },
-    getHomeData (state, rawData) {
-      state.homeData = rawData.data
-    },
     getMeteoData (state, rawData) {
       state.meteoData = rawData.entity
     },
@@ -288,7 +277,7 @@ export default createStore<GlobalDataProps>({
       }
     },
     setPowerStationInfo (state, rawData) {
-      state.powerStationInfo = rawData.entity
+      state.powerStationInfo = rawData.entity.stationInfo
     },
     setTransformerList (state, rawData) {
       state.transformerListInfo = rawData.entity
@@ -313,15 +302,6 @@ export default createStore<GlobalDataProps>({
     },
     fetchCurrentUser ({ commit }) {
       return asyncAndCommit('/user/current', 'fetchCurrentUser', commit)
-    },
-    async getHomeData ({ commit }, cid) {
-      const { data } = await axios.get(`/columns/${cid}`)
-      commit('getHomeData', data)
-    },
-    getHomeDatas ({ commit }, cid) {
-      axios.get(`/columns/${cid}`).then(resp => {
-        commit('getHomeData', resp.data)
-      })
     },
     // 组合Action
     loginAndFetch ({ dispatch }, loginData) {
