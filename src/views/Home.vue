@@ -27,7 +27,7 @@
     <div class="container__column">
       <div class="container__video">
         <div class="container__video__text">监控视频</div>
-        <img class="container__video__img" src="https://img2.woyaogexing.com/2018/10/08/cd4ddeec6bd34baeaa02228850460f37!400x400.jpeg"/>
+        <img class="container__video__img" src="../assets/video_img.png"/>
       </div>
       <div id="pieChart" class="container__pie"></div>
     </div>
