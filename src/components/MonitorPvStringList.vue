@@ -185,8 +185,7 @@ export default defineComponent({
   width: 100%;
   box-sizing: border-box;
   padding-right: 0.3rem;
-  height: 0.4rem;
-  margin-top: 0.1rem;
+  padding-top: .1rem;
   color: #fff;
   font-size: 0.16rem;
   align-items: center;
