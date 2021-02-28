@@ -155,7 +155,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   margin-left: 2rem;
-  margin-top: .4rem;
+  margin-top: .2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -183,17 +183,17 @@ export default defineComponent({
       width: 1.6rem;
       color: #333;
       background-color: #A9CE98;
+      font-weight: 800;
     }
     &__value {
       width: 3rem;
-      background-color: #4F917E;
       color: #FFF;
+      background-color: #4F917E;
       font-weight: 800;
     }
   }
   &__video {
     width: 4rem;
-    margin-left: .4rem;
     &__text {
       color:#FFF;
       font-size: .22rem;
@@ -205,11 +205,10 @@ export default defineComponent({
     }
   }
   &__weather {
-    width: 4rem;
+    width: 5rem;
     height: 2.2rem;
     color: white;
     border: 1px solid #555468;
-    margin-left: .4rem;
     background-color: #080245;
     h1 {
       font-size: 16px;

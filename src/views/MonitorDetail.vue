@@ -1,27 +1,36 @@
 <template>
 <div class="container">
-  <div class="container__title">
-    <p>
-      {{pvstringDetailProps.deviceName}}：
-      <span>电压：{{pvstringDetailProps.u}}</span>
-      <span>电流：{{pvstringDetailProps.i}}</span>
-      <span>功率：{{pvstringDetailProps.p}}</span>
-      <span v-if="pvstringDetailProps.isStandard">组件衰减率：{{pvstringDetailProps.degradationRatio}}</span>
-      <span v-if="pvstringDetailProps.isStandard">灰尘损失率：{{pvstringDetailProps.soilingRatio}}</span>
-    </p>
+  <div class="container__head">
+    <img src="../assets/Hosting4.png" alt=""/>
+    <div class="container__head__column">
+      <div class="container__title">
+        <p>
+          {{pvstringDetailProps.deviceName}}：
+          <span>电压：{{pvstringDetailProps.u}}</span>
+          <span>电流：{{pvstringDetailProps.i}}</span>
+          <span>功率：{{pvstringDetailProps.p}}</span>
+          <span v-if="pvstringDetailProps.isStandard">组件衰减率：{{pvstringDetailProps.degradationRatio}}</span>
+          <span v-if="pvstringDetailProps.isStandard">灰尘损失率：{{pvstringDetailProps.soilingRatio}}</span>
+        </p>
+      </div>
+      <div class="container__title">
+        <p>
+          环境数据：
+          <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
+          <span>{{`湿度：${meteoData.humidity}`}}</span>
+          <span>{{`压力：${meteoData.pressure}`}}</span>
+          <span>{{`风向：${meteoData.windDirection}`}}</span>
+          <span>{{`风速：${meteoData.windSpeed}`}}</span>
+          <span>{{`Poa：${meteoData.poa}`}}</span>
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="container__title">
-    <p>
-      环境数据：
-      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
-      <span>{{`湿度：${meteoData.humidity}`}}</span>
-      <span>{{`压力：${meteoData.pressure}`}}</span>
-      <span>{{`风向：${meteoData.windDirection}`}}</span>
-      <span>{{`风速：${meteoData.windSpeed}`}}</span>
-      <span>{{`Poa：${meteoData.poa}`}}</span>
-    </p>
-  </div>
-  <div class="container__content">
+  <el-menu class="container__menu" :default-active="1" mode="horizontal" @select="handleSelect" background-color="#021138" text-color="#FFF" active-text-color="#409EFF">
+    <el-menu-item index="1">设备监控</el-menu-item>
+    <el-menu-item index="2">设备能效</el-menu-item>
+  </el-menu>
+  <div class="container__content" v-show="showMenu=='1'">
     <div class="container__content__chart" ref="uCharts"></div>
     <div class="container__content__chart" ref="iCharts"></div>
     <div class="container__content__chart" ref="pCharts"></div>
@@ -371,13 +380,21 @@ export default defineComponent({
     })
 
     console.log('isStandard---------', pvstringDetailProps.value.isStandard)
+
+    const showMenu = ref('1')
+    function handleSelect(key: string, keyPath: string) {
+      showMenu.value = key
+      console.log('showMenu', showMenu)
+    }
     return {
       pvstringDetailProps,
       uCharts,
       iCharts,
       pCharts,
       tempCharts,
-      meteoData
+      meteoData,
+      handleSelect,
+      showMenu
     }
   }
 })
@@ -386,8 +403,21 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container{
   margin-left: 2rem;
+  overflow-y: scroll;
+  height: 8rem;
+  &__head{
+    display: flex;
+    flex-direction: row;
+    margin-left: .3rem;
+    &__column{
+      display: flex;
+      flex-direction: column;
+    }
+  }
   &__title{
-    height: 0.3rem;
+    height: .3rem;
+    margin-left: .3rem;
+    margin-top: .1rem;
     p{
       width: 100%;
       height: 0.3rem;
@@ -402,6 +432,11 @@ export default defineComponent({
       color: white;
     }
   }
+  &__menu{
+    margin-left: .3rem;
+    margin-right: .3rem;
+    margin-top: .1rem;
+  }
   &__content{
     display: flex;
     flex-direction: row;
@@ -415,5 +450,14 @@ export default defineComponent({
       height: 300px;
     }
   }
+}
+.container::-webkit-scrollbar{
+  background-color: #2b2f31;
+  border-radius: 3px;
+  width: 5px;
+}
+.container::-webkit-scrollbar-thumb{
+  border-radius: 3px;
+  background-color: #00B1FF;
 }
 </style>

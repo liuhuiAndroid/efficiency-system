@@ -31,11 +31,12 @@ export default defineComponent({
     const route = useRoute()
 
     function setCurrentIndex (to: string) {
+      console.log('totototo:', to)
       if (to === '/home') {
         currentIndex.value = 0
       } else if (to === '/benchmarking') {
         currentIndex.value = 1
-      } else if (to === '/device') {
+      } else if (to.startsWith('/device')) {
         currentIndex.value = 2
       } else if (to === '/warning') {
         currentIndex.value = 3
