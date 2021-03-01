@@ -16,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Main',
+    redirect: '/home', // 设置默认打开的页面
     component: () => import(/* webpackChunkName: "main" */ '../views/Main.vue'),
     meta: { requiredLogin: false },
     children: [
@@ -38,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requiredLogin: false }
       },
       {
-        path: '/monitordetail/:id',
+        path: '/devicedetail/:id',
         name: 'MonitorDetail',
         component: () => import(/* webpackChunkName: "monitordetail" */ '../views/MonitorDetail.vue'),
         meta: { requiredLogin: false }

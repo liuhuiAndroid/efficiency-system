@@ -181,18 +181,19 @@ export default defineComponent({
   padding-left: 0.1rem;
   box-sizing: border-box;
 }
+
 .page-warp{
   width: 100%;
   box-sizing: border-box;
   padding-right: 0.3rem;
-  height: 0.4rem;
-  margin-top: 0.1rem;
+  padding-top: .1rem;
   color: #fff;
   font-size: 0.16rem;
   align-items: center;
   display: flex;
   justify-content: flex-end;
 }
+
 ::v-deep {
   .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
     /*对页数的样式进行修改*/

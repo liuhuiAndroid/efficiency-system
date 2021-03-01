@@ -6,7 +6,7 @@
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div class="content-title">
         <span>{{column.deviceName}}</span>
-        <router-link :to="`/monitordetail/${column.deviceId}`"><img src="../assets/Hosting4.png" alt=""></router-link>
+        <router-link :to="`/devicedetail/${column.deviceId}`"><img src="../assets/Hosting4.png" alt=""></router-link>
       </div>
       <p>
         <span>电压：{{column.u}}</span>
@@ -185,8 +185,7 @@ export default defineComponent({
   width: 100%;
   box-sizing: border-box;
   padding-right: 0.3rem;
-  height: 0.4rem;
-  margin-top: 0.1rem;
+  padding-top: .1rem;
   color: #fff;
   font-size: 0.16rem;
   align-items: center;

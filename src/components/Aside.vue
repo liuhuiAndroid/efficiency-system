@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'Aside',
   setup() {
     const navs = [
-      { name: '首页', to: '/', img: require('../assets/left1.png'), img_active: require('../assets/left1_active.png') },
+      { name: '首页', to: '/home', img: require('../assets/left1.png'), img_active: require('../assets/left1_active.png') },
       { name: '标杆组串', to: '/benchmarking', img: require('../assets/left2.png'), img_active: require('../assets/left2_active.png') },
       { name: '实时监测', to: '/device', img: require('../assets/left3.png'), img_active: require('../assets/left3_active.png') },
       { name: '设备预警', to: '/warning', img: require('../assets/left4.png'), img_active: require('../assets/left4_active.png') },
@@ -29,12 +29,14 @@ export default defineComponent({
     ]
     const currentIndex = ref(0)
     const route = useRoute()
-    watch(() => route.path, (to) => {
-      if (to === '/') {
+
+    function setCurrentIndex (to: string) {
+      console.log('totototo:', to)
+      if (to === '/home') {
         currentIndex.value = 0
       } else if (to === '/benchmarking') {
         currentIndex.value = 1
-      } else if (to === '/device') {
+      } else if (to.startsWith('/device')) {
         currentIndex.value = 2
       } else if (to === '/warning') {
         currentIndex.value = 3
@@ -45,6 +47,11 @@ export default defineComponent({
       } else if (to === '/setting') {
         currentIndex.value = 6
       }
+    }
+
+    setCurrentIndex(route.path)
+    watch(() => route.path, (to) => {
+      setCurrentIndex(to)
     })
     return {
       navs,
