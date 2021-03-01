@@ -254,12 +254,6 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          // tooltip: {
-          //   trigger: 'axis',
-          //   axisPointer: {
-          //     type: 'cross'
-          //   }
-          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {

@@ -23,6 +23,8 @@
           <td class="container__station__value">{{powerStationInfo.powerTotal}}</td>
         </tr>
       </table>
+      <div class="container__column__chart" ref="dailyCharts"></div>
+      <div class="container__column__chart" ref="monthlyCharts"></div>
     </div>
     <div class="container__column">
       <div class="container__video">
@@ -83,7 +85,7 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed, onMounted } from 'vue'
+import { defineComponent, computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
 
@@ -91,14 +93,135 @@ export default defineComponent({
   name: 'Home',
   setup() {
     const store = useStore<GlobalDataProps>()
-    // 获取电站信息
-    store.dispatch('getPowerStationInfo')
-    // 获取当前气象数据
-    store.dispatch('getMeteoData')
     const powerStationInfo = computed(() => store.state.powerStationInfo)
     const meteoData = computed(() => store.state.meteoData)
+    const stationDailyPower = computed(() => store.state.stationDailyPower)
+    const stationMonthlyPower = computed(() => store.state.stationMonthlyPower)
+    const dailyCharts = ref(null)
+    const monthlyCharts = ref(null)
+    const mDailyList = ref()
+    const mMonthlyListX = ref()
+    const mMonthlyListY = ref()
+    // echart 初始化
+    const initCharts = () => {
+      // 日发电量
+      const mDailyCharts = dailyCharts.value
+      if (mDailyCharts) {
+        var myDailyCharts = echarts.init(mDailyCharts)
+        // 绘制图表
+        myDailyCharts.setOption({
+          title: {
+            left: 'left',
+            text: '日发电量（kWh）',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 0]
+          },
+          xAxis: {
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            axisLabel: {
+              formatter: function (value:any) {
+                var data = new Date(value)
+                var month = data.getMonth() + 1
+                var day = data.getDate()
+                var monthString = month + ''
+                var dayString = day + ''
+                if (month < 10) {
+                  monthString = '0' + month
+                }
+                if (day < 10) {
+                  dayString = '0' + day
+                }
+                return monthString + '-' + dayString
+              }
+            }
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              formatter: '{value}'
+            }
+          },
+          series: [{
+            type: 'line',
+            smooth: true,
+            data: mDailyList.value,
+            areaStyle: {},
+            showSymbol: false,
+            hoverAnimation: false
+          }]
+        })
+      }
 
+      // 月发电量
+      const mMonthlyCharts = monthlyCharts.value
+      if (mMonthlyCharts) {
+        var myMonthlyCharts = echarts.init(mMonthlyCharts)
+        // 绘制图表
+        myMonthlyCharts.setOption({
+          title: {
+            left: 'left',
+            text: '月发电量（MWh）',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 0]
+          },
+          xAxis: {
+            type: 'category',
+            data: mMonthlyListX.value
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            data: mMonthlyListY.value,
+            type: 'bar'
+          }]
+        })
+      }
+    }
+    watch(stationDailyPower, () => {
+      const stationDailyPower = store.state.stationDailyPower
+      const dailyList = stationDailyPower.map((item) => {
+        return {
+          name: '',
+          value: [
+            item.timely,
+            item.actualPower
+          ]
+        }
+      })
+      if (dailyList) {
+        mDailyList.value = dailyList
+      }
+      // mMonthlyList
+      initCharts()
+    })
+    watch(stationMonthlyPower, () => {
+      const stationMonthlyPower = store.state.stationMonthlyPower
+      mMonthlyListX.value = stationMonthlyPower.map((item) => {
+        return item.timely
+      })
+      mMonthlyListY.value = stationMonthlyPower.map((item) => {
+        return item.actualPower
+      })
+      console.log('mMonthlyListY', mMonthlyListY)
+    })
     onMounted(() => {
+      // 获取电站信息
+      store.dispatch('getPowerStationInfo')
+      // 获取当前气象数据
+      store.dispatch('getMeteoData')
+      // 获取电站每日发电量（30天以内）
+      store.dispatch('getStationDailyPower')
+      // 获取电站每月发电量（当年）
+      store.dispatch('getStationMonthlyPower')
+
       // 饼状图
       const pieChartEle = document.getElementById('pieChart')
       if (pieChartEle) {
@@ -146,7 +269,9 @@ export default defineComponent({
     })
     return {
       powerStationInfo,
-      meteoData
+      meteoData,
+      dailyCharts,
+      monthlyCharts
     }
   }
 })
@@ -169,6 +294,11 @@ export default defineComponent({
     display:flex;
     flex-direction: column;
     justify-content: center;
+    &__chart {
+      width: 5rem;
+      height: 3rem;
+      margin-left: .2rem;
+    }
   }
   &__station {
     width: 4.6rem;
@@ -176,6 +306,7 @@ export default defineComponent({
     font-size: .22rem;
     text-align: center;
     margin-left: .2rem;
+    margin-bottom: .2rem;
     tr {
       border-bottom: .02rem solid #64A396;
     }

@@ -185,6 +185,16 @@ interface ListProps<P> {
   [id: string]: P;
 }
 
+interface StationDailyPower{
+  timely?: string,
+  actualPower?: number,
+}
+
+interface StationMonthlyPower{
+  timely?: string,
+  actualPower?: number,
+}
+
 export interface GlobalDataProps {
   token: string;
   loading: boolean;
@@ -200,6 +210,8 @@ export interface GlobalDataProps {
   combinerBoxListInfo: CombinerBoxListInfo;
   pvstringListInfo: PvstringListInfo;
   pvstringDetailProps: PvstringDetailProps;
+  stationDailyPower: StationMonthlyPower[];
+  stationMonthlyPower: StationMonthlyPower[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -228,7 +240,9 @@ export default createStore<GlobalDataProps>({
     inverterListInfo: {},
     combinerBoxListInfo: {},
     pvstringListInfo: {},
-    pvstringDetailProps: {}
+    pvstringDetailProps: {},
+    stationDailyPower: [],
+    stationMonthlyPower: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -293,6 +307,12 @@ export default createStore<GlobalDataProps>({
     },
     setPvstringDetail (state, rawData) {
       state.pvstringDetailProps = rawData.entity
+    },
+    setStationDailyPower (state, rawData) {
+      state.stationDailyPower = rawData.entity
+    },
+    setStationMonthlyPower (state, rawData) {
+      state.stationMonthlyPower = rawData.entity
     }
   },
   actions: {
@@ -355,6 +375,14 @@ export default createStore<GlobalDataProps>({
     // 获取光伏组详情
     getPvStringDetail ({ commit }, payload) {
       return asyncAndCommit('/web/device/getpvstringdetail', 'setPvstringDetail', commit, { method: 'post', data: payload })
+    },
+    // 获取电站每日发电量（30天以内）
+    getStationDailyPower ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getstationdailypower', 'setStationDailyPower', commit, { method: 'post', data: payload })
+    },
+    // 获取电站每月发电量（当年）
+    getStationMonthlyPower ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getstationmonthlypower', 'setStationMonthlyPower', commit, { method: 'post', data: payload })
     }
   },
   modules: {
