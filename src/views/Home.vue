@@ -102,8 +102,8 @@ export default defineComponent({
     const mDailyList = ref()
     const mMonthlyListX = ref()
     const mMonthlyListY = ref()
-    // echart 初始化
-    const initCharts = () => {
+
+    const initDailyCharts = () => {
       // 日发电量
       const mDailyCharts = dailyCharts.value
       if (mDailyCharts) {
@@ -156,7 +156,9 @@ export default defineComponent({
           }]
         })
       }
+    }
 
+    const initMonthlyCharts = () => {
       // 月发电量
       const mMonthlyCharts = monthlyCharts.value
       if (mMonthlyCharts) {
@@ -179,12 +181,13 @@ export default defineComponent({
             type: 'value'
           },
           series: [{
-            data: mMonthlyListY.value,
+            data: [1, 2],
             type: 'bar'
           }]
         })
       }
     }
+
     watch(stationDailyPower, () => {
       const stationDailyPower = store.state.stationDailyPower
       const dailyList = stationDailyPower.map((item) => {
@@ -199,8 +202,7 @@ export default defineComponent({
       if (dailyList) {
         mDailyList.value = dailyList
       }
-      // mMonthlyList
-      initCharts()
+      initDailyCharts()
     })
     watch(stationMonthlyPower, () => {
       const stationMonthlyPower = store.state.stationMonthlyPower
@@ -210,7 +212,9 @@ export default defineComponent({
       mMonthlyListY.value = stationMonthlyPower.map((item) => {
         return item.actualPower
       })
-      console.log('mMonthlyListY', mMonthlyListY)
+      console.log('mMonthlyListY', mMonthlyListY.value)
+      console.log('mMonthlyListX', mMonthlyListX.value)
+      initMonthlyCharts()
     })
     onMounted(() => {
       // 获取电站信息
