@@ -157,6 +157,7 @@ export interface MeteoProps {
   windDirection?: string;
   windSpeed?: string;
   poa?: string;
+  ghi?: string;
 }
 
 export interface DeviceInfo {
@@ -212,6 +213,7 @@ export interface GlobalDataProps {
   pvstringDetailProps: PvstringDetailProps;
   stationDailyPower: StationMonthlyPower[];
   stationMonthlyPower: StationMonthlyPower[];
+  deviceOverview: Array<Array<string>>;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -242,7 +244,8 @@ export default createStore<GlobalDataProps>({
     pvstringListInfo: {},
     pvstringDetailProps: {},
     stationDailyPower: [],
-    stationMonthlyPower: []
+    stationMonthlyPower: [],
+    deviceOverview: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -313,6 +316,10 @@ export default createStore<GlobalDataProps>({
     },
     setStationMonthlyPower (state, rawData) {
       state.stationMonthlyPower = rawData.entity
+    },
+    setDeviceOverview (state, rawData) {
+      state.deviceOverview = rawData.entity
+      console.log('deviceOverview', state.deviceOverview)
     }
   },
   actions: {
@@ -383,6 +390,10 @@ export default createStore<GlobalDataProps>({
     // 获取电站每月发电量（当年）
     getStationMonthlyPower ({ commit }, payload) {
       return asyncAndCommit('/web/home/getstationmonthlypower', 'setStationMonthlyPower', commit, { method: 'post', data: payload })
+    },
+    // 获取电站设备概况
+    getDeviceOverview ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getdeviceoverview', 'setDeviceOverview', commit, { method: 'post', data: payload })
     }
   },
   modules: {

@@ -21,7 +21,8 @@
           <span>{{`压力：${meteoData.pressure}`}}</span>
           <span>{{`风向：${meteoData.windDirection}`}}</span>
           <span>{{`风速：${meteoData.windSpeed}`}}</span>
-          <span>{{`Poa：${meteoData.poa}`}}</span>
+          <span>{{`POA(辐照度)：${meteoData.poa}`}}</span>
+          <span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span>
         </p>
       </div>
     </div>

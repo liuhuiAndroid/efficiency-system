@@ -37,46 +37,46 @@
       <div class="container__weather">
         <h1>气象信息：</h1>
         <ul>
-          <li><span>温度：{{meteoData.temperature}}</span><span>湿度：{{meteoData.humidity}}</span></li>
-          <li><span>压力：{{meteoData.pressure}}</span><span>风向：{{meteoData.windDirection}}</span></li>
-          <li><span>风速：{{meteoData.windSpeed}}</span><span>Poa：{{meteoData.poa}}</span></li>
+          <li><span>温度：{{meteoData.temperature}}</span><span>湿度：{{meteoData.humidity}}</span><span>压力：{{meteoData.pressure}}</span></li>
+          <li><span>风向：{{meteoData.windDirection}}</span><span>风速：{{meteoData.windSpeed}}</span></li>
+          <li><span>{{`POA(辐照度)：${meteoData.poa}`}}</span><span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span></li>
         </ul>
       </div>
-      <table class="container__device" border="1">
-        <tr>
-          <td>设备类型</td>
-          <td>正常</td>
-          <td>故障</td>
-          <td>低效</td>
-          <td>全部</td>
+      <table class="container__device" border="1" v-if="deviceOverview">
+        <tr v-if="deviceOverview[0]">
+          <td>{{deviceOverview[0][0]}}</td>
+          <td>{{deviceOverview[0][1]}}</td>
+          <td>{{deviceOverview[0][2]}}</td>
+          <td>{{deviceOverview[0][3]}}</td>
+          <td>{{deviceOverview[0][4]}}</td>
         </tr>
-        <tr>
-          <td>升压变</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
+        <tr v-if="deviceOverview[1]">
+          <td>{{deviceOverview[1][0]}}</td>
+          <td>{{deviceOverview[1][1]}}</td>
+          <td>{{deviceOverview[1][2]}}</td>
+          <td>{{deviceOverview[1][3]}}</td>
+          <td>{{deviceOverview[1][4]}}</td>
         </tr>
-        <tr>
-          <td>逆变器</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
+        <tr v-if="deviceOverview[2]">
+          <td>{{deviceOverview[2][0]}}</td>
+          <td>{{deviceOverview[2][1]}}</td>
+          <td>{{deviceOverview[2][2]}}</td>
+          <td>{{deviceOverview[2][3]}}</td>
+          <td>{{deviceOverview[2][4]}}</td>
         </tr>
-        <tr>
-          <td>汇流箱</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
+        <tr v-if="deviceOverview[3]">
+          <td>{{deviceOverview[3][0]}}</td>
+          <td>{{deviceOverview[3][1]}}</td>
+          <td>{{deviceOverview[3][2]}}</td>
+          <td>{{deviceOverview[3][3]}}</td>
+          <td>{{deviceOverview[3][4]}}</td>
         </tr>
-        <tr>
-          <td>光伏组串</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
+        <tr v-if="deviceOverview[4]">
+          <td>{{deviceOverview[4][0]}}</td>
+          <td>{{deviceOverview[4][1]}}</td>
+          <td>{{deviceOverview[4][2]}}</td>
+          <td>{{deviceOverview[4][3]}}</td>
+          <td>{{deviceOverview[4][4]}}</td>
         </tr>
       </table>
     </div>
@@ -97,11 +97,17 @@ export default defineComponent({
     const meteoData = computed(() => store.state.meteoData)
     const stationDailyPower = computed(() => store.state.stationDailyPower)
     const stationMonthlyPower = computed(() => store.state.stationMonthlyPower)
+    const deviceOverviewCom = computed(() => store.state.deviceOverview)
     const dailyCharts = ref(null)
     const monthlyCharts = ref(null)
     const mDailyList = ref()
     const mMonthlyListX = ref()
     const mMonthlyListY = ref()
+    const deviceOverview = ref()
+
+    watch(deviceOverviewCom, () => {
+      deviceOverview.value = store.state.deviceOverview
+    })
 
     const initDailyCharts = () => {
       // 日发电量
@@ -212,8 +218,6 @@ export default defineComponent({
       mMonthlyListY.value = stationMonthlyPower.map((item) => {
         return item.actualPower
       })
-      console.log('mMonthlyListY', mMonthlyListY.value)
-      console.log('mMonthlyListX', mMonthlyListX.value)
       initMonthlyCharts()
     })
     onMounted(() => {
@@ -225,6 +229,8 @@ export default defineComponent({
       store.dispatch('getStationDailyPower')
       // 获取电站每月发电量（当年）
       store.dispatch('getStationMonthlyPower')
+      // 获取电站设备概况
+      store.dispatch('getDeviceOverview')
 
       // 饼状图
       const pieChartEle = document.getElementById('pieChart')
@@ -275,7 +281,8 @@ export default defineComponent({
       powerStationInfo,
       meteoData,
       dailyCharts,
-      monthlyCharts
+      monthlyCharts,
+      deviceOverview
     }
   }
 })

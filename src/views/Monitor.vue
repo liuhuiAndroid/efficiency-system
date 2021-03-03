@@ -19,12 +19,13 @@
     </div>
     <p>
       环境数据：
-      <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
+      <span>{{`温度：${meteoData.temperature}`}}</span>
       <span>{{`湿度：${meteoData.humidity}`}}</span>
       <span>{{`压力：${meteoData.pressure}`}}</span>
       <span>{{`风向：${meteoData.windDirection}`}}</span>
       <span>{{`风速：${meteoData.windSpeed}`}}</span>
-      <span>{{`Poa：${meteoData.poa}`}}</span>
+      <span>{{`POA(辐照度)：${meteoData.poa}`}}</span>
+      <span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span>
     </p>
   </div>
     <div class="main-right-center">
@@ -270,10 +271,10 @@ export default defineComponent({
 }
 
 .main-right-header div{
-  margin-right: 0.2rem;
+  margin-right: 0.1rem;
 }
 .main-right-header p span{
-  margin-right: 0.2rem;
+  margin-right: 0.1rem;
 }
 .main-right-center{
   width: 100%;
