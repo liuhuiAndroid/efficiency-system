@@ -172,6 +172,11 @@ export interface DeviceStatusInfo {
   deviceCount: number
 }
 
+export interface StationTodayPac {
+  timely: string,
+  actualPower: number
+}
+
 // 电站信息
 export interface PowerStationInfo {
   stationName?: string,
@@ -214,6 +219,7 @@ export interface GlobalDataProps {
   stationDailyPower: StationMonthlyPower[];
   stationMonthlyPower: StationMonthlyPower[];
   deviceOverview: Array<Array<string>>;
+  stationTodayPac: StationTodayPac[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -245,7 +251,8 @@ export default createStore<GlobalDataProps>({
     pvstringDetailProps: {},
     stationDailyPower: [],
     stationMonthlyPower: [],
-    deviceOverview: []
+    deviceOverview: [],
+    stationTodayPac: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -319,7 +326,9 @@ export default createStore<GlobalDataProps>({
     },
     setDeviceOverview (state, rawData) {
       state.deviceOverview = rawData.entity
-      console.log('deviceOverview', state.deviceOverview)
+    },
+    setStationTodayPac (state, rawData) {
+      state.stationTodayPac = rawData.entity
     }
   },
   actions: {
@@ -394,6 +403,10 @@ export default createStore<GlobalDataProps>({
     // 获取电站设备概况
     getDeviceOverview ({ commit }, payload) {
       return asyncAndCommit('/web/home/getdeviceoverview', 'setDeviceOverview', commit, { method: 'post', data: payload })
+    },
+    // 获取当日电站功率
+    getStationTodayPac ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getstationtodaypac', 'setStationTodayPac', commit, { method: 'post', data: payload })
     }
   },
   modules: {

@@ -28,7 +28,6 @@
     </div>
     <div class="container__column">
       <div class="container__video">
-        <div class="container__video__text">监控视频</div>
         <img class="container__video__img" src="../assets/video_img.png"/>
       </div>
       <div id="pieChart" class="container__pie"></div>
@@ -79,6 +78,7 @@
           <td>{{deviceOverview[4][4]}}</td>
         </tr>
       </table>
+      <div class="container__column__chart" ref="stationPacCharts"></div>
     </div>
   </div>
 </template>
@@ -98,12 +98,15 @@ export default defineComponent({
     const stationDailyPower = computed(() => store.state.stationDailyPower)
     const stationMonthlyPower = computed(() => store.state.stationMonthlyPower)
     const deviceOverviewCom = computed(() => store.state.deviceOverview)
+    const stationTodayPac = computed(() => store.state.stationTodayPac)
     const dailyCharts = ref(null)
     const monthlyCharts = ref(null)
+    const stationPacCharts = ref(null)
     const mDailyList = ref()
     const mMonthlyListX = ref()
     const mMonthlyListY = ref()
     const deviceOverview = ref()
+    const mStationTodayPacList = ref()
 
     watch(deviceOverviewCom, () => {
       deviceOverview.value = store.state.deviceOverview
@@ -187,8 +190,64 @@ export default defineComponent({
             type: 'value'
           },
           series: [{
-            data: [1, 2],
+            data: mMonthlyListY.value,
             type: 'bar'
+          }]
+        })
+      }
+    }
+
+    const initStationTodayPacCharts = () => {
+      // 月发电量
+      const mStationPacCharts = stationPacCharts.value
+      if (mStationPacCharts) {
+        var myStationPacCharts = echarts.init(mStationPacCharts)
+        // 绘制图表
+        myStationPacCharts.setOption({
+          title: {
+            left: 'left',
+            text: '功率（kW）',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 0]
+          },
+          xAxis: {
+            type: 'time', // 时间轴
+            splitLine: {
+              show: false
+            },
+            axisLabel: {
+              formatter: function (value:any) {
+                console.log('value', value)
+                var data = new Date(value)
+                var month = data.getMonth() + 1
+                var day = data.getDate()
+                var monthString = month + ''
+                var dayString = day + ''
+                if (month < 10) {
+                  monthString = '0' + month
+                }
+                if (day < 10) {
+                  dayString = '0' + day
+                }
+                return monthString + '-' + dayString
+              }
+            }
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              formatter: '{value}'
+            }
+          },
+          series: [{
+            type: 'line',
+            smooth: true,
+            data: mStationTodayPacList.value,
+            areaStyle: {},
+            showSymbol: false,
+            hoverAnimation: false
           }]
         })
       }
@@ -220,6 +279,23 @@ export default defineComponent({
       })
       initMonthlyCharts()
     })
+    watch(stationTodayPac, () => {
+      const stationTodayPac = store.state.stationTodayPac
+      const stationTodayPacList = stationTodayPac.map((item) => {
+        return {
+          name: '',
+          value: [
+            item.timely.replace('+08', ''),
+            item.actualPower
+          ]
+        }
+      })
+      if (stationTodayPacList) {
+        mStationTodayPacList.value = stationTodayPacList
+      }
+      console.log('mStationTodayPacList.value', mStationTodayPacList.value)
+      initStationTodayPacCharts()
+    })
     onMounted(() => {
       // 获取电站信息
       store.dispatch('getPowerStationInfo')
@@ -231,6 +307,8 @@ export default defineComponent({
       store.dispatch('getStationMonthlyPower')
       // 获取电站设备概况
       store.dispatch('getDeviceOverview')
+      // 获取当日电站功率
+      store.dispatch('getStationTodayPac')
 
       // 饼状图
       const pieChartEle = document.getElementById('pieChart')
@@ -282,7 +360,8 @@ export default defineComponent({
       meteoData,
       dailyCharts,
       monthlyCharts,
-      deviceOverview
+      deviceOverview,
+      stationPacCharts
     }
   }
 })
@@ -306,7 +385,7 @@ export default defineComponent({
     flex-direction: column;
     justify-content: center;
     &__chart {
-      width: 5rem;
+      width: 5.5rem;
       height: 3rem;
       margin-left: .2rem;
     }
@@ -336,10 +415,6 @@ export default defineComponent({
   }
   &__video {
     width: 4rem;
-    &__text {
-      color:#FFF;
-      font-size: .22rem;
-    }
     &__img {
       width: 4rem;
       height: 3rem;
