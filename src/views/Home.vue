@@ -228,17 +228,17 @@ export default defineComponent({
               formatter: function (value:any) {
                 console.log('value', value)
                 var data = new Date(value)
-                var month = data.getMonth() + 1
-                var day = data.getDate()
-                var monthString = month + ''
-                var dayString = day + ''
-                if (month < 10) {
-                  monthString = '0' + month
+                var hours = data.getHours()
+                var minutes = data.getMinutes()
+                var hoursString = hours + ''
+                var minutesString = minutes + ''
+                if (hours < 10) {
+                  hoursString = '0' + hours
                 }
-                if (day < 10) {
-                  dayString = '0' + day
+                if (minutes < 10) {
+                  minutesString = '0' + minutes
                 }
-                return monthString + '-' + dayString
+                return hoursString + ':' + minutesString
               }
             }
           },
