@@ -174,7 +174,8 @@ export interface DeviceStatusInfo {
 
 export interface StationTodayPac {
   timely: string,
-  actualPower: number
+  actualPower: number,
+  ghi: number
 }
 
 // 电站信息

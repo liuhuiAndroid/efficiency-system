@@ -78,7 +78,7 @@
           <td>{{deviceOverview[4][4]}}</td>
         </tr>
       </table>
-      <div class="container__column__chart" ref="stationPacCharts"></div>
+      <div class="container__column__chart2" ref="stationPacCharts"></div>
     </div>
   </div>
 </template>
@@ -107,6 +107,7 @@ export default defineComponent({
     const mMonthlyListY = ref()
     const deviceOverview = ref()
     const mStationTodayPacList = ref()
+    const mStationTodayPacList2 = ref()
 
     watch(deviceOverviewCom, () => {
       deviceOverview.value = store.state.deviceOverview
@@ -212,6 +213,12 @@ export default defineComponent({
             },
             padding: [20, 0, 0, 0]
           },
+          legend: {
+            data: ['实际功率', 'GHI辐照度'],
+            textStyle: {
+              color: '#fff'
+            }
+          },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
@@ -242,10 +249,18 @@ export default defineComponent({
             }
           },
           series: [{
+            name: '实际功率',
             type: 'line',
             smooth: true,
             data: mStationTodayPacList.value,
             areaStyle: {},
+            showSymbol: false,
+            hoverAnimation: false
+          }, {
+            name: 'GHI辐照度',
+            type: 'line',
+            smooth: true,
+            data: mStationTodayPacList2.value,
             showSymbol: false,
             hoverAnimation: false
           }]
@@ -290,8 +305,18 @@ export default defineComponent({
           ]
         }
       })
+      const stationTodayPacList2 = stationTodayPac.map((item) => {
+        return {
+          name: '',
+          value: [
+            item.timely.replace('+08', ''),
+            item.ghi
+          ]
+        }
+      })
       if (stationTodayPacList) {
         mStationTodayPacList.value = stationTodayPacList
+        mStationTodayPacList2.value = stationTodayPacList2
       }
       console.log('mStationTodayPacList.value', mStationTodayPacList.value)
       initStationTodayPacCharts()
@@ -388,6 +413,12 @@ export default defineComponent({
       width: 5.5rem;
       height: 3rem;
       margin-left: .2rem;
+    }
+    &__chart2 {
+      width: 5.5rem;
+      height: 3rem;
+      margin-left: .2rem;
+      margin-top: .2rem;
     }
   }
   &__station {
