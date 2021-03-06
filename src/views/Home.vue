@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed, onMounted, ref, watch } from 'vue'
+import { defineComponent, computed, onMounted, ref, watch, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
 
@@ -321,7 +321,8 @@ export default defineComponent({
       console.log('mStationTodayPacList.value', mStationTodayPacList.value)
       initStationTodayPacCharts()
     })
-    onMounted(() => {
+
+    var refreshUI = function() {
       // 获取电站信息
       store.dispatch('getPowerStationInfo')
       // 获取当前气象数据
@@ -334,6 +335,12 @@ export default defineComponent({
       store.dispatch('getDeviceOverview')
       // 获取当日电站功率
       store.dispatch('getStationTodayPac')
+    }
+
+    let intervalTask: number
+    onMounted(() => {
+      refreshUI()
+      intervalTask = window.setInterval(refreshUI, 300000)
 
       // 饼状图
       const pieChartEle = document.getElementById('pieChart')
@@ -378,6 +385,12 @@ export default defineComponent({
             }
           ]
         })
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (intervalTask) {
+        window.clearInterval(intervalTask)
       }
     })
     return {
