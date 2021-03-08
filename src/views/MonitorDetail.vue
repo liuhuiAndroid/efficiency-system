@@ -44,10 +44,10 @@
 import { defineComponent, onMounted, onBeforeUnmount, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
-import { GlobalDataProps, PvstringDetailProps } from '../store'
+import { GlobalDataProps } from '@/store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
-import { currentTime } from '../utils/DateUtils'
+import { currentTime } from '@/utils/DateUtils'
 
 export default defineComponent({
   setup() {

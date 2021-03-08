@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HeaderComponent from '../components/Header.vue'
-import AsideComponent from '../components/Aside.vue'
+import HeaderComponent from '@/components/Header.vue'
+import AsideComponent from '@/components/Aside.vue'
 
 export default defineComponent({
   name: 'Main',

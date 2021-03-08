@@ -43,14 +43,14 @@
 
 <script lang="ts">
 import { defineComponent, computed, getCurrentInstance, ref, watch, onMounted, onUnmounted, onBeforeUnmount } from 'vue'
-import { GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '../store'
+import { GlobalDataProps, DeviceInfo, DeviceStatusInfo } from '@/store'
 import { useStore } from 'vuex'
-import Dropdown from '../components/Dropdown.vue'
-import DropdownItem from '../components/DropdownItem.vue'
-import MonitorTransformerList from '../components/MonitorTransformerList.vue'
-import MonitorInverterList from '../components/MonitorInverterList.vue'
-import MonitorCombinerBoxList from '../components/MonitorCombinerBoxList.vue'
-import MonitorPvStringList from '../components/MonitorPvStringList.vue'
+import Dropdown from '@/components/Dropdown.vue'
+import DropdownItem from '@/components/DropdownItem.vue'
+import MonitorTransformerList from '@/components/MonitorTransformerList.vue'
+import MonitorInverterList from '@/components/MonitorInverterList.vue'
+import MonitorCombinerBoxList from '@/components/MonitorCombinerBoxList.vue'
+import MonitorPvStringList from '@/components/MonitorPvStringList.vue'
 import mitt from 'mitt'
 
 export const emitter = mitt()
