@@ -67,20 +67,11 @@ export default defineComponent({
   width: 2rem;
   overflow: hidden;
   background: #00B1FF;
-  padding: 0 0.1rem;
-  box-sizing: border-box;
   position: absolute;
   top: 0.47rem;
-  right: 0;
+  left: 0;
   z-index: 99;
   cursor: pointer;
-}
-.select-item li{
-  width: 100%;
-  display: flex;
-  height: 0.4rem;
-  align-items: center;
-  justify-content: space-between;
-  color: #fff;
+  padding-inline-start: 0rem;
 }
 </style>

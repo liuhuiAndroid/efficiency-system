@@ -309,39 +309,21 @@ export default defineComponent({
   align-items: center;
   position: relative;
 }
-.select-input{
-  width: 2rem;
-  height: 0.46rem;
-  border: 1px solid;
-  border-image: linear-gradient(90deg, rgba(0, 177, 255, 1), rgba(0, 177, 255, 0.2), rgba(0, 177, 255, 1)) 1 1;
-  background: rgba(0, 177, 255, 0.2);
-  padding: 0 0.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  cursor: pointer;
-}
 
-.select-item{
-  width: 2rem;
-  overflow: hidden;
-  background: #00B1FF;
-  padding: 0 0.1rem;
-  box-sizing: border-box;
-  position: absolute;
-  top: 0.47rem;
-  right: 0;
-  z-index: 99;
-  cursor: pointer;
-}
 .select-item li{
-  width: 100%;
+  width: 2rem;
   display: flex;
-  height: 0.4rem;
+  height: 0.5rem;
   align-items: center;
   justify-content: space-between;
   color: #fff;
+  padding: 0 0.1rem;
+  box-sizing: border-box;
+  background: #00B1FF;
+}
+
+.select-item li:hover{
+  background: #01628D;
 }
 
 .center-item{
