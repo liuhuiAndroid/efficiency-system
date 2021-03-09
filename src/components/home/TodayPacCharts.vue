@@ -40,14 +40,8 @@ export default defineComponent({
         mStationTodayPacList.value = stationTodayPacList
         mStationTodayPacList2.value = stationTodayPacList2
       }
-      console.log('mStationTodayPacList.value', mStationTodayPacList.value)
       initStationTodayPacCharts()
     })
-    onMounted(() => {
-      // 获取当日电站功率
-      store.dispatch('getStationTodayPac')
-    })
-
     const initStationTodayPacCharts = () => {
       const mStationPacCharts = stationPacCharts.value
       if (mStationPacCharts) {
@@ -116,7 +110,6 @@ export default defineComponent({
         })
       }
     }
-
     return {
       stationPacCharts
     }

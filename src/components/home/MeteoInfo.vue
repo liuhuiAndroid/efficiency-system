@@ -19,10 +19,6 @@ export default defineComponent({
   setup() {
     const store = useStore<GlobalDataProps>()
     const meteoData = computed(() => store.state.meteoData)
-    onMounted(() => {
-      // 获取当前气象数据
-      store.dispatch('getMeteoData')
-    })
     return {
       meteoData
     }

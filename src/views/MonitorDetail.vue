@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="container__head">
-    <img src="../assets/Hosting4.png" alt=""/>
+    <img src="@/assets/Hosting4.png" alt=""/>
     <div class="container__head__column">
       <div class="container__title">
         <p>
@@ -77,12 +77,6 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          // tooltip: {
-          //   trigger: 'axis',
-          //   axisPointer: {
-          //     type: 'cross'
-          //   }
-          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
@@ -136,12 +130,6 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          // tooltip: {
-          //   trigger: 'axis',
-          //   axisPointer: {
-          //     type: 'cross'
-          //   }
-          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {
@@ -195,12 +183,6 @@ export default defineComponent({
               color: '#fff'
             }
           },
-          // tooltip: {
-          //   trigger: 'axis',
-          //   axisPointer: {
-          //     type: 'cross'
-          //   }
-          // },
           xAxis: {
             type: 'time', // 时间轴
             splitLine: {

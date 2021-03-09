@@ -32,11 +32,7 @@ export default defineComponent({
       }
       initDailyCharts()
     })
-
-    onMounted(() => {
-      // 获取电站每日发电量（30天以内）
-      store.dispatch('getStationDailyPower')
-    })
+    
     const initDailyCharts = () => {
       // 日发电量
       const mDailyCharts = dailyCharts.value

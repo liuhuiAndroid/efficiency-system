@@ -27,12 +27,6 @@ export default defineComponent({
       })
       initMonthlyCharts()
     })
-
-    onMounted(() => {
-      // 获取电站每月发电量（当年）
-      store.dispatch('getStationMonthlyPower')
-    })
-
     const initMonthlyCharts = () => {
       // 月发电量
       const mMonthlyCharts = monthlyCharts.value

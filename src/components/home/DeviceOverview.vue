@@ -53,10 +53,6 @@ export default defineComponent({
     watch(deviceOverviewCom, () => {
       deviceOverview.value = store.state.deviceOverview
     })
-    onMounted(() => {
-      // 获取电站设备概况
-      store.dispatch('getDeviceOverview')
-    })
     return {
       deviceOverview
     }

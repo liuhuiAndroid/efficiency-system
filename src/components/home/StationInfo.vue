@@ -33,11 +33,6 @@ export default defineComponent({
   setup() {
     const store = useStore<GlobalDataProps>()
     const powerStationInfo = computed(() => store.state.powerStationInfo)
-
-    onMounted(() => {
-      // 获取电站信息
-      store.dispatch('getPowerStationInfo')
-    })
     return {
       powerStationInfo
     }

@@ -209,15 +209,6 @@ export default defineComponent({
       emitter.off('handleCurrentChange', handleCurrentChangeCallback)
     })
 
-    watch(deviceInfoChoose, () => {
-      // 刷新列表数据
-      console.log('')
-    })
-    watch(deviceStatusInfoChoose, () => {
-      // 刷新列表数据
-      console.log('')
-    })
-
     const transformerTitle = '升压变'
     const inverterTitle = '逆变器'
     const combinerBoxTitle = '汇流箱'

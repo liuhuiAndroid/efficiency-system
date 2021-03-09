@@ -6,27 +6,25 @@
       <monthly-power-charts class="container__column__chart"/>
     </div>
     <div class="container__column">
-      <div class="container__video">
-        <img class="container__video__img" src="../assets/video_img.png"/>
-      </div>
-      <div id="pieChart" class="container__pie"></div>
+      <img class="container__column__img" src="../assets/video_img.png"/>
+      <lose-pie-charts class="container__column__pie" />
     </div>
     <div class="container__column">
       <meteo-info />
-      <device-overview class="container__device" />
-      <today-pac-charts class="container__column__chart2" />
+      <device-overview class="container__column__device" />
+      <today-pac-charts class="container__column__chart" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import * as echarts from 'echarts'
-import { defineComponent, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, onMounted, onBeforeUnmount } from 'vue'
 import { GlobalDataProps } from '@/store'
+import { useStore } from 'vuex'
 import StationInfo from '@/components/home/StationInfo.vue'
 import DailyPowerCharts from '@/components/home/DailyPowerCharts.vue'
 import MonthlyPowerCharts from '@/components/home/MonthlyPowerCharts.vue'
+import LosePieCharts from '@/components/home/LosePieCharts.vue'
 import MeteoInfo from '@/components/home/MeteoInfo.vue'
 import DeviceOverview from '@/components/home/DeviceOverview.vue'
 import TodayPacCharts from '@/components/home/TodayPacCharts.vue'
@@ -37,56 +35,35 @@ export default defineComponent({
     StationInfo,
     DailyPowerCharts,
     MonthlyPowerCharts,
+    LosePieCharts,
     MeteoInfo,
     DeviceOverview,
     TodayPacCharts
   },
   setup() {
     const store = useStore<GlobalDataProps>()
+    var refreshUI = function() {
+      // 获取电站信息
+      store.dispatch('getPowerStationInfo')
+      // 获取当前气象数据
+      store.dispatch('getMeteoData')
+      // 获取电站每日发电量（30天以内）
+      store.dispatch('getStationDailyPower')
+      // 获取电站每月发电量（当年）
+      store.dispatch('getStationMonthlyPower')
+      // 获取电站设备概况
+      store.dispatch('getDeviceOverview')
+      // 获取当日电站功率
+      store.dispatch('getStationTodayPac')
+    }
+    let intervalTask: number
     onMounted(() => {
-      // 饼状图
-      const pieChartEle = document.getElementById('pieChart')
-      if (pieChartEle) {
-        const pieChart = echarts.init(pieChartEle)
-        // 绘制饼状图
-        pieChart.setOption({
-          title: {
-            text: '12月电站能效损失比例饼状图',
-            left: 'center',
-            textStyle: {
-              color: '#fff'
-            }
-          },
-          tooltip: {
-            trigger: 'item'
-          },
-          legend: {
-            orient: 'horizontal',
-            x: 'center',
-            y: 'bottom',
-            textStyle: {
-              color: '#fff'
-            }
-          },
-          series: [
-            {
-              name: '访问来源',
-              type: 'pie',
-              radius: '50%',
-              label: {
-                color: '#FFF'
-              },
-              data: [
-                { value: 63, name: '灰尘损失' },
-                { value: 7, name: '高温损失' },
-                { value: 20, name: '预期遮挡' },
-                { value: 21, name: '组件衰减' },
-                { value: 12, name: '非预期遮挡' },
-                { value: 9, name: '异常损失' }
-              ]
-            }
-          ]
-        })
+      refreshUI()
+      intervalTask = window.setInterval(refreshUI, 300000)
+    })
+    onBeforeUnmount(() => {
+      if (intervalTask) {
+        window.clearInterval(intervalTask)
       }
     })
   }
@@ -110,37 +87,29 @@ export default defineComponent({
     display:flex;
     flex-direction: column;
     justify-content: center;
+    &__img {
+      width: 4.8rem;
+      height: 3.6rem;
+      margin-top: .1rem;
+    }
     &__chart {
       width: 5.5rem;
       height: 3rem;
       margin-left: .2rem;
     }
-    &__chart2 {
-      width: 5.5rem;
-      height: 3rem;
-      margin-left: .2rem;
+    &__pie {
+      width: 5rem;
+      height: 4rem;
       margin-top: .2rem;
     }
-  }
-  &__video {
-    width: 4rem;
-    &__img {
-      width: 4rem;
-      height: 3rem;
-      margin-top: .1rem;
+    &__device {
+      width: 5rem;
+      margin-top: .4rem;
+      background-color: #080245;
+      border-color:#FFF;
+      border-collapse: collapse;
+      margin-bottom: .2rem;
     }
-  }
-  &__pie {
-    width: 5rem;
-    height: 4rem;
-    margin-top: .2rem;
-  }
-  &__device {
-    width: 5rem;
-    margin-top: .4rem;
-    background-color: #080245;
-    border-color:#FFF;
-    border-collapse: collapse;
   }
 }
 .container::-webkit-scrollbar{
