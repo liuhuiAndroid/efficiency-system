@@ -32,7 +32,6 @@ export default defineComponent({
       }
       initDailyCharts()
     })
-    
     const initDailyCharts = () => {
       // 日发电量
       const mDailyCharts = dailyCharts.value

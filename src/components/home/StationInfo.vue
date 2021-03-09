@@ -41,6 +41,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/varibles';
+@import '@/assets/styles/mixins';
 .station {
     width: 4.6rem;
     line-height: .4rem;
@@ -53,9 +55,10 @@ export default defineComponent({
     }
     &__name {
         width: 1.6rem;
-        color: #333;
+        color: $dark-text-color;
         background-color: #A9CE98;
         font-weight: 800;
+        @include singleline-ellipsis;
     }
     &__value {
         width: 3rem;

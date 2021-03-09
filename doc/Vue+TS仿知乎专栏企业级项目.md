@@ -14,6 +14,7 @@ VSCode插件：
 
 - REST Client
 - vscode-standardjs - JavaScript 代码规范
+- Live Sass Compiler
 
 课程：
 
