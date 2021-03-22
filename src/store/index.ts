@@ -23,9 +23,9 @@ export interface TransformerInfo {
   deviceId: string;
   status: boolean;
   fac: string; // 频率
-  hU: string; // 高压侧电压
-  lU: string; // 低压侧电压
-  pFactor: string; // 功率因子
+  hu: string; // 高压侧电压
+  lu: string; // 低压侧电压
+  pfactor: string; // 功率因子
   pac: string; // 功率
   inverterCount: number;
 }
@@ -192,12 +192,12 @@ interface ListProps<P> {
   [id: string]: P;
 }
 
-interface StationDailyPower{
+interface StationDailyPower {
   timely?: string,
   actualPower?: number,
 }
 
-interface StationMonthlyPower{
+interface StationMonthlyPower {
   timely?: string,
   actualPower?: number,
 }

@@ -9,15 +9,15 @@
         <img src="../assets/Hosting.png" alt="">
       </div>
       <p>
-        <span>低压侧：{{column.lU}}</span>
-        <span>高压侧：{{column.hU}}</span>
+        <span>低压侧：{{column.lu}}</span>
+        <span>高压侧：{{column.hu}}</span>
       </p>
       <p>
         <span>频率：{{column.fac}}</span>
         <span>功率：{{column.pac}}</span>
       </p>
       <p>
-        <span>功率因数：{{column.pFactor}}</span>
+        <span>功率因数：{{column.pfactor}}</span>
         <span>下级设备：逆变器({{column.inverterCount}})</span>
       </p>
     </div>

@@ -12,7 +12,7 @@ import axios from 'axios'
 import 'normalize.css/normalize.css'
 import './style/index.scss'
 
-axios.defaults.baseURL = 'http://119.3.177.188:8080/api'
+axios.defaults.baseURL = 'http://yuandong-backend.pv-soul.com:8080/api'
 // Add a request interceptor
 axios.interceptors.request.use(config => {
   // config.params = { ...config.params, icode: 'aaa' }
