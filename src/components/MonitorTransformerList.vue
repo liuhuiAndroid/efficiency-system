@@ -6,19 +6,19 @@
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div class="content-title">
         <span>{{column.deviceName}}</span>
-        <img src="../assets/Hosting.png" alt="">
+        <router-link :to="`/transformerdetail/${column.deviceId}`"><img src="../assets/Hosting4.png" alt=""></router-link>
       </div>
       <p>
-        <span>低压侧：{{column.lu}}</span>
-        <span>高压侧：{{column.hu}}</span>
+        <span>电压：{{column.u}}</span>
+        <span>电流：{{column.i}}</span>
       </p>
       <p>
-        <span>频率：{{column.fac}}</span>
-        <span>功率：{{column.pac}}</span>
+        <span>功率：{{column.p}}</span>
+        <span></span>
       </p>
       <p>
-        <span>功率因数：{{column.pfactor}}</span>
-        <span>下级设备：逆变器({{column.inverterCount}})</span>
+        <span></span>
+        <span></span>
       </p>
     </div>
     <div class="page-warp">
@@ -37,14 +37,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed, ref } from 'vue'
-import { TransformerInfo } from '../store'
+import { PvstringInfo } from '../store'
 import { emitter } from '@/views/Monitor.vue'
 
 export default defineComponent({
-  name: 'MonitorTransformerList',
+  name: 'MonitorPvStringList',
   props: {
     list: {
-      type: Array as PropType<TransformerInfo[]>,
+      type: Array as PropType<PvstringInfo[]>,
       required: true
     },
     title: {
@@ -181,7 +181,6 @@ export default defineComponent({
   padding-left: 0.1rem;
   box-sizing: border-box;
 }
-
 .page-warp{
   width: 100%;
   box-sizing: border-box;
@@ -193,7 +192,6 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
 }
-
 ::v-deep {
   .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
     /*对页数的样式进行修改*/

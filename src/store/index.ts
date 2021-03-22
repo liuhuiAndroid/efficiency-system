@@ -108,6 +108,13 @@ export interface DeviceDataOfToday {
   temperature: number;
 }
 
+export interface DeviceDataOfTodayForTransformer {
+  time: string;
+  lu: number;
+  hu: number;
+  p: number;
+}
+
 // 光伏组串详情
 export interface PvstringDetailProps {
   deviceName?: string;
@@ -120,6 +127,39 @@ export interface PvstringDetailProps {
   soilingRatio?: string; // 灰尘损失率
   deviceDataOfToday?: DeviceDataOfToday[];
   isStandard?: boolean; // 是否是标杆组串
+}
+
+// 汇流箱详情
+export interface CombinerDetailProps {
+  deviceName?: string;
+  deviceId?: string;
+  status?: number;
+  u?: string;
+  i?: string;
+  p?: string;
+  deviceDataOfToday?: DeviceDataOfToday[];
+}
+
+// 逆变器详情
+export interface InverterDetailProps {
+  deviceName?: string;
+  deviceId?: string;
+  status?: number;
+  u?: string;
+  i?: string;
+  p?: string;
+  deviceDataOfToday?: DeviceDataOfToday[];
+}
+
+// 升压变详情
+export interface TransformerDetailProps {
+  deviceName?: string;
+  deviceId?: string;
+  status?: number;
+  hu?: string;
+  lu?: string;
+  p?: string;
+  deviceDataOfToday?: DeviceDataOfTodayForTransformer[];
 }
 
 // 标杆组串
@@ -217,6 +257,9 @@ export interface GlobalDataProps {
   combinerBoxListInfo: CombinerBoxListInfo;
   pvstringListInfo: PvstringListInfo;
   pvstringDetailProps: PvstringDetailProps;
+  combinerDetailProps: CombinerDetailProps;
+  inverterDetailProps: InverterDetailProps;
+  transformerDetailProps: TransformerDetailProps;
   stationDailyPower: StationMonthlyPower[];
   stationMonthlyPower: StationMonthlyPower[];
   deviceOverview: Array<Array<string>>;
@@ -250,6 +293,9 @@ export default createStore<GlobalDataProps>({
     combinerBoxListInfo: {},
     pvstringListInfo: {},
     pvstringDetailProps: {},
+    combinerDetailProps: {},
+    inverterDetailProps: {},
+    transformerDetailProps: {},
     stationDailyPower: [],
     stationMonthlyPower: [],
     deviceOverview: [],
@@ -318,6 +364,15 @@ export default createStore<GlobalDataProps>({
     },
     setPvstringDetail (state, rawData) {
       state.pvstringDetailProps = rawData.entity
+    },
+    setCombinerDetail (state, rawData) {
+      state.combinerDetailProps = rawData.entity
+    },
+    setInverterDetail (state, rawData) {
+      state.inverterDetailProps = rawData.entity
+    },
+    setTransformerDetail (state, rawData) {
+      state.transformerDetailProps = rawData.entity
     },
     setStationDailyPower (state, rawData) {
       state.stationDailyPower = rawData.entity
@@ -392,6 +447,18 @@ export default createStore<GlobalDataProps>({
     // 获取光伏组详情
     getPvStringDetail ({ commit }, payload) {
       return asyncAndCommit('/web/device/getpvstringdetail', 'setPvstringDetail', commit, { method: 'post', data: payload })
+    },
+    // 获取汇流箱详情
+    getCombinerDetail ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getcombinerdetail', 'setCombinerDetail', commit, { method: 'post', data: payload })
+    },
+    // 获取逆变器详情
+    getInverterDetail ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getinverterdetail', 'setInverterDetail', commit, { method: 'post', data: payload })
+    },
+    // 获取升压变详情
+    getTransformerDetail ({ commit }, payload) {
+      return asyncAndCommit('/web/device/gettransformerdetail', 'setTransformerDetail', commit, { method: 'post', data: payload })
     },
     // 获取电站每日发电量（30天以内）
     getStationDailyPower ({ commit }, payload) {
