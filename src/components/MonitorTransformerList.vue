@@ -6,7 +6,7 @@
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div class="content-title">
         <span>{{column.deviceName}}</span>
-        <router-link :to="`/transformerdetail/${column.deviceId}`"><img src="../assets/Hosting4.png" alt=""></router-link>
+        <router-link :to="`/transformerdetail/${column.deviceId}`"><img src="../assets/Hosting.png" alt=""></router-link>
       </div>
       <p>
         <span>电压：{{column.u}}</span>

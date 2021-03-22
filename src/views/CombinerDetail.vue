@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="container__head">
-    <img src="@/assets/Hosting4.png" alt=""/>
+    <img src="@/assets/Hosting3.png" alt=""/>
     <div class="container__head__column">
       <div class="container__title">
         <p>

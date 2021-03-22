@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="container__head">
-    <img src="@/assets/Hosting4.png" alt=""/>
+    <img src="@/assets/Hosting.png" alt=""/>
     <div class="container__head__column">
       <div class="container__title">
         <p>
@@ -69,7 +69,7 @@ export default defineComponent({
         myuChart.setOption({
           title: {
             left: 'center',
-            text: 'DC电压',
+            text: '低压侧电压',
             textStyle: {
               color: '#fff'
             }
@@ -122,7 +122,7 @@ export default defineComponent({
         myiChart.setOption({
           title: {
             left: 'center',
-            text: 'DC电流',
+            text: '高压侧电压',
             textStyle: {
               color: '#fff'
             }
@@ -175,7 +175,7 @@ export default defineComponent({
         mypCharts.setOption({
           title: {
             left: 'center',
-            text: '组串功率',
+            text: '功率',
             textStyle: {
               color: '#fff'
             }

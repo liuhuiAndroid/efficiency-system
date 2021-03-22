@@ -7,7 +7,7 @@
       <div class="content-title">
         <span>{{column.deviceName}}</span>
         <router-link :to="`/inverterdetail/${column.deviceId}`">
-          <img src="../assets/Hosting2.png" alt="">
+          <img src="../assets/Hosting4.png" alt="">
         </router-link>
       </div>
       <p>
