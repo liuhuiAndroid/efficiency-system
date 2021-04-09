@@ -55,6 +55,8 @@ export default defineComponent({
       store.dispatch('getDeviceOverview')
       // 获取当日电站功率
       store.dispatch('getStationTodayPac')
+      // 获取电站能耗损失（30天以内）
+      store.dispatch('getStationLosses')
     }
     let intervalTask: number
     onMounted(() => {
@@ -99,7 +101,7 @@ export default defineComponent({
     }
     &__pie {
       width: 5rem;
-      height: 4rem;
+      height: 5rem;
       margin-top: .2rem;
     }
     &__device {

@@ -11,10 +11,36 @@ import { GlobalDataProps } from '@/store'
 export default defineComponent({
   name: 'LosePieCharts',
   setup() {
+    const store = useStore<GlobalDataProps>()
+    const stationLossesList = computed(() => store.state.stationLosses)
     const pieCharts = ref(null)
-    onMounted(() => {
+    const mLoseList = ref()
+    watch(stationLossesList, () => {
+      const stationLosses = store.state.stationLosses
+      const lossesTotal: number = stationLosses.map((a) => a.loss)
+        .reduce(function (a, b) {
+          return a + b
+        })
+      const stationLossesList = stationLosses.map((item) => {
+        const percent = Percentage(item.loss, lossesTotal)
+        return {
+          name: item.lossName + '（' + percent + '%）',
+          value: item.loss
+        }
+      })
+      if (stationLossesList) {
+        mLoseList.value = stationLossesList
+      }
+      console.log(mLoseList.value)
       initLosePieCharts()
     })
+    function Percentage (num: number, total: number) {
+      if (num === 0 || total === 0) {
+        return 0
+      }
+      return Math.round(num / total * 10000) / 100.00
+    }
+
     const initLosePieCharts = () => {
       // 饼状图
       const mPieCharts = pieCharts.value
@@ -23,7 +49,7 @@ export default defineComponent({
         // 绘制饼状图
         pieChart.setOption({
           title: {
-            text: '12月电站能效损失比例饼状图',
+            text: '近30天的能耗损失比例',
             left: 'center',
             textStyle: {
               color: '#fff'
@@ -42,20 +68,17 @@ export default defineComponent({
           },
           series: [
             {
-              name: '访问来源',
+              top: -100,
               type: 'pie',
               radius: '50%',
               label: {
-                color: '#FFF'
+                color: '#FFF',
+                show: false
               },
-              data: [
-                { value: 63, name: '灰尘损失' },
-                { value: 7, name: '高温损失' },
-                { value: 20, name: '预期遮挡' },
-                { value: 21, name: '组件衰减' },
-                { value: 12, name: '非预期遮挡' },
-                { value: 9, name: '异常损失' }
-              ]
+              labelLine: {
+                show: false
+              },
+              data: mLoseList.value
             }
           ]
         })

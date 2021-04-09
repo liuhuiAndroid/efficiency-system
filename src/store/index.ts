@@ -218,6 +218,11 @@ export interface StationTodayPac {
   ghi: number
 }
 
+export interface StationLosses {
+  lossName: string,
+  loss: number
+}
+
 // 电站信息
 export interface PowerStationInfo {
   stationName?: string,
@@ -266,6 +271,7 @@ export interface GlobalDataProps {
   stationMonthlyPower: StationMonthlyPower[];
   deviceOverview: Array<Array<string>>;
   stationTodayPac: StationTodayPac[];
+  stationLosses: StationLosses[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -301,7 +307,8 @@ export default createStore<GlobalDataProps>({
     stationDailyPower: [],
     stationMonthlyPower: [],
     deviceOverview: [],
-    stationTodayPac: []
+    stationTodayPac: [],
+    stationLosses: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -387,6 +394,9 @@ export default createStore<GlobalDataProps>({
     },
     setStationTodayPac (state, rawData) {
       state.stationTodayPac = rawData.entity
+    },
+    setstationlosses (state, rawData) {
+      state.stationLosses = rawData.entity
     }
   },
   actions: {
@@ -477,6 +487,10 @@ export default createStore<GlobalDataProps>({
     // 获取当日电站功率
     getStationTodayPac ({ commit }, payload) {
       return asyncAndCommit('/web/home/getstationtodaypac', 'setStationTodayPac', commit, { method: 'post', data: payload })
+    },
+    // 获取电站能耗损失（30天以内）
+    getStationLosses ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getstationlosses', 'setstationlosses', commit, { method: 'post', data: payload })
     }
   },
   modules: {
