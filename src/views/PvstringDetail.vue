@@ -338,7 +338,17 @@ export default defineComponent({
         // 绘制折线图
         pieChart.setOption({
           tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            axisPointer: {
+              type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}kWh</b></p>`
+              }
+              return relVal
+            }
           },
           legend: {
             data: (mLineData.value as NameWrapper[]).map((item) => {
@@ -452,6 +462,9 @@ export default defineComponent({
           return {
             name: item.lossName,
             type: 'line',
+            tooltip: {
+              trigger: 'line'
+            },
             data: item.loss
           }
         })
