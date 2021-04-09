@@ -219,8 +219,19 @@ export interface StationTodayPac {
 }
 
 export interface StationLosses {
-  lossName: string,
+  lossName: string[],
   loss: number
+}
+
+export interface DailyPvStringLosses {
+  lossName: string,
+  loss: number[],
+  lossSum: number
+}
+
+export interface PvStringLosses {
+  lossDate?: string,
+  dailyLossData?: DailyPvStringLosses[]
 }
 
 // 电站信息
@@ -272,6 +283,7 @@ export interface GlobalDataProps {
   deviceOverview: Array<Array<string>>;
   stationTodayPac: StationTodayPac[];
   stationLosses: StationLosses[];
+  pvStringLosses: PvStringLosses;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -308,7 +320,8 @@ export default createStore<GlobalDataProps>({
     stationMonthlyPower: [],
     deviceOverview: [],
     stationTodayPac: [],
-    stationLosses: []
+    stationLosses: [],
+    pvStringLosses: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -395,8 +408,11 @@ export default createStore<GlobalDataProps>({
     setStationTodayPac (state, rawData) {
       state.stationTodayPac = rawData.entity
     },
-    setstationlosses (state, rawData) {
+    setStationLosses (state, rawData) {
       state.stationLosses = rawData.entity
+    },
+    setPvStringLoss (state, rawData) {
+      state.pvStringLosses = rawData.entity
     }
   },
   actions: {
@@ -490,7 +506,11 @@ export default createStore<GlobalDataProps>({
     },
     // 获取电站能耗损失（30天以内）
     getStationLosses ({ commit }, payload) {
-      return asyncAndCommit('/web/home/getstationlosses', 'setstationlosses', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/home/getstationlosses', 'setStationLosses', commit, { method: 'post', data: payload })
+    },
+    // 获取光伏组串每日能耗损失
+    getPvStringLoss ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getpvstringloss', 'setPvStringLoss', commit, { method: 'post', data: payload })
     }
   },
   modules: {
