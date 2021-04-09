@@ -56,7 +56,8 @@ export default defineComponent({
             }
           },
           tooltip: {
-            trigger: 'item'
+            trigger: 'item',
+            formatter: '{b} : {c}kWh'
           },
           legend: {
             orient: 'horizontal',
