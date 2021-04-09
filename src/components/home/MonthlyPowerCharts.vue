@@ -15,15 +15,19 @@ export default defineComponent({
     const stationMonthlyPower = computed(() => store.state.stationMonthlyPower)
     const monthlyCharts = ref(null)
     const mMonthlyListX = ref()
-    const mMonthlyListY = ref()
+    const mMonthlyListActualY = ref()
+    const mMonthlyListIdealY = ref()
 
     watch(stationMonthlyPower, () => {
       const stationMonthlyPower = store.state.stationMonthlyPower
       mMonthlyListX.value = stationMonthlyPower.map((item) => {
         return item.timely
       })
-      mMonthlyListY.value = stationMonthlyPower.map((item) => {
+      mMonthlyListActualY.value = stationMonthlyPower.map((item) => {
         return item.actualPower
+      })
+      mMonthlyListIdealY.value = stationMonthlyPower.map((item) => {
+        return item.idealPower
       })
       initMonthlyCharts()
     })
@@ -42,6 +46,12 @@ export default defineComponent({
             },
             padding: [20, 0, 0, 0]
           },
+          legend: {
+            data: ['实际发电量', '理论发电量'],
+            textStyle: {
+              color: '#fff'
+            }
+          },
           xAxis: {
             type: 'category',
             data: mMonthlyListX.value
@@ -49,10 +59,18 @@ export default defineComponent({
           yAxis: {
             type: 'value'
           },
-          series: [{
-            data: mMonthlyListY.value,
-            type: 'bar'
-          }]
+          series: [
+            {
+              name: '实际发电量',
+              type: 'bar',
+              data: mMonthlyListActualY.value
+            },
+            {
+              name: '理论发电量',
+              type: 'line',
+              data: mMonthlyListIdealY.value
+            }
+          ]
         })
       }
     }

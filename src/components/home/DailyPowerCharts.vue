@@ -14,7 +14,8 @@ export default defineComponent({
     const store = useStore<GlobalDataProps>()
     const stationDailyPower = computed(() => store.state.stationDailyPower)
     const dailyCharts = ref(null)
-    const mDailyList = ref()
+    const mDailyActualList = ref()
+    const mDailyIdealList = ref()
 
     watch(stationDailyPower, () => {
       const stationDailyPower = store.state.stationDailyPower
@@ -28,8 +29,21 @@ export default defineComponent({
         }
       })
       if (dailyList) {
-        mDailyList.value = dailyList
+        mDailyActualList.value = dailyList
       }
+      const dailyIdealList = stationDailyPower.map((item) => {
+        return {
+          name: '',
+          value: [
+            item.timely,
+            item.idealPower
+          ]
+        }
+      })
+      if (dailyIdealList) {
+        mDailyIdealList.value = dailyIdealList
+      }
+
       initDailyCharts()
     })
     const initDailyCharts = () => {
@@ -46,6 +60,12 @@ export default defineComponent({
               color: '#fff'
             },
             padding: [20, 0, 0, 0]
+          },
+          legend: {
+            data: ['实际发电量', '理论发电量'],
+            textStyle: {
+              color: '#fff'
+            }
           },
           xAxis: {
             type: 'time', // 时间轴
@@ -75,14 +95,23 @@ export default defineComponent({
               formatter: '{value}'
             }
           },
-          series: [{
-            type: 'line',
-            smooth: true,
-            data: mDailyList.value,
-            areaStyle: {},
-            showSymbol: false,
-            hoverAnimation: false
-          }]
+          series: [
+            {
+              name: '实际发电量',
+              type: 'line',
+              smooth: true,
+              data: mDailyActualList.value,
+              areaStyle: {},
+              showSymbol: false,
+              hoverAnimation: false
+            },
+            {
+              name: '理论发电量',
+              type: 'line',
+              smooth: true,
+              data: mDailyIdealList.value
+            }
+          ]
         })
       }
     }

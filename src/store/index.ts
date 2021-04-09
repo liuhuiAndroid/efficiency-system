@@ -234,11 +234,13 @@ interface ListProps<P> {
 
 interface StationDailyPower {
   timely?: string,
+  idealPower?: number,
   actualPower?: number,
 }
 
 interface StationMonthlyPower {
   timely?: string,
+  idealPower?: number,
   actualPower?: number,
 }
 
@@ -260,7 +262,7 @@ export interface GlobalDataProps {
   combinerDetailProps: CombinerDetailProps;
   inverterDetailProps: InverterDetailProps;
   transformerDetailProps: TransformerDetailProps;
-  stationDailyPower: StationMonthlyPower[];
+  stationDailyPower: StationDailyPower[];
   stationMonthlyPower: StationMonthlyPower[];
   deviceOverview: Array<Array<string>>;
   stationTodayPac: StationTodayPac[];
