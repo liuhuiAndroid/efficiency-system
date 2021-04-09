@@ -229,6 +229,10 @@ export interface DailyPvStringLosses {
   lossSum: number
 }
 
+export interface NameWrapper {
+  name?: string,
+}
+
 export interface PvStringLosses {
   lossDate?: string,
   dailyLossData?: DailyPvStringLosses[]

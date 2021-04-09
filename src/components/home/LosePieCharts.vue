@@ -4,9 +4,10 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { defineComponent, computed, onMounted, ref, watch } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '@/store'
+import { Percentage } from '@/utils/NumberUtils'
 
 export default defineComponent({
   name: 'LosePieCharts',
@@ -34,12 +35,6 @@ export default defineComponent({
       console.log(mLoseList.value)
       initLosePieCharts()
     })
-    function Percentage (num: number, total: number) {
-      if (num === 0 || total === 0) {
-        return 0
-      }
-      return Math.round(num / total * 10000) / 100.00
-    }
 
     const initLosePieCharts = () => {
       // 饼状图

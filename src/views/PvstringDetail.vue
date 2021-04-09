@@ -37,6 +37,10 @@
     <div class="container__content__chart" ref="pCharts"></div>
     <div class="container__content__chart" ref="tempCharts"></div>
   </div>
+  <div class="container__content" v-show="showMenu=='2'">
+    <div class="container__content__pie" ref="pieCharts"></div>
+    <div class="container__content__chart" ref="lineCharts"></div>
+  </div>
 </div>
 </template>
 
@@ -44,10 +48,11 @@
 import { defineComponent, onMounted, onBeforeUnmount, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
-import { GlobalDataProps } from '@/store'
+import { GlobalDataProps, NameWrapper } from '@/store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
-import { currentTime } from '@/utils/DateUtils'
+import { currentTime, get30AgoTime } from '@/utils/DateUtils'
+import { Percentage } from '@/utils/NumberUtils'
 
 export default defineComponent({
   setup() {
@@ -58,10 +63,15 @@ export default defineComponent({
     const iCharts = ref(null)
     const pCharts = ref(null)
     const tempCharts = ref(null)
+    const pieCharts = ref(null)
+    const lineCharts = ref(null)
     const mUList = ref()
     const mIList = ref()
     const mPList = ref()
     const mTempList = ref()
+    const mPieData = ref()
+    const mLineDataX = ref()
+    const mLineData = ref()
     // echart 初始化
     const initCharts = () => {
       // 电压
@@ -277,6 +287,85 @@ export default defineComponent({
         })
       }
     }
+    const initPieCharts = () => {
+      // 饼图
+      const mpieCharts = pieCharts.value
+      console.log('mpieCharts', mpieCharts)
+      if (mpieCharts && mPieData.value) {
+        const pieChart = echarts.init(mpieCharts)
+        // 绘制饼状图
+        pieChart.setOption({
+          title: {
+            text: '近30天的能耗损失比例',
+            left: 'center',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b} : {c}kWh'
+          },
+          legend: {
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          series: [
+            {
+              type: 'pie',
+              radius: '50%',
+              label: {
+                color: '#FFF',
+                show: false
+              },
+              labelLine: {
+                show: false
+              },
+              data: mPieData.value
+            }
+          ]
+        })
+      }
+      // 折线图
+      const mlineCharts = lineCharts.value
+      console.log('mlineCharts', mlineCharts)
+      if (mlineCharts && mLineData.value && mLineDataX.value) {
+        const pieChart = echarts.init(mlineCharts)
+        // 绘制折线图
+        pieChart.setOption({
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: (mLineData.value as NameWrapper[]).map((item) => {
+              return item.name
+            }),
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: mLineDataX.value
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: mLineData.value
+        })
+      }
+    }
     const route = useRoute()
     const store = useStore<GlobalDataProps>()
     const pvstringDetailProps = computed(() => {
@@ -334,6 +423,41 @@ export default defineComponent({
       }
       initCharts()
     })
+    const pvStringLosses = computed(() => {
+      return store.state.pvStringLosses
+    })
+    watch(pvStringLosses, () => {
+      if (pvStringLosses.value.dailyLossData != null) {
+        const lossesTotal: number = pvStringLosses.value.dailyLossData.map((a) => a.lossSum)
+          .reduce(function (a, b) {
+            return a + b
+          })
+        const lossesList = pvStringLosses.value.dailyLossData.map((item) => {
+          const percent = Percentage(item.lossSum, lossesTotal)
+          return {
+            name: item.lossName + '（' + percent + '%）',
+            value: item.lossSum
+          }
+        })
+        if (lossesList) {
+          console.log('lossesList', lossesList)
+          mPieData.value = lossesList
+        }
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mLineDataX.value = pvStringLosses.value.lossDate
+      }
+      if (pvStringLosses.value.dailyLossData != null) {
+        mLineData.value = pvStringLosses.value.dailyLossData.map(item => {
+          return {
+            name: item.lossName,
+            type: 'line',
+            data: item.loss
+          }
+        })
+      }
+      initPieCharts()
+    })
 
     const meteoData = computed(() => store.state.meteoData)
 
@@ -342,6 +466,13 @@ export default defineComponent({
       store.dispatch('getMeteoData')
       // 获取光伏组串详情
       store.dispatch('getPvStringDetail', { deviceId: route.params.id })
+      // 获取光伏组串详情
+      console.log('AAA', currentTime() + get30AgoTime())
+      store.dispatch('getPvStringLoss', {
+        deviceId: route.params.id,
+        startTime: get30AgoTime(),
+        endTime: currentTime()
+      })
     }
     let intervalTask: number
 
@@ -369,6 +500,8 @@ export default defineComponent({
       iCharts,
       pCharts,
       tempCharts,
+      pieCharts,
+      lineCharts,
       meteoData,
       handleSelect,
       showMenu
@@ -423,6 +556,10 @@ export default defineComponent({
     flex-grow: 1;
     margin-top: .5rem;
     &__chart{
+      width: 600px;
+      height: 300px;
+    }
+    &__pie{
       width: 600px;
       height: 300px;
     }

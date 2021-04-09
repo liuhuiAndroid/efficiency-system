@@ -28,8 +28,17 @@ export const formatDate = (time: Date) => {
 
 export const currentTime = () => {
   const Dates = new Date()
-  const Year : number = Dates.getFullYear()
-  const Months : any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1)
-  const Day : any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate()
+  const Year: number = Dates.getFullYear()
+  const Months: any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1)
+  const Day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate()
+  return Year + '-' + Months + '-' + Day
+}
+
+export const get30AgoTime = () => {
+  const DatesNumber = new Date().setMonth((new Date().getMonth() - 1))
+  const Dates = new Date(DatesNumber)
+  const Year: number = Dates.getFullYear()
+  const Months: any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1)
+  const Day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate()
   return Year + '-' + Months + '-' + Day
 }
