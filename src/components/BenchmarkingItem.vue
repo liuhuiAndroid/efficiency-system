@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <div class="container__head">
-      <div class="container__title">
+  <div class="item">
+    <div class="item__head">
+      <div class="item__head__title">
         <p>
-          {{benchMarkList.deviceName}}：
+          标杆组串{{benchMarkList.deviceName}}：
           <span>电压：{{benchMarkList.u}}</span>
           <span>电流：{{benchMarkList.i}}</span>
           <span>功率：{{benchMarkList.p}}</span>
@@ -12,9 +12,9 @@
         </p>
       </div>
     </div>
-    <div class="container__content">
-      <div class="container__content__chart" ref="firstCharts"></div>
-      <div class="container__content__chart" ref="secondCharts"></div>
+    <div class="item__content">
+      <div class="item__content__chart" ref="firstCharts"></div>
+      <div class="item__content__chart" ref="secondCharts"></div>
     </div>
   </div>
 </template>
@@ -39,6 +39,9 @@ export default defineComponent({
     const mFigureDatas02 = ref()
     const mFigure2Datas01 = ref()
     const mFigure2Datas02 = ref()
+    const mFigureDatas00Title = ref()
+    const mFigureDatas01Title = ref()
+    const mFigureDatas02Title = ref()
     const mFigure2Datas01Title = ref()
     const mFigure2Datas02Title = ref()
 
@@ -54,6 +57,9 @@ export default defineComponent({
         benchMarkList.figure1.figureDatas[2].data[index]
       ]
     })
+    mFigureDatas00Title.value = benchMarkList.figure1.figureDatas[0].title
+    mFigureDatas01Title.value = benchMarkList.figure1.figureDatas[1].title
+    mFigureDatas02Title.value = benchMarkList.figure1.figureDatas[2].title
     mFigure2Datas01.value = benchMarkList.figure2.figureDatas[0].data.map((item, index) => {
       if (benchMarkList.figure2.figureDatas[1].data[index] === 'NaN') {
         benchMarkList.figure2.figureDatas[1].data[index] = '0'
@@ -61,7 +67,7 @@ export default defineComponent({
       return {
         name: '',
         value: [
-          item.replace(':00.000', ''),
+          item.replace(':00.000', '').replace('+08', ''),
           Number(benchMarkList.figure2.figureDatas[1].data[index])
         ]
       }
@@ -73,13 +79,11 @@ export default defineComponent({
       return {
         name: '',
         value: [
-          item.replace(':00.000', ''),
+          item.replace(':00.000', '').replace('+08', ''),
           Number(benchMarkList.figure2.figureDatas[2].data[index])
         ]
       }
     })
-    console.log('mFigure2Datas01', mFigure2Datas01.value)
-    console.log('mFigure2Datas02', mFigure2Datas02.value)
     mFigure2Datas01Title.value = benchMarkList.figure2.figureDatas[1].title
     mFigure2Datas02Title.value = benchMarkList.figure2.figureDatas[2].title
     const firstCharts = ref(null)
@@ -91,7 +95,22 @@ export default defineComponent({
         var myfirstCharts = echarts.init(mfirstCharts)
         // 绘制图表
         myfirstCharts.setOption({
+          title: {
+            text: '发电数学模型曲线',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          legend: {
+            data: [mFigureDatas01Title.value, mFigureDatas02Title.value],
+            textStyle: {
+              color: '#fff'
+            }
+          },
           xAxis: {
+            name: mFigureDatas00Title.value,
+            nameLocation: 'center',
+            nameGap: 30,
             splitLine: {
               lineStyle: {
                 type: 'dashed'
@@ -106,10 +125,12 @@ export default defineComponent({
             }
           },
           series: [{
+            name: mFigureDatas01Title.value,
             data: mFigureDatas01.value,
             type: 'scatter'
           },
           {
+            name: mFigureDatas02Title.value,
             data: mFigureDatas02.value,
             type: 'scatter'
           }]
@@ -123,7 +144,7 @@ export default defineComponent({
         mysecondCharts.setOption({
           title: {
             left: 'left',
-            text: '功率（kW）',
+            text: '组串功率（kW）',
             textStyle: {
               color: '#fff'
             },
@@ -195,7 +216,34 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.container{
+.item{
+  margin: .1rem;
+  border: 1px solid #00B1FF;
+  border-radius: .1rem;
+  &__head{
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.5rem;
+    &__title{
+      display: flex;
+      flex-direction: column;
+      p{
+        width: 100%;
+        height: 0.3rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: white;
+        font-size: .2rem;
+      }
+      span{
+        display: inline-block;
+        margin-left: 0.4rem;
+        color: white;
+        font-size: .2rem;
+      }
+    }
+  }
   &__content{
     display: flex;
     flex-direction: row;

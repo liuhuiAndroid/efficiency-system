@@ -33,6 +33,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container{
   overflow-y: scroll;
+  height: 8rem;
   display: flex;
   flex-direction: column;
 }
