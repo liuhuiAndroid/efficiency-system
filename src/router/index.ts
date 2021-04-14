@@ -30,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/benchmarking',
         name: 'Benchmarking',
         component: () => import(/* webpackChunkName: "benchmarking" */ '../views/Benchmarking.vue'),
-        meta: { requiredLogin: true }
+        meta: { requiredLogin: false }
       },
       {
         path: '/device',

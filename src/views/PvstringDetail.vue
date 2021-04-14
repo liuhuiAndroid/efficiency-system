@@ -378,9 +378,7 @@ export default defineComponent({
     }
     const route = useRoute()
     const store = useStore<GlobalDataProps>()
-    const pvstringDetailProps = computed(() => {
-      return store.state.pvstringDetailProps
-    })
+    const pvstringDetailProps = computed(() => store.state.pvstringDetailProps)
     watch(pvstringDetailProps, () => {
       const pvstringDetailProps = store.state.pvstringDetailProps
       const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => {

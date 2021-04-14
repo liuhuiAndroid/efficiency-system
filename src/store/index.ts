@@ -238,6 +238,38 @@ export interface PvStringLosses {
   dailyLossData?: DailyPvStringLosses[]
 }
 
+export interface BenchMarkFigureDatas1 {
+  title: string,
+  data: string[]
+}
+
+export interface BenchMarkFigureDatas2 {
+  title: string,
+  data: string[]
+}
+
+export interface BenchMarkFigure1 {
+  figureDatas: BenchMarkFigureDatas1[]
+}
+
+export interface BenchMarkFigure2 {
+  figureDatas: BenchMarkFigureDatas2[]
+}
+
+export interface BenchMarkList {
+  deviceName?: string,
+  deviceId?: string,
+  status?: number,
+  u?: string,
+  i?: string,
+  p?: string,
+  temperature?: string,
+  dustCleanliness?: string,
+  degradationRatio?: string,
+  figure1: BenchMarkFigure1,
+  figure2: BenchMarkFigure2,
+}
+
 // 电站信息
 export interface PowerStationInfo {
   stationName?: string,
@@ -288,6 +320,7 @@ export interface GlobalDataProps {
   stationTodayPac: StationTodayPac[];
   stationLosses: StationLosses[];
   pvStringLosses: PvStringLosses;
+  benchMarkList: BenchMarkList[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -325,7 +358,8 @@ export default createStore<GlobalDataProps>({
     deviceOverview: [],
     stationTodayPac: [],
     stationLosses: [],
-    pvStringLosses: {}
+    pvStringLosses: {},
+    benchMarkList: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -417,6 +451,9 @@ export default createStore<GlobalDataProps>({
     },
     setPvStringLoss (state, rawData) {
       state.pvStringLosses = rawData.entity
+    },
+    setBenchMarkList (state, rawData) {
+      state.benchMarkList = rawData.entity
     }
   },
   actions: {
@@ -515,6 +552,10 @@ export default createStore<GlobalDataProps>({
     // 获取光伏组串每日能耗损失
     getPvStringLoss ({ commit }, payload) {
       return asyncAndCommit('/web/device/getpvstringloss', 'setPvStringLoss', commit, { method: 'post', data: payload })
+    },
+    // 获取标杆组串列表
+    getBenchMarkList ({ commit }, payload) {
+      return asyncAndCommit('/web/benchmark/getbenchmarklist', 'setBenchMarkList', commit, { method: 'post', data: payload })
     }
   },
   modules: {
