@@ -100,8 +100,8 @@ export default defineComponent({
       margin-left: .2rem;
     }
     &__pie {
-      width: 5rem;
-      height: 5rem;
+      width: 5.5rem;
+      height: 5.5rem;
       margin-top: .2rem;
     }
     &__device {

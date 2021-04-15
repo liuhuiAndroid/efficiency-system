@@ -29,7 +29,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .weather {
     width: 5rem;
-    height: 2.2rem;
     color: white;
     border: 1px solid #555468;
     background-color: #080245;

@@ -1,6 +1,9 @@
 <template>
   <div class="item">
     <div class="item__head">
+      <router-link :to="`/pvstringdetail/${benchMarkList.deviceId}`">
+        <img src="@/assets/Hosting4.png" alt=""/>
+      </router-link>
       <div class="item__head__title">
         <p>
           标杆组串{{benchMarkList.deviceName}}：
@@ -99,7 +102,8 @@ export default defineComponent({
             text: '发电数学模型曲线',
             textStyle: {
               color: '#fff'
-            }
+            },
+            padding: [20, 0, 0, 0]
           },
           legend: {
             data: [mFigureDatas01Title.value, mFigureDatas02Title.value],
@@ -223,10 +227,13 @@ export default defineComponent({
   &__head{
     display: flex;
     flex-direction: row;
-    margin-left: 1.5rem;
+    margin-left: .5rem;
+    margin-top: .2rem;
     &__title{
       display: flex;
       flex-direction: column;
+      margin-left: .3rem;
+      margin-top: .1rem;
       p{
         width: 100%;
         height: 0.3rem;
@@ -253,8 +260,8 @@ export default defineComponent({
     flex-grow: 1;
     margin-top: .5rem;
     &__chart{
-      width: 600px;
-      height: 300px;
+      width: 8rem;
+      height: 4rem;
     }
   }
 }
