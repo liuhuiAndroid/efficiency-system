@@ -567,12 +567,12 @@ export default defineComponent({
     flex-grow: 1;
     margin-top: .5rem;
     &__chart{
-      width: 600px;
-      height: 300px;
+      width: 8rem;
+      height: 4rem;
     }
     &__pie{
-      width: 600px;
-      height: 300px;
+      width: 8rem;
+      height: 4rem;
     }
   }
 }
