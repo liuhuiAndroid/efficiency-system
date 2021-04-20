@@ -6,7 +6,9 @@
       <monthly-power-charts class="container__column__chart"/>
     </div>
     <div class="container__column">
-      <img class="container__column__img" src="../assets/video_img.png"/>
+      <video class="container__column__img" src="../assets/video/video.mp4" muted autoplay loop>
+        您的浏览器不支持 video 标签。
+      </video>
       <lose-pie-charts class="container__column__pie" />
     </div>
     <div class="container__column">
