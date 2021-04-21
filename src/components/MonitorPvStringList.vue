@@ -164,7 +164,7 @@ export default defineComponent({
 .content-title img{
   width: 1rem;
   position: absolute;
-  left: 50%;
+  left: 60%;
   margin-left: -0.5rem;
 }
 

@@ -17,16 +17,20 @@
         </dropdown-item>
       </dropdown>
     </div>
-    <p>
-      环境数据：
-      <span>{{`温度：${meteoData.temperature}`}}</span>
-      <span>{{`湿度：${meteoData.humidity}`}}</span>
-      <span>{{`压力：${meteoData.pressure}`}}</span>
-      <span>{{`风向：${meteoData.windDirection}`}}</span>
-      <span>{{`风速：${meteoData.windSpeed}`}}</span>
-      <span>{{`POA(辐照度)：${meteoData.poa}`}}</span>
-      <span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span>
-    </p>
+    <div class="surroundings">
+      <div class="surroundings-line1">
+        环境数据：
+        <span>{{`温度：${meteoData.temperature}`}}</span>
+        <span>{{`湿度：${meteoData.humidity}`}}</span>
+        <span>{{`压力：${meteoData.pressure}`}}</span>
+        <span>{{`风向：${meteoData.windDirection}`}}</span>
+        <span>{{`风速：${meteoData.windSpeed}`}}</span>
+      </div>
+      <div class="surroundings-line2">
+        <span>{{`POA(辐照度)：${meteoData.poa}`}}</span>
+        <span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span>
+      </div>
+    </div>
   </div>
     <div class="main-right-center">
       <div class="main-center-warp">
@@ -264,8 +268,8 @@ export default defineComponent({
 .main-right-header div{
   margin-right: 0.1rem;
 }
-.main-right-header p span{
-  margin-right: 0.1rem;
+.surroundings div span{
+  margin-right: 0.5rem;
 }
 .main-right-center{
   width: 100%;
@@ -299,6 +303,16 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.surroundings{
+  display: flex;
+  flex-direction: column;
+}
+
+.surroundings-line2{
+  margin-top: .1rem;
+  margin-left: .9rem;
 }
 
 .select-item li{
