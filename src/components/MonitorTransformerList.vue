@@ -9,8 +9,8 @@
         <router-link :to="`/transformerdetail/${column.deviceId}`"><img src="../assets/Hosting.png" alt=""></router-link>
       </div>
       <p>
-        <span>低电压：{{column.lu}}</span>
-        <span>高电压：{{column.hu}}</span>
+        <span>电压(低)：{{column.lu}}</span>
+        <span>电压(高)：{{column.hu}}</span>
       </p>
       <p>
         <span>功率：{{column.pac}}</span>
