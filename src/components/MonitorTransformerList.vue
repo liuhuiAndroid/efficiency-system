@@ -9,16 +9,15 @@
         <router-link :to="`/transformerdetail/${column.deviceId}`"><img src="../assets/Hosting.png" alt=""></router-link>
       </div>
       <p>
-        <span>电压：{{column.u}}</span>
-        <span>电流：{{column.i}}</span>
+        <span>低电压：{{column.lu}}</span>
+        <span>高电压：{{column.hu}}</span>
       </p>
       <p>
-        <span>功率：{{column.p}}</span>
-        <span></span>
+        <span>功率：{{column.pac}}</span>
+        <span>频率：{{column.fac}}</span>
       </p>
       <p>
-        <span></span>
-        <span></span>
+        <a class="pvstring">下级设备：逆变器({{column.inverterCount}})</a>
       </p>
     </div>
     <div class="page-warp">
@@ -198,5 +197,13 @@ export default defineComponent({
     background-color: #013D63;
     color: #FFF;
   }
+}
+
+.pvstring {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
 }
 </style>

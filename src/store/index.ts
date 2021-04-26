@@ -9,6 +9,8 @@ export interface StationInfo {
   powerToday: string;
   powerThisMonth: string;
   powerTotal: string;
+  pr: string;
+  health: string;
 }
 
 // 电站信息
@@ -21,7 +23,7 @@ export interface PowerStationInfoProps {
 export interface TransformerInfo {
   deviceName: string;
   deviceId: string;
-  status: boolean;
+  status: number;
   fac: string; // 频率
   hu: string; // 高压侧电压
   lu: string; // 低压侧电压

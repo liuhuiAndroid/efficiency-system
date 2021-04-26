@@ -16,11 +16,10 @@
       </p>
       <p>
         <span>功率：{{column.p}}</span>
-        <span>下级设备：汇流箱({{column.combinerBoxCount}})</span>
+        <span></span>
       </p>
       <p>
-        <span></span>
-        <span></span>
+        <a class="pvstring">下级设备：汇流箱({{column.combinerBoxCount}})</a>
       </p>
     </div>
     <div class="page-warp">
@@ -200,5 +199,13 @@ export default defineComponent({
     background-color: #013D63;
     color: #FFF;
   }
+}
+
+.pvstring {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
 }
 </style>

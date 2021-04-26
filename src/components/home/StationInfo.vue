@@ -20,6 +20,14 @@
           <td class="station__name">累计发电量</td>
           <td class="station__value">{{powerStationInfo.powerTotal}}</td>
         </tr>
+        <tr>
+          <td class="station__name">Pr值</td>
+          <td class="station__value">{{powerStationInfo.pr}}</td>
+        </tr>
+        <tr>
+          <td class="station__name">健康度</td>
+          <td class="station__value">{{powerStationInfo.health}}</td>
+        </tr>
     </table>
 </template>
 
