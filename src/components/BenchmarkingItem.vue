@@ -131,11 +131,13 @@ export default defineComponent({
           series: [{
             name: mFigureDatas01Title.value,
             data: mFigureDatas01.value,
+            symbolSize: 5,
             type: 'scatter'
           },
           {
             name: mFigureDatas02Title.value,
             data: mFigureDatas02.value,
+            symbolSize: 5,
             type: 'scatter'
           }]
         })

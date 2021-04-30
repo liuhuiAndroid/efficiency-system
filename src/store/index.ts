@@ -237,7 +237,9 @@ export interface NameWrapper {
 
 export interface PvStringLosses {
   lossDate?: string,
-  dailyLossData?: DailyPvStringLosses[]
+  dailyLossData?: DailyPvStringLosses[],
+  prDatas?: string[],
+  healthDatas?: string[]
 }
 
 export interface BenchMarkFigureDatas1 {
@@ -270,6 +272,16 @@ export interface BenchMarkList {
   degradationRatio?: string,
   figure1: BenchMarkFigure1,
   figure2: BenchMarkFigure2,
+}
+
+export interface AnalysisLossDto {
+  lossName: string[],
+  economicLoss: string[]
+}
+
+export interface Efficiencyanalysis {
+  efficiencyAnalysis?: string[],
+  lossDtos?: AnalysisLossDto[]
 }
 
 // 电站信息
@@ -323,6 +335,7 @@ export interface GlobalDataProps {
   stationLosses: StationLosses[];
   pvStringLosses: PvStringLosses;
   benchMarkList: BenchMarkList[];
+  efficiencyanalysis: Efficiencyanalysis;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -361,7 +374,8 @@ export default createStore<GlobalDataProps>({
     stationTodayPac: [],
     stationLosses: [],
     pvStringLosses: {},
-    benchMarkList: []
+    benchMarkList: [],
+    efficiencyanalysis: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -456,6 +470,9 @@ export default createStore<GlobalDataProps>({
     },
     setBenchMarkList (state, rawData) {
       state.benchMarkList = rawData.entity
+    },
+    setEfficiencyanalysis (state, rawData) {
+      state.efficiencyanalysis = rawData.entity
     }
   },
   actions: {
@@ -558,6 +575,10 @@ export default createStore<GlobalDataProps>({
     // 获取标杆组串列表
     getBenchMarkList ({ commit }, payload) {
       return asyncAndCommit('/web/benchmark/getbenchmarklist', 'setBenchMarkList', commit, { method: 'post', data: payload })
+    },
+    // 获取能效分析（30天以内）
+    getEfficiencyanalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getefficiencyanalysis', 'setEfficiencyanalysis', commit, { method: 'post', data: payload })
     }
   },
   modules: {

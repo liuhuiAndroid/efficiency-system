@@ -2,51 +2,25 @@
   <div class="main-right">
     <div class="main-right-menu">
       <p class="main-menu-title">运行监测</p>
-      <div class="main-menu-item">
+      <div class="main-menu-item" v-for="column in efficiencyanalysisData.lossDtos" :key="column.lossName">
         <img :src="require('../assets/menu_icon.png')" alt=""/>
         <p>
-          组件效率衰减<br>
-          <span>1.2万元（2.1%）</span>
-        </p>
-      </div>
-      <div class="main-menu-item">
-        <img :src="require('../assets/menu_icon1.png')" alt="">
-        <p>
-          组件效率衰减<br>
-          <span>1.2万元（2.1%）</span>
-        </p>
-      </div>
-      <div class="main-menu-item">
-        <img :src="require('../assets/menu_icon2.png')" alt="">
-        <p>
-          组件效率衰减<br>
-          <span>1.2万元（2.1%）</span>
-        </p>
-      </div>
-      <div class="main-menu-item">
-        <img :src="require('../assets/menu_icon3.png')" alt="">
-        <p>
-          组件效率衰减<br>
-          <span>1.2万元（2.1%）</span>
-        </p>
-      </div>
-      <div class="main-menu-item">
-        <img :src="require('../assets/menu_icon4.png')" alt="">
-        <p>
-          组件效率衰减<br>
-          <span>1.2万元（2.1%）</span>
-        </p>
-      </div>
-      <div class="main-menu-item">
-        <img :src="require('../assets/menu_icon5.png')" alt="">
-        <p>
-          组件效率衰减<br>
-          <span>12700元（2.1%）</span>
+          {{column.lossName}}<br>
+          <span>{{column.economicLoss}}</span>
         </p>
       </div>
   </div>
   <div class="main-right-center">
-    <p class="main-right-top">环境数据：<span style="margin-left: 0.2rem;">温度：4度</span><span>湿度：60%</span><span>风速：4m/s</span><span>GHI：120W/m</span><span>DHI：80W/m</span></p>
+    <p class="main-right-top">
+      环境数据：
+      <span>{{`温度：${meteoData.temperature}`}}</span>
+      <span>{{`湿度：${meteoData.humidity}`}}</span>
+      <span>{{`压力：${meteoData.pressure}`}}</span>
+      <span>{{`风向：${meteoData.windDirection}`}}</span>
+      <span>{{`风速：${meteoData.windSpeed}`}}</span>
+      <span>{{`POA(辐照度)：${meteoData.poa}`}}</span>
+      <span>{{`GHI(辐照度)：${meteoData.ghi}`}}</span>
+    </p>
     <div class="main-center-warp">
       <div class="main-chart">
         <div class="main-chart-box1">
@@ -131,12 +105,24 @@
 </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import { GlobalDataProps } from '@/store'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'Analysis',
   setup() {
-    console.log('Analysis')
+    const store = useStore<GlobalDataProps>()
+    // 获取能效分析（30天以内）
+    store.dispatch('getEfficiencyanalysis')
+    // 获取当前气象数据
+    store.dispatch('getMeteoData')
+    const efficiencyanalysisData = computed(() => store.state.efficiencyanalysis)
+    const meteoData = computed(() => store.state.meteoData)
+    return {
+      efficiencyanalysisData,
+      meteoData
+    }
   }
 })
 </script>

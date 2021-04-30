@@ -40,6 +40,7 @@
   <div class="container__content" v-show="showMenu=='2'">
     <div class="container__content__pie" ref="pieCharts"></div>
     <div class="container__content__chart" ref="lineCharts"></div>
+    <div class="container__content__chart" ref="prAndHealthLineCharts"></div>
   </div>
 </div>
 </template>
@@ -65,6 +66,7 @@ export default defineComponent({
     const tempCharts = ref(null)
     const pieCharts = ref(null)
     const lineCharts = ref(null)
+    const prAndHealthLineCharts = ref(null)
     const mUList = ref()
     const mIList = ref()
     const mPList = ref()
@@ -72,6 +74,9 @@ export default defineComponent({
     const mPieData = ref()
     const mLineDataX = ref()
     const mLineData = ref()
+    const mLinePrDatas = ref()
+    const mLineHealthDatas = ref()
+    const mLinePrAndHealthDatasX = ref()
     // echart 初始化
     const initCharts = () => {
       // 电压
@@ -375,6 +380,48 @@ export default defineComponent({
           series: mLineData.value
         })
       }
+      // PR+健康度的历史趋势曲线
+      const mPrAndHealthLineCharts = prAndHealthLineCharts.value
+      if (mPrAndHealthLineCharts && mLinePrDatas.value && mLineHealthDatas.value) {
+        const prAndHealthLineCharts = echarts.init(mPrAndHealthLineCharts)
+        prAndHealthLineCharts.setOption({
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'line'
+            }
+          },
+          legend: {
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: mLinePrAndHealthDatasX.value
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            name: 'PR',
+            data: mLinePrDatas.value,
+            type: 'line',
+            smooth: true
+          }, {
+            name: '健康度',
+            data: mLineHealthDatas.value,
+            type: 'line',
+            smooth: true
+          }]
+        })
+      }
     }
     const route = useRoute()
     const store = useStore<GlobalDataProps>()
@@ -467,6 +514,29 @@ export default defineComponent({
           }
         })
       }
+      if (pvStringLosses.value.prDatas != null) {
+        mLinePrDatas.value = pvStringLosses.value.prDatas.map((item) => {
+          if (item != null) {
+            return item.substring(0, item.length - 1)
+          } else {
+            return null
+          }
+        })
+        const arrayX:string[] = []
+        pvStringLosses.value.prDatas.forEach((val, idx, array) => {
+          arrayX.push('')
+        })
+        mLinePrAndHealthDatasX.value = arrayX
+      }
+      if (pvStringLosses.value.healthDatas != null) {
+        mLineHealthDatas.value = pvStringLosses.value.healthDatas.map((item) => {
+          if (item != null) {
+            return item.substring(0, item.length - 1)
+          } else {
+            return null
+          }
+        })
+      }
       initPieCharts()
     })
 
@@ -513,6 +583,7 @@ export default defineComponent({
       tempCharts,
       pieCharts,
       lineCharts,
+      prAndHealthLineCharts,
       meteoData,
       handleSelect,
       showMenu
