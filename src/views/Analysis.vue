@@ -31,12 +31,7 @@
                 <div class="main-chart-box">
                   <p class="main-chart-title">光伏消耗</p>
                   <div class="main-chart-desc">
-                    <span>组件效率衰减：1.2万元（2.1%）</span>
-                    <span>预期遮挡：1.2万元（2.1%）</span>
-                    <span>组件效率衰减：1.2万元（2.1%）</span>
-                    <span>预期遮挡：1.2万元（2.1%）</span>
-                    <span>组件效率衰减：1.2万元（2.1%）</span>
-                    <span>预期遮挡：1.2万元（2.1%）</span>
+                    <span>{{efficiencyanalysisData.efficiencyAnalysis.pv_string}}</span>
                   </div>
                   <p class="main-chart-bottom">光伏板</p>
                 </div>
@@ -46,8 +41,7 @@
                 <div class="main-chart-box">
                   <p class="main-chart-title">逆变器消耗</p>
                   <div class="main-chart-desc main-chart-desc1">
-                    <span>逆变器损耗：15100元（2.1%）</span>
-                    <span>故障险检修损耗：11.2万元（2.1%）</span>
+                    <span>{{efficiencyanalysisData.efficiencyAnalysis.inverter}}</span>
                   </div>
                   <p class="main-chart-bottom main-chart-bottom1">逆变器</p>
                 </div>
@@ -57,8 +51,7 @@
                 <div class="main-chart-box">
                   <p class="main-chart-title">电网消耗</p>
                   <div class="main-chart-desc main-chart-desc1">
-                    <span>限电损失：0%</span>
-                    <span>功率预测不准确的罚款：0%</span>
+                    <span>{{efficiencyanalysisData.efficiencyAnalysis.power_grid}}</span>
                   </div>
                   <p class="main-chart-bottom main-chart-bottom1">电网</p>
                 </div>
@@ -82,7 +75,7 @@
                   <p class="main--chart-bottom-title">汇流箱</p>
                   <p class="main-chart-bottom-desc">汇流箱消耗</p>
                   <div class="main-chart-desc main-chart-desc2">
-                    <span>功率预测不准确的罚款：0%</span>
+                    <span>{{efficiencyanalysisData.efficiencyAnalysis.combiner_box}}</span>
                   </div>
                 </div>
               </div>
@@ -92,7 +85,7 @@
                   <p class="main--chart-bottom-title">升压变</p>
                   <p class="main-chart-bottom-desc">升压变消耗</p>
                   <div class="main-chart-desc main-chart-desc2">
-                    <span>功率预测不准确的罚款：0%</span>
+                    <span>{{efficiencyanalysisData.efficiencyAnalysis.tansformer}}</span>
                   </div>
                 </div>
               </div>

@@ -231,6 +231,13 @@ export interface DailyPvStringLosses {
   lossSum: number
 }
 
+export interface StationDailyPvStringLosses {
+  lossName: string,
+  loss: number[],
+  lossPercent: string[],
+  lossSum: number
+}
+
 export interface NameWrapper {
   name?: string,
 }
@@ -274,13 +281,21 @@ export interface BenchMarkList {
   figure2: BenchMarkFigure2,
 }
 
+export interface EfficiencyAnalysis {
+  pv_string?: string,
+  combiner_box?: string,
+  inverter?: string,
+  tansformer?: string,
+  power_grid?: string
+}
+
 export interface AnalysisLossDto {
   lossName: string[],
   economicLoss: string[]
 }
 
 export interface Efficiencyanalysis {
-  efficiencyAnalysis?: string[],
+  efficiencyAnalysis?: EfficiencyAnalysis,
   lossDtos?: AnalysisLossDto[]
 }
 
@@ -292,6 +307,14 @@ export interface PowerStationInfo {
   powerThisMonth?: string,
   powerThisYear?: string,
   powerTotal?: string
+}
+
+// 电站能效
+export interface StationEfficiency {
+  lossDate?: string[],
+  dailyLossData?: StationDailyPvStringLosses[],
+  prDatas?: string[],
+  healthDatas?: string[]
 }
 
 interface ListProps<P> {
@@ -320,6 +343,7 @@ export interface GlobalDataProps {
   dviceStatusInfos: ListProps<DeviceStatusInfo>;
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
   powerStationInfo: PowerStationInfo;
+  stationEfficiency: StationEfficiency;
   transformerListInfo: TransformerListInfo;
   inverterListInfo: InverterListInfo;
   combinerBoxListInfo: CombinerBoxListInfo;
@@ -360,6 +384,7 @@ export default createStore<GlobalDataProps>({
     dviceStatusInfos: {},
     columns: { data: {}, currentPage: 0, total: 0 },
     powerStationInfo: {},
+    stationEfficiency: {},
     transformerListInfo: {},
     inverterListInfo: {},
     combinerBoxListInfo: {},
@@ -425,6 +450,9 @@ export default createStore<GlobalDataProps>({
     },
     setPowerStationInfo (state, rawData) {
       state.powerStationInfo = rawData.entity.stationInfo
+    },
+    setStationEfficiency (state, rawData) {
+      state.stationEfficiency = rawData.entity
     },
     setTransformerList (state, rawData) {
       state.transformerListInfo = rawData.entity
@@ -515,6 +543,10 @@ export default createStore<GlobalDataProps>({
     // 获取电站信息
     getPowerStationInfo ({ commit }, payload) {
       return asyncAndCommit('/web/home/getpowerstationinfo', 'setPowerStationInfo', commit, { method: 'post', data: payload })
+    },
+    // 获取电站能效
+    getStationEfficiency ({ commit }, payload) {
+      return asyncAndCommit('/web/home/getstationefficiency', 'setStationEfficiency', commit, { method: 'post', data: payload })
     },
     // 获取升压变列表
     getTransformerList ({ commit }, payload) {

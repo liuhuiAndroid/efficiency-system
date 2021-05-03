@@ -4,6 +4,7 @@
       <station-info />
       <daily-power-charts class="container__column__chart"/>
       <monthly-power-charts class="container__column__chart"/>
+      <pr-health-line-charts class="container__column__chart"/>
     </div>
     <div class="container__column">
       <video class="container__column__img" src="../assets/video/video.mp4" muted autoplay loop>
@@ -26,10 +27,12 @@ import { useStore } from 'vuex'
 import StationInfo from '@/components/home/StationInfo.vue'
 import DailyPowerCharts from '@/components/home/DailyPowerCharts.vue'
 import MonthlyPowerCharts from '@/components/home/MonthlyPowerCharts.vue'
+import PrHealthLineCharts from '@/components/home/PrHealthLineCharts.vue'
 import LosePieCharts from '@/components/home/LosePieCharts.vue'
 import MeteoInfo from '@/components/home/MeteoInfo.vue'
 import DeviceOverview from '@/components/home/DeviceOverview.vue'
 import TodayPacCharts from '@/components/home/TodayPacCharts.vue'
+import { currentTime, get30AgoTime } from '@/utils/DateUtils'
 
 export default defineComponent({
   name: 'Home',
@@ -37,6 +40,7 @@ export default defineComponent({
     StationInfo,
     DailyPowerCharts,
     MonthlyPowerCharts,
+    PrHealthLineCharts,
     LosePieCharts,
     MeteoInfo,
     DeviceOverview,
@@ -47,6 +51,11 @@ export default defineComponent({
     var refreshUI = function() {
       // 获取电站信息
       store.dispatch('getPowerStationInfo')
+      // 获取电站能效
+      store.dispatch('getStationEfficiency', {
+        startTime: get30AgoTime(),
+        endTime: currentTime()
+      })
       // 获取当前气象数据
       store.dispatch('getMeteoData')
       // 获取电站每日发电量（30天以内）
