@@ -318,6 +318,13 @@ export interface StationEfficiency {
   healthDatas?: string[]
 }
 
+export interface InverterEfficiency {
+  lossDate?: string[],
+  dailyLossData?: StationDailyPvStringLosses[],
+  prDatas?: string[],
+  healthDatas?: string[]
+}
+
 interface ListProps<P> {
   [id: string]: P;
 }
@@ -345,6 +352,7 @@ export interface GlobalDataProps {
   columns: { data: ListProps<ColumnProps>; currentPage: number; total: number };
   powerStationInfo: PowerStationInfo;
   stationEfficiency: StationEfficiency;
+  inverterEfficiency: InverterEfficiency;
   transformerListInfo: TransformerListInfo;
   inverterListInfo: InverterListInfo;
   combinerBoxListInfo: CombinerBoxListInfo;
@@ -386,6 +394,7 @@ export default createStore<GlobalDataProps>({
     columns: { data: {}, currentPage: 0, total: 0 },
     powerStationInfo: {},
     stationEfficiency: {},
+    inverterEfficiency: {},
     transformerListInfo: {},
     inverterListInfo: {},
     combinerBoxListInfo: {},
@@ -454,6 +463,9 @@ export default createStore<GlobalDataProps>({
     },
     setStationEfficiency (state, rawData) {
       state.stationEfficiency = rawData.entity
+    },
+    setInverterEfficiency (state, rawData) {
+      state.inverterEfficiency = rawData.entity
     },
     setTransformerList (state, rawData) {
       state.transformerListInfo = rawData.entity
@@ -612,6 +624,10 @@ export default createStore<GlobalDataProps>({
     // 获取能效分析（30天以内）
     getEfficiencyanalysis ({ commit }, payload) {
       return asyncAndCommit('/web/analysis/getefficiencyanalysis', 'setEfficiencyanalysis', commit, { method: 'post', data: payload })
+    },
+    // 获取逆变器设备能效
+    getInverterEfficiency ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getinverterefficiency', 'setInverterEfficiency', commit, { method: 'post', data: payload })
     }
   },
   modules: {
