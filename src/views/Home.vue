@@ -11,6 +11,7 @@
         您的浏览器不支持 video 标签。
       </video>
       <lose-pie-charts class="container__column__pie" />
+      <lose-line-charts class="container__column__bigchart" />
     </div>
     <div class="container__column">
       <meteo-info />
@@ -29,6 +30,7 @@ import DailyPowerCharts from '@/components/home/DailyPowerCharts.vue'
 import MonthlyPowerCharts from '@/components/home/MonthlyPowerCharts.vue'
 import PrHealthLineCharts from '@/components/home/PrHealthLineCharts.vue'
 import LosePieCharts from '@/components/home/LosePieCharts.vue'
+import LoseLineCharts from '@/components/home/LoseLineCharts.vue'
 import MeteoInfo from '@/components/home/MeteoInfo.vue'
 import DeviceOverview from '@/components/home/DeviceOverview.vue'
 import TodayPacCharts from '@/components/home/TodayPacCharts.vue'
@@ -42,6 +44,7 @@ export default defineComponent({
     MonthlyPowerCharts,
     PrHealthLineCharts,
     LosePieCharts,
+    LoseLineCharts,
     MeteoInfo,
     DeviceOverview,
     TodayPacCharts
@@ -108,6 +111,11 @@ export default defineComponent({
     &__chart {
       width: 5.5rem;
       height: 3rem;
+      margin-left: .2rem;
+    }
+    &__bigchart {
+      width: 5.5rem;
+      height: 4rem;
       margin-left: .2rem;
     }
     &__pie {

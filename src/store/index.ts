@@ -23,7 +23,7 @@ export interface PowerStationInfoProps {
 export interface TransformerInfo {
   deviceName: string;
   deviceId: string;
-  status: number;
+  status: number; // 0正常 1故障 2低效
   fac: string; // 频率
   hu: string; // 高压侧电压
   lu: string; // 低压侧电压
@@ -228,6 +228,7 @@ export interface StationLosses {
 export interface DailyPvStringLosses {
   lossName: string,
   loss: number[],
+  lossPercent: string[],
   lossSum: number
 }
 
@@ -243,7 +244,7 @@ export interface NameWrapper {
 }
 
 export interface PvStringLosses {
-  lossDate?: string,
+  lossDate?: string[],
   dailyLossData?: DailyPvStringLosses[],
   prDatas?: string[],
   healthDatas?: string[]

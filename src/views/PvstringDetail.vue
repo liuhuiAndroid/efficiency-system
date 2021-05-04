@@ -39,6 +39,7 @@
   </div>
   <div class="container__content" v-show="showMenu=='2'">
     <div class="container__content__pie" ref="pieCharts"></div>
+    <div class="container__content__chart" ref="histogramCharts"></div>
     <div class="container__content__chart" ref="lineCharts"></div>
     <div class="container__content__chart" ref="prAndHealthLineCharts"></div>
   </div>
@@ -49,7 +50,7 @@
 import { defineComponent, onMounted, onBeforeUnmount, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
-import { GlobalDataProps, NameWrapper } from '@/store'
+import { GlobalDataProps, NameWrapper, DailyPvStringLosses } from '@/store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
 import { currentTime, get30AgoTime } from '@/utils/DateUtils'
@@ -65,6 +66,7 @@ export default defineComponent({
     const pCharts = ref(null)
     const tempCharts = ref(null)
     const pieCharts = ref(null)
+    const histogramCharts = ref(null)
     const lineCharts = ref(null)
     const prAndHealthLineCharts = ref(null)
     const mUList = ref()
@@ -72,6 +74,8 @@ export default defineComponent({
     const mPList = ref()
     const mTempList = ref()
     const mPieData = ref()
+    const mHistogramDataX = ref()
+    const mHistogramData = ref()
     const mLineDataX = ref()
     const mLineData = ref()
     const mLinePrDatas = ref()
@@ -295,7 +299,6 @@ export default defineComponent({
     const initPieCharts = () => {
       // 饼图
       const mpieCharts = pieCharts.value
-      console.log('mpieCharts', mpieCharts)
       if (mpieCharts && mPieData.value) {
         const pieChart = echarts.init(mpieCharts)
         // 绘制饼状图
@@ -335,9 +338,155 @@ export default defineComponent({
           ]
         })
       }
+      // 柱状图
+      const mHistogramCharts = histogramCharts.value
+      if (mHistogramCharts) {
+        const histogramChart = echarts.init(mHistogramCharts)
+        // 绘制柱状图
+        histogramChart.setOption({
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          legend: {
+            data: (mHistogramData.value as DailyPvStringLosses[]).map((item) => {
+              return item.lossName
+            }),
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center'
+          },
+          xAxis: [
+            {
+              type: 'category',
+              axisTick: { show: false },
+              data: mHistogramDataX.value
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value'
+            }
+          ],
+          series: [
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[0].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[0].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[1].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[1].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[2].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[2].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[3].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[3].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[4].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[4].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[5].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[5].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[6].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[6].lossPercent.map((item) => {
+                if (item != null) {
+                  return item.substring(0, item.length - 1)
+                } else {
+                  return null
+                }
+              })
+            }
+          ]
+        })
+      }
       // 折线图
       const mlineCharts = lineCharts.value
-      console.log('mlineCharts', mlineCharts)
       if (mlineCharts && mLineData.value && mLineDataX.value) {
         const pieChart = echarts.init(mlineCharts)
         // 绘制折线图
@@ -503,6 +652,12 @@ export default defineComponent({
         mLineDataX.value = pvStringLosses.value.lossDate
       }
       if (pvStringLosses.value.dailyLossData != null) {
+        mHistogramData.value = pvStringLosses.value.dailyLossData
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mHistogramDataX.value = pvStringLosses.value.lossDate
+      }
+      if (pvStringLosses.value.dailyLossData != null) {
         mLineData.value = pvStringLosses.value.dailyLossData.map(item => {
           return {
             name: item.lossName,
@@ -582,6 +737,7 @@ export default defineComponent({
       pCharts,
       tempCharts,
       pieCharts,
+      histogramCharts,
       lineCharts,
       prAndHealthLineCharts,
       meteoData,
