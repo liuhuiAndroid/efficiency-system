@@ -66,13 +66,14 @@ export default defineComponent({
             }),
             textStyle: {
               color: '#fff'
-            }
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
           },
           grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            bottom: '30%',
+            containLabel: false
           },
           xAxis: {
             type: 'category',

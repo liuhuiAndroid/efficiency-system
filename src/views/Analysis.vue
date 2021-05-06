@@ -27,13 +27,13 @@
           <div class="main-chart-box2">
             <div class="main-chart-top">
               <div class="main-chart-item">
-                <img :src="require('../assets/guangfu.png')" alt="">
+                <img :src="require('../assets/nibian.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main-chart-title">光伏消耗</p>
                   <div class="main-chart-desc">
                     <span>{{efficiencyanalysisData.efficiencyAnalysis.pv_string}}</span>
                   </div>
-                  <p class="main-chart-bottom">光伏板</p>
+                  <p class="main-chart-bottom main-chart-bottom1">光伏板</p>
                 </div>
               </div>
               <div class="main-chart-item main-chart-item2">
@@ -73,7 +73,7 @@
               <img :src="require('../assets/shengya.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main--chart-bottom-title">汇流箱</p>
-                  <p class="main-chart-bottom-desc">汇流箱消耗</p>
+                  <p class="main-chart-bottom-desc main-chart-desc1">汇流箱消耗</p>
                   <div class="main-chart-desc main-chart-desc2">
                     <span>{{efficiencyanalysisData.efficiencyAnalysis.combiner_box}}</span>
                   </div>
@@ -83,7 +83,7 @@
                 <img :src="require('../assets/shengya.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main--chart-bottom-title">升压变</p>
-                  <p class="main-chart-bottom-desc">升压变消耗</p>
+                  <p class="main-chart-bottom-desc main-chart-desc1">升压变消耗</p>
                   <div class="main-chart-desc main-chart-desc2">
                     <span>{{efficiencyanalysisData.efficiencyAnalysis.tansformer}}</span>
                   </div>
@@ -220,9 +220,9 @@ export default defineComponent({
 
 .main-chart-item{
   float: left;
-  width:  5rem;
-  height: 2.2rem;
+  width: 2.2rem;
   position: relative;
+  margin-left: 1.5rem;
 }
 
 .main-chart-item img{
@@ -232,7 +232,7 @@ export default defineComponent({
 
 .main-chart-item2{
   width: 2.2rem;
-  margin-left: 0.5rem;
+  margin-left: 1.8rem;
 }
 
 .main-chart-item3{
@@ -261,7 +261,7 @@ export default defineComponent({
   color: #fff;
   font-size: 12px;
   padding-left: 0.08rem;
-   box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .main-chart-title{
@@ -291,41 +291,41 @@ export default defineComponent({
 .main-chart-desc2 span{
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0.12rem;
+  margin-top: 0rem;
 }
 
 .main-chart-bottom{
   position: absolute;
-  bottom: 0.08rem;
+  bottom: 0rem;
   left: 46%;
   font-size: 0.18rem;
 }
 .main-chart-bottom1{
   left: 40%;
-  bottom: 0.1rem;
 }
 
 .main--chart-bottom-title{
   width: 100%;
   font-size: 0.16rem;
-  height: 0.35rem;
+  height: 0.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
+
 .main-chart-img{
   width: 80%;
   height: 2.6rem;
   margin: 0 auto 0;
   position: relative;
 }
+
 .main-chart-img1{
   width: 100%;
 }
 
 .main-chart-bottom-desc{
-  margin-top: 0.28rem;
+  margin-top: 0.35rem;
 }
 
 .guangfu_img{

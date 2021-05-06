@@ -115,7 +115,7 @@ export default defineComponent({
     }
     &__bigchart {
       width: 5.5rem;
-      height: 4rem;
+      height: 5.5rem;
       margin-left: .2rem;
     }
     &__pie {
