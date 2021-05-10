@@ -47,3 +47,15 @@ POST http://119.3.177.188:8080/api/web/device/getpvstringdetail
 Content-Type: application/json
 
 {"deviceId": "120b2494-e4a0-43d7-a1cf-f5f74f0d885e"}
+
+###
+POST http://114.80.110.197/testpassportjava/json/reply/CouponUserToCodeRequest
+Content-Type: application/json
+
+{"cityCode":"022","sharingCode":"8LAepSQL2bsRBIuL9/GF+w=="}
+
+###
+POST http://114.80.110.197/testpassportjava/json/reply/CouponRelationRequest
+Content-Type: application/json
+
+{"couponId":"9CA52F20","cityCode":"022","endTime":"2021-05-12T14:00:00.000+0800","appName":"APP_iOS","userId":"U100074064","remark":"{\"estateName\":\"彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕\",\"propertyType\":\"办公楼\",\"estateImage\":\"https:\\\/\\\/pic.centanet.com\\\/tianjin\\\/postimage\\\/xinfang\\\/20200826\\\/0473af7c7762a579242f8c4a32048ed5.jpg\",\"couponContent\":\"￥3000\",\"couponTitle\":\"购房优惠券\",\"estateId\":\"10594\"}","source":"XINFANG","UserToken":"-VQwR4VstNo-xuINdcw\/Ur7AVpj93BUzudA\/zZvwgDYXdJffBWn6MrATCijzOH3kQPckbNzBEUfTg\/YNYDvGiM\/x-KohtTkINm0O3kjXMkYEXA\/L5Kbye-jjFYSUn-wd","CityCode":"022"}

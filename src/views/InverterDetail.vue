@@ -678,11 +678,9 @@ export default defineComponent({
             return null
           }
         })
-        const arrayX:string[] = []
-        inverterEfficiency.value.prDatas.forEach((val, idx, array) => {
-          arrayX.push('')
-        })
-        mLinePrAndHealthDatasX.value = arrayX
+      }
+      if (inverterEfficiency.value.lossDate != null) {
+        mLinePrAndHealthDatasX.value = inverterEfficiency.value.lossDate
       }
       if (inverterEfficiency.value.healthDatas != null) {
         mLineHealthDatas.value = inverterEfficiency.value.healthDatas.map((item) => {

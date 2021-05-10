@@ -677,11 +677,9 @@ export default defineComponent({
             return null
           }
         })
-        const arrayX:string[] = []
-        pvStringLosses.value.prDatas.forEach((val, idx, array) => {
-          arrayX.push('')
-        })
-        mLinePrAndHealthDatasX.value = arrayX
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mLinePrAndHealthDatasX.value = pvStringLosses.value.lossDate
       }
       if (pvStringLosses.value.healthDatas != null) {
         mLineHealthDatas.value = pvStringLosses.value.healthDatas.map((item) => {
