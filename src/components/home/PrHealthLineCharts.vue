@@ -22,7 +22,7 @@ export default defineComponent({
       if (stationEfficiency.value.prDatas != null) {
         mLinePrDatas.value = stationEfficiency.value.prDatas.map((item) => {
           if (item != null) {
-            return item.substring(0, item.length - 1)
+            return (item * 100).toFixed(2)
           } else {
             return null
           }
@@ -31,7 +31,7 @@ export default defineComponent({
       if (stationEfficiency.value.healthDatas != null) {
         mLineHealthDatas.value = stationEfficiency.value.healthDatas.map((item) => {
           if (item != null) {
-            return item.substring(0, item.length - 1)
+            return (item * 100).toFixed(2)
           } else {
             return null
           }
@@ -46,7 +46,7 @@ export default defineComponent({
         prAndHealthLineCharts.setOption({
           title: {
             left: 'left',
-            text: 'PR和健康度历史曲线（%）',
+            text: 'PR和健康度历史曲线',
             textStyle: {
               color: '#fff'
             },
@@ -56,6 +56,13 @@ export default defineComponent({
             trigger: 'axis',
             axisPointer: {
               type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}%</b></p>`
+              }
+              return relVal
             }
           },
           legend: {

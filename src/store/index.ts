@@ -228,7 +228,7 @@ export interface StationLosses {
 export interface DailyPvStringLosses {
   lossName: string,
   loss: number[],
-  lossPercent: string[],
+  lossPercent: number[],
   lossSum: number
 }
 
@@ -246,8 +246,8 @@ export interface NameWrapper {
 export interface PvStringLosses {
   lossDate?: string[],
   dailyLossData?: DailyPvStringLosses[],
-  prDatas?: string[],
-  healthDatas?: string[]
+  prDatas?: number[],
+  healthDatas?: number[]
 }
 
 export interface BenchMarkFigureDatas1 {
@@ -314,15 +314,15 @@ export interface PowerStationInfo {
 export interface StationEfficiency {
   lossDate?: string[],
   dailyLossData?: StationDailyPvStringLosses[],
-  prDatas?: string[],
-  healthDatas?: string[]
+  prDatas?: number[],
+  healthDatas?: number[]
 }
 
 export interface InverterEfficiency {
   lossDate?: string[],
   dailyLossData?: StationDailyPvStringLosses[],
-  prDatas?: string[],
-  healthDatas?: string[]
+  prDatas?: number[],
+  healthDatas?: number[]
 }
 
 interface ListProps<P> {

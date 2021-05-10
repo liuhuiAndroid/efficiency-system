@@ -91,7 +91,7 @@ export default defineComponent({
         // 绘制饼状图
         pieChart.setOption({
           title: {
-            text: '近30天的能耗损失比例',
+            text: '各损失权重重要性的饼状图',
             left: 'center',
             textStyle: {
               color: '#fff'
@@ -131,10 +131,25 @@ export default defineComponent({
         const histogramChart = echarts.init(mHistogramCharts)
         // 绘制柱状图
         histogramChart.setOption({
+          title: {
+            left: 'left',
+            text: '各损失绝对损失百分数的柱状图',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
           tooltip: {
             trigger: 'axis',
             axisPointer: {
-              type: 'shadow'
+              type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}%</b></p>`
+              }
+              return relVal
             }
           },
           legend: {
@@ -143,7 +158,10 @@ export default defineComponent({
             }),
             textStyle: {
               color: '#fff'
-            }
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
           },
           toolbox: {
             show: true,
@@ -173,7 +191,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[0].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -188,7 +206,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[1].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -203,7 +221,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[2].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -218,7 +236,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[3].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -233,7 +251,8 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[4].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  console.log('item:', item)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -248,7 +267,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[5].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -263,7 +282,7 @@ export default defineComponent({
               },
               data: (mHistogramData.value as DailyPvStringLosses[])[6].lossPercent.map((item) => {
                 if (item != null) {
-                  return item.substring(0, item.length - 1)
+                  return (item * 100).toFixed(2)
                 } else {
                   return null
                 }
@@ -278,6 +297,14 @@ export default defineComponent({
         const pieChart = echarts.init(mlineCharts)
         // 绘制折线图
         pieChart.setOption({
+          title: {
+            left: 'left',
+            text: '各损失绝对损失百分数的历史趋势曲线',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -297,13 +324,14 @@ export default defineComponent({
             }),
             textStyle: {
               color: '#fff'
-            }
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
           },
           grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            bottom: '30%',
+            containLabel: false
           },
           xAxis: {
             type: 'category',
@@ -321,22 +349,38 @@ export default defineComponent({
       if (mPrAndHealthLineCharts && mLinePrDatas.value && mLineHealthDatas.value) {
         const prAndHealthLineCharts = echarts.init(mPrAndHealthLineCharts)
         prAndHealthLineCharts.setOption({
+          title: {
+            left: 'left',
+            text: 'PR和健康度历史曲线',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
           tooltip: {
             trigger: 'axis',
             axisPointer: {
               type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}%</b></p>`
+              }
+              return relVal
             }
           },
           legend: {
             textStyle: {
               color: '#fff'
-            }
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
           },
           grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            bottom: '20%',
+            containLabel: false
           },
           xAxis: {
             type: 'category',
@@ -673,7 +717,7 @@ export default defineComponent({
       if (inverterEfficiency.value.prDatas != null) {
         mLinePrDatas.value = inverterEfficiency.value.prDatas.map((item) => {
           if (item != null) {
-            return item.substring(0, item.length - 1)
+            return (item * 100).toFixed(2)
           } else {
             return null
           }
@@ -685,7 +729,7 @@ export default defineComponent({
       if (inverterEfficiency.value.healthDatas != null) {
         mLineHealthDatas.value = inverterEfficiency.value.healthDatas.map((item) => {
           if (item != null) {
-            return item.substring(0, item.length - 1)
+            return (item * 100).toFixed(2)
           } else {
             return null
           }
