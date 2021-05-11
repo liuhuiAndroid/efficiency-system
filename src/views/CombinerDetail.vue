@@ -1,7 +1,9 @@
 <template>
 <div class="container">
   <div class="container__head">
-    <img src="@/assets/Hosting3.png" alt=""/>
+    <img v-if="pvstringDetailProps.status==0" src="../assets/Hosting3.png" alt="">
+    <!-- <img v-else-if="pvstringDetailProps.status==1" src="../assets/Hosting3_error.png" alt=""> -->
+    <img v-else src="../assets/Hosting3_warning.png" alt="">
     <div class="container__head__column">
       <div class="container__title">
         <p>

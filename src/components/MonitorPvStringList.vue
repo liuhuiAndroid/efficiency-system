@@ -4,24 +4,28 @@
       {{title}}
     </p>
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
-      <div class="content-title">
-        <span>{{column.deviceName}}</span>
-        <router-link :to="`/pvstringdetail/${column.deviceId}`">
-          <img src="../assets/Hosting4.png" alt="">
-        </router-link>
+      <div :class="{'center-item-bg-normal':column.status==0, 'center-item-bg-error':column.status==1,'center-item-bg-warning':column.status==2}" >
+        <div class="content-title">
+          <span>{{column.deviceName}}</span>
+          <router-link :to="`/pvstringdetail/${column.deviceId}`">
+            <img v-if="column.status==0" src="../assets/Hosting4.png" alt="">
+            <img v-else-if="column.status==1" src="../assets/Hosting4_error.png" alt="">
+            <img v-else src="../assets/Hosting4_warning.png" alt="">
+          </router-link>
+        </div>
+        <p>
+          <span>电压：{{column.u}}</span>
+          <span>电流：{{column.i}}</span>
+        </p>
+        <p>
+          <span>功率：{{column.p}}</span>
+          <span></span>
+        </p>
+        <p>
+          <span></span>
+          <span></span>
+        </p>
       </div>
-      <p>
-        <span>电压：{{column.u}}</span>
-        <span>电流：{{column.i}}</span>
-      </p>
-      <p>
-        <span>功率：{{column.p}}</span>
-        <span></span>
-      </p>
-      <p>
-        <span></span>
-        <span></span>
-      </p>
     </div>
     <div class="page-warp">
       <el-pagination
@@ -109,20 +113,27 @@ export default defineComponent({
 .center-item-content{
   width: 3rem;
   height: 2rem;
-  background: url(../assets/center_bg.png) no-repeat center;
-  background-size: 100% 100%;
   float: left;
   margin-right: 0.25rem;
 }
 
-.center-item-error{
+.center-item-bg-normal{
+  background: url(../assets/center_bg.png) no-repeat center;
+  background-size: 100% 100%;
+  width: 3rem;
+  height: 2rem;
+}
+
+.center-item-bg-error{
   background: url(../assets/center_bg_error.png) no-repeat center;
   background-size: 100% 100%;
+  width: 3rem;
+  height: 2rem;
 }
-.center-item-error .content-title{
+.center-item-bg-error .content-title{
   color: #FF0000;
 }
-.center-item-error .content-title::after{
+.center-item-bg-error .content-title::after{
   content: '';
   clear: both;
   background: url(../assets/error_icon.png) no-repeat center;
@@ -133,15 +144,18 @@ export default defineComponent({
   top: 0.1rem;
 }
 
-.center-item-warning{
+.center-item-bg-warning{
   background: url(../assets/center_bg_warning.png) no-repeat center;
   background-size: 100% 100%;
+  width: 3rem;
+  height: 2rem;
 }
-.center-item-warning .content-title{
+
+.center-item-bg-warning .content-title{
   color: #FFBE02;
 }
 
-.center-item-warning .content-title::after{
+.center-item-bg-warning .content-title::after{
   content: '';
   clear: both;
   background: url(../assets/warning_icon.png) no-repeat center;
