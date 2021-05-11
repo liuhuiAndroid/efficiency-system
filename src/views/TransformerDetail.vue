@@ -1,9 +1,11 @@
 <template>
 <div class="container">
   <div class="container__head">
-    <img v-if="pvstringDetailProps.status==0" src="../assets/Hosting.png" alt="">
-    <!-- <img v-else-if="pvstringDetailProps.status==1" src="../assets/Hosting_error.png" alt=""> -->
-    <img v-else src="../assets/Hosting_warning.png" alt="">
+    <div v-if="pvstringDetailProps.deviceId==currentDeviceId">
+      <img v-if="pvstringDetailProps.status==0" src="../assets/Hosting.png" alt="">
+      <!-- <img v-else-if="pvstringDetailProps.status==1" src="../assets/Hosting_error.png" alt=""> -->
+      <img v-else src="../assets/Hosting_warning.png" alt="">
+    </div>
     <div class="container__head__column">
       <div class="container__title">
         <p>
@@ -51,6 +53,9 @@ import { currentTime } from '@/utils/DateUtils'
 
 export default defineComponent({
   setup() {
+    const route = useRoute()
+    var currentDeviceId = route.params.id
+
     const min = `${currentTime()} 00:00:00`
     const max = `${currentTime()} 24:00:00`
 
@@ -222,7 +227,6 @@ export default defineComponent({
         })
       }
     }
-    const route = useRoute()
     const store = useStore<GlobalDataProps>()
     const pvstringDetailProps = computed(() => {
       return store.state.transformerDetailProps
@@ -303,7 +307,8 @@ export default defineComponent({
       tempCharts,
       meteoData,
       handleSelect,
-      showMenu
+      showMenu,
+      currentDeviceId
     }
   }
 })
