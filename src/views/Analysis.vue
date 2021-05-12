@@ -58,10 +58,18 @@
               </div>
             </div>
             <div class="main-chart-img">
-              <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
-              <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
-              <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
-              <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
+              <router-link :to="`/analysisdetail/1`">
+                <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
+              </router-link>
+              <router-link :to="`/analysisdetail/2`">
+                <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
+              </router-link>
+              <router-link :to="`/analysisdetail/3`">
+                <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
+              </router-link>
+              <router-link :to="`/analysisdetail/4`">
+                <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
+              </router-link>
               <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
               <img class="arrow1" :src="require('../assets/arrow.png')" alt="">
               <img class="arrow2" :src="require('../assets/arrow.png')" alt="">

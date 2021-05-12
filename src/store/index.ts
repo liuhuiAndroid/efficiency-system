@@ -300,6 +300,24 @@ export interface Efficiencyanalysis {
   lossDtos?: AnalysisLossDto[]
 }
 
+export interface PvStringEfficiencyAnalysisDevices {
+  deviceId?: string,
+  deviceName?: string,
+  status?: number,
+  loss?: number,
+  lossPercent?: number
+}
+
+export interface PvStringEfficiencyAnalysis {
+  lossType?: number,
+  lossName?: string,
+  pageNum?: number,
+  pageSize?: number,
+  pageCount?: number,
+  totalCount?: number
+  devices?: PvStringEfficiencyAnalysisDevices[]
+}
+
 // 电站信息
 export interface PowerStationInfo {
   stationName?: string,
@@ -369,6 +387,10 @@ export interface GlobalDataProps {
   pvStringLosses: PvStringLosses;
   benchMarkList: BenchMarkList[];
   efficiencyanalysis: Efficiencyanalysis;
+  pvStringEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
+  combinerBoxEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
+  inverterEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
+  transformerEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -410,7 +432,11 @@ export default createStore<GlobalDataProps>({
     stationLosses: [],
     pvStringLosses: {},
     benchMarkList: [],
-    efficiencyanalysis: {}
+    efficiencyanalysis: {},
+    pvStringEfficiencyAnalysis: [],
+    combinerBoxEfficiencyAnalysis: [],
+    inverterEfficiencyAnalysis: [],
+    transformerEfficiencyAnalysis: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -514,6 +540,18 @@ export default createStore<GlobalDataProps>({
     },
     setEfficiencyanalysis (state, rawData) {
       state.efficiencyanalysis = rawData.entity
+    },
+    setPvStringEfficiencyAnalysis (state, rawData) {
+      state.pvStringEfficiencyAnalysis = rawData.entity
+    },
+    setCombinerBoxEfficiencyAnalysis (state, rawData) {
+      state.combinerBoxEfficiencyAnalysis = rawData.entity
+    },
+    setInverterEfficiencyAnalysis (state, rawData) {
+      state.inverterEfficiencyAnalysis = rawData.entity
+    },
+    setTransformerEfficiencyAnalysis (state, rawData) {
+      state.transformerEfficiencyAnalysis = rawData.entity
     }
   },
   actions: {
@@ -628,6 +666,22 @@ export default createStore<GlobalDataProps>({
     // 获取逆变器设备能效
     getInverterEfficiency ({ commit }, payload) {
       return asyncAndCommit('/web/device/getinverterefficiency', 'setInverterEfficiency', commit, { method: 'post', data: payload })
+    },
+    // 获取光伏组串能效分析
+    getpvstringefficiencyanalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getpvstringefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    },
+    // 获取汇流箱能效分析
+    getcombinerboxefficiencyanalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getCombinerBoxEfficiencyAnalysis', 'setCombinerBoxEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    },
+    // 获取逆变器能效分析
+    getinverterefficiencyanalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getInverterEfficiencyAnalysis', 'setInverterEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    },
+    // 获取升压变能效分析
+    gettransformerefficiencyanalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getTransformerEfficiencyAnalysis', 'setTransformerEfficiencyAnalysis', commit, { method: 'post', data: payload })
     }
   },
   modules: {

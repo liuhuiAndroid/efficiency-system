@@ -80,11 +80,17 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "suggestion" */ '../views/Suggestion.vue'),
         meta: { requiredLogin: true }
       },
+      // {
+      //   path: '/setting',
+      //   name: 'Setting',
+      //   component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
+      //   meta: { requiredLogin: true }
+      // },
       {
-        path: '/setting',
-        name: 'Setting',
-        component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
-        meta: { requiredLogin: true }
+        path: '/analysisdetail/:type',
+        name: 'AnalysisDetail',
+        component: () => import(/* webpackChunkName: "analysisdetail" */ '../views/AnalysisDetail.vue'),
+        meta: { requiredLogin: false }
       }
     ]
   }
