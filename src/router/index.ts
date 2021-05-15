@@ -66,7 +66,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/warning',
         name: 'Warning',
         component: () => import(/* webpackChunkName: "warning" */ '../views/Warning.vue'),
-        meta: { requiredLogin: true }
+        meta: { requiredLogin: false }
       },
       {
         path: '/analysis',

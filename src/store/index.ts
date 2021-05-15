@@ -651,10 +651,6 @@ export default createStore<GlobalDataProps>({
     getStationLosses ({ commit }, payload) {
       return asyncAndCommit('/web/home/getstationlosses', 'setStationLosses', commit, { method: 'post', data: payload })
     },
-    // 获取光伏组串每日能耗损失
-    getPvStringLoss ({ commit }, payload) {
-      return asyncAndCommit('/web/device/getpvstringloss', 'setPvStringLoss', commit, { method: 'post', data: payload })
-    },
     // 获取标杆组串列表
     getBenchMarkList ({ commit }, payload) {
       return asyncAndCommit('/web/benchmark/getbenchmarklist', 'setBenchMarkList', commit, { method: 'post', data: payload })
@@ -663,25 +659,39 @@ export default createStore<GlobalDataProps>({
     getEfficiencyanalysis ({ commit }, payload) {
       return asyncAndCommit('/web/analysis/getefficiencyanalysis', 'setEfficiencyanalysis', commit, { method: 'post', data: payload })
     },
+
+    // 获取光伏组串每日能耗损失
+    getPvStringLoss ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getpvstringloss', 'setPvStringLoss', commit, { method: 'post', data: payload })
+    },
     // 获取逆变器设备能效
     getInverterEfficiency ({ commit }, payload) {
       return asyncAndCommit('/web/device/getinverterefficiency', 'setInverterEfficiency', commit, { method: 'post', data: payload })
     },
+    // 获取汇流箱设备能效
+    getCombinerBoxEfficiency ({ commit }, payload) {
+      return asyncAndCommit('/web/device/getcombinerboxefficiency', 'setPvStringLoss', commit, { method: 'post', data: payload })
+    },
+    // 获取升压变设备能效
+    getTransformerEfficiency ({ commit }, payload) {
+      return asyncAndCommit('/web/device/gettransformerefficiency', 'setPvStringLoss', commit, { method: 'post', data: payload })
+    },
+
     // 获取光伏组串能效分析
     getpvstringefficiencyanalysis ({ commit }, payload) {
       return asyncAndCommit('/web/analysis/getpvstringefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取汇流箱能效分析
-    getcombinerboxefficiencyanalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/getCombinerBoxEfficiencyAnalysis', 'setCombinerBoxEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    getCombinerBoxEfficiencyAnalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getcombinerboxefficiencyanalysis', 'setCombinerBoxEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取逆变器能效分析
     getinverterefficiencyanalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/getInverterEfficiencyAnalysis', 'setInverterEfficiencyAnalysis', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/analysis/getinverterefficiencyanalysis', 'setInverterEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取升压变能效分析
-    gettransformerefficiencyanalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/getTransformerEfficiencyAnalysis', 'setTransformerEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    getTransformerEfficiencyAnalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/gettransformerefficiencyanalysis', 'setTransformerEfficiencyAnalysis', commit, { method: 'post', data: payload })
     }
   },
   modules: {

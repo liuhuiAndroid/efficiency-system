@@ -39,6 +39,12 @@
     <div class="container__content__chart" ref="pCharts"></div>
     <div class="container__content__chart" ref="tempCharts"></div>
   </div>
+  <div class="container__content" v-show="showMenu=='2'">
+    <div class="container__content__pie" ref="pieCharts"></div>
+    <div class="container__content__chart" ref="histogramCharts"></div>
+    <div class="container__content__chart" ref="lineCharts"></div>
+    <div class="container__content__chart" ref="prAndHealthLineCharts"></div>
+  </div>
 </div>
 </template>
 
@@ -46,10 +52,11 @@
 import { defineComponent, onMounted, onBeforeUnmount, computed, reactive, ref, watch } from 'vue'
 // 获取路由信息
 import { useRoute } from 'vue-router'
-import { GlobalDataProps } from '@/store'
+import { GlobalDataProps, NameWrapper, DailyPvStringLosses } from '@/store'
 import { useStore } from 'vuex'
 import * as echarts from 'echarts'
-import { currentTime } from '@/utils/DateUtils'
+import { currentTime, get30AgoTime } from '@/utils/DateUtils'
+import { Percentage } from '@/utils/NumberUtils'
 
 export default defineComponent({
   setup() {
@@ -63,10 +70,22 @@ export default defineComponent({
     const iCharts = ref(null)
     const pCharts = ref(null)
     const tempCharts = ref(null)
+    const pieCharts = ref(null)
+    const histogramCharts = ref(null)
+    const lineCharts = ref(null)
+    const prAndHealthLineCharts = ref(null)
     const mUList = ref()
     const mIList = ref()
     const mPList = ref()
     const mTempList = ref()
+    const mPieData = ref()
+    const mHistogramDataX = ref()
+    const mHistogramData = ref()
+    const mLineDataX = ref()
+    const mLineData = ref()
+    const mLinePrDatas = ref()
+    const mLineHealthDatas = ref()
+    const mLinePrAndHealthDatasX = ref()
     // echart 初始化
     const initCharts = () => {
       // 电压
@@ -282,10 +301,327 @@ export default defineComponent({
         })
       }
     }
+    const initPieCharts = () => {
+      // 饼图
+      const mpieCharts = pieCharts.value
+      if (mpieCharts && mPieData.value) {
+        const pieChart = echarts.init(mpieCharts)
+        // 绘制饼状图
+        pieChart.setOption({
+          title: {
+            text: '各损失权重重要性的饼状图',
+            left: 'center',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b} : {c}kWh'
+          },
+          legend: {
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          series: [
+            {
+              type: 'pie',
+              radius: '50%',
+              label: {
+                color: '#FFF',
+                show: false
+              },
+              labelLine: {
+                show: false
+              },
+              data: mPieData.value
+            }
+          ]
+        })
+      }
+      // 柱状图
+      const mHistogramCharts = histogramCharts.value
+      if (mHistogramCharts) {
+        const histogramChart = echarts.init(mHistogramCharts)
+        // 绘制柱状图
+        histogramChart.setOption({
+          title: {
+            left: 'left',
+            text: '各损失绝对损失百分数的柱状图',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}%</b></p>`
+              }
+              return relVal
+            }
+          },
+          legend: {
+            data: (mHistogramData.value as DailyPvStringLosses[]).map((item) => {
+              return item.lossName
+            }),
+            textStyle: {
+              color: '#fff'
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
+          },
+          toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center'
+          },
+          xAxis: [
+            {
+              type: 'category',
+              axisTick: { show: false },
+              data: mHistogramDataX.value
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value'
+            }
+          ],
+          series: [
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[0].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[0].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[1].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[1].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[2].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[2].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[3].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[3].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[4].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[4].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[5].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[5].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            },
+            {
+              name: (mHistogramData.value as DailyPvStringLosses[])[6].lossName,
+              type: 'bar',
+              barGap: 0,
+              emphasis: {
+                focus: 'series'
+              },
+              data: (mHistogramData.value as DailyPvStringLosses[])[6].lossPercent.map((item) => {
+                if (item != null) {
+                  return (item * 100).toFixed(2)
+                } else {
+                  return null
+                }
+              })
+            }
+          ]
+        })
+      }
+      // 折线图
+      const mlineCharts = lineCharts.value
+      if (mlineCharts && mLineData.value && mLineDataX.value) {
+        const pieChart = echarts.init(mlineCharts)
+        // 绘制折线图
+        pieChart.setOption({
+          title: {
+            left: 'left',
+            text: '各损失绝对损失百分数的历史趋势曲线',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}kWh</b></p>`
+              }
+              return relVal
+            }
+          },
+          legend: {
+            data: (mLineData.value as NameWrapper[]).map((item) => {
+              return item.name
+            }),
+            textStyle: {
+              color: '#fff'
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
+          },
+          grid: {
+            bottom: '30%',
+            containLabel: false
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: mLineDataX.value
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: mLineData.value
+        })
+      }
+      // PR+健康度的历史趋势曲线
+      const mPrAndHealthLineCharts = prAndHealthLineCharts.value
+      if (mPrAndHealthLineCharts && mLinePrDatas.value && mLineHealthDatas.value) {
+        const prAndHealthLineCharts = echarts.init(mPrAndHealthLineCharts)
+        prAndHealthLineCharts.setOption({
+          title: {
+            left: 'left',
+            text: 'PR和健康度历史曲线',
+            textStyle: {
+              color: '#fff'
+            },
+            padding: [20, 0, 0, 40]
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'line'
+            },
+            formatter: function(params: any) {
+              var relVal = params[0].name
+              for (var i = 0, l = params.length; i < l; i++) {
+                relVal += `<p>${params[i].marker}${params[i].seriesName}：&nbsp;<b>${params[i].value}%</b></p>`
+              }
+              return relVal
+            }
+          },
+          legend: {
+            textStyle: {
+              color: '#fff'
+            },
+            orient: 'horizontal',
+            x: 'center',
+            y: 'bottom'
+          },
+          grid: {
+            bottom: '20%',
+            containLabel: false
+          },
+          xAxis: {
+            type: 'category',
+            data: mLinePrAndHealthDatasX.value
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            name: 'PR',
+            data: mLinePrDatas.value,
+            type: 'line',
+            smooth: true
+          }, {
+            name: '健康度',
+            data: mLineHealthDatas.value,
+            type: 'line',
+            smooth: true
+          }]
+        })
+      }
+    }
     const store = useStore<GlobalDataProps>()
-    const pvstringDetailProps = computed(() => {
-      return store.state.combinerDetailProps
-    })
+    const pvstringDetailProps = computed(() => store.state.combinerDetailProps)
     watch(pvstringDetailProps, () => {
       const pvstringDetailProps = store.state.combinerDetailProps
       const uList = pvstringDetailProps.deviceDataOfToday?.map((item) => {
@@ -336,6 +672,69 @@ export default defineComponent({
       })
       initCharts()
     })
+    const pvStringLosses = computed(() => store.state.pvStringLosses)
+    watch(pvStringLosses, () => {
+      if (pvStringLosses.value.dailyLossData != null) {
+        const lossesTotal: number = pvStringLosses.value.dailyLossData.map((a) => a.lossSum)
+          .reduce(function (a, b) {
+            return a + b
+          })
+        const lossesList = pvStringLosses.value.dailyLossData.map((item) => {
+          const percent = Percentage(item.lossSum, lossesTotal)
+          return {
+            name: item.lossName + '（' + percent + '%）',
+            value: item.lossSum
+          }
+        })
+        if (lossesList) {
+          console.log('lossesList', lossesList)
+          mPieData.value = lossesList
+        }
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mLineDataX.value = pvStringLosses.value.lossDate
+      }
+      if (pvStringLosses.value.dailyLossData != null) {
+        mHistogramData.value = pvStringLosses.value.dailyLossData
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mHistogramDataX.value = pvStringLosses.value.lossDate
+      }
+      if (pvStringLosses.value.dailyLossData != null) {
+        mLineData.value = pvStringLosses.value.dailyLossData.map(item => {
+          return {
+            name: item.lossName,
+            type: 'line',
+            tooltip: {
+              trigger: 'line'
+            },
+            data: item.loss
+          }
+        })
+      }
+      if (pvStringLosses.value.prDatas != null) {
+        mLinePrDatas.value = pvStringLosses.value.prDatas.map((item) => {
+          if (item != null) {
+            return (item * 100).toFixed(2)
+          } else {
+            return null
+          }
+        })
+      }
+      if (pvStringLosses.value.lossDate != null) {
+        mLinePrAndHealthDatasX.value = pvStringLosses.value.lossDate
+      }
+      if (pvStringLosses.value.healthDatas != null) {
+        mLineHealthDatas.value = pvStringLosses.value.healthDatas.map((item) => {
+          if (item != null) {
+            return (item * 100).toFixed(2)
+          } else {
+            return null
+          }
+        })
+      }
+      initPieCharts()
+    })
 
     const meteoData = computed(() => store.state.meteoData)
 
@@ -344,6 +743,13 @@ export default defineComponent({
       store.dispatch('getMeteoData')
       // 获取光伏组串详情
       store.dispatch('getCombinerDetail', { deviceId: route.params.id })
+      // 获取汇流箱每日能耗损失
+      console.log('AAA', currentTime() + get30AgoTime())
+      store.dispatch('getCombinerBoxEfficiency', {
+        deviceId: route.params.id,
+        startTime: get30AgoTime(),
+        endTime: currentTime()
+      })
     }
     let intervalTask: number
 
@@ -369,6 +775,10 @@ export default defineComponent({
       iCharts,
       pCharts,
       tempCharts,
+      pieCharts,
+      histogramCharts,
+      lineCharts,
+      prAndHealthLineCharts,
       meteoData,
       handleSelect,
       showMenu,
@@ -424,6 +834,10 @@ export default defineComponent({
     flex-grow: 1;
     margin-top: .5rem;
     &__chart{
+      width: 8rem;
+      height: 4rem;
+    }
+    &__pie{
       width: 8rem;
       height: 4rem;
     }
