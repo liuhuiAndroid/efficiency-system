@@ -5,51 +5,65 @@
     </p>
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
       <div :class="{'center-item-bg-normal':column.status==0, 'center-item-bg-error':column.status==1,'center-item-bg-warning':column.status==2}" >
-        <div class="content-title">
+          <div class="content-title">
+          <span v-if="currentTypeId == 1">升压变 </span>
+          <span v-else-if="currentTypeId == 2">逆变器 </span>
+          <span v-else-if="currentTypeId == 3">汇流箱 </span>
+          <span v-else>光伏组串 </span>
           <span>{{column.deviceName}}</span>
-          <router-link :to="`/transformerdetail/${column.deviceId}`">
-            <img v-if="column.status==0" src="../assets/Hosting.png" alt="">
-            <img v-else-if="column.status==1" src="../assets/Hosting_error.png" alt="">
-            <img v-else src="../assets/Hosting_warning.png" alt="">
+          <router-link v-if="currentTypeId == 1" :to="`/transformerdetail/${column.deviceId}/2`">
+              <img v-if="column.status==0" src="../assets/Hosting.png" alt="">
+              <img v-else-if="column.status==1" src="../assets/Hosting_error.png" alt="">
+              <img v-else src="../assets/Hosting_warning.png" alt="">
           </router-link>
+          <router-link v-if="currentTypeId == 2" :to="`/inverterdetail/${column.deviceId}/2`">
+              <img v-if="column.status==0" src="../assets/Hosting2.png" alt="">
+              <img v-else-if="column.status==1" src="../assets/Hosting2_error.png" alt="">
+              <img v-else src="../assets/Hosting2_warning.png" alt="">
+          </router-link>
+          <router-link v-if="currentTypeId == 3" :to="`/combinerdetail/${column.deviceId}/2`">
+              <img v-if="column.status==0" src="../assets/Hosting3.png" alt="">
+              <img v-else-if="column.status==1" src="../assets/Hosting3_error.png" alt="">
+              <img v-else src="../assets/Hosting3_warning.png" alt="">
+          </router-link>
+          <router-link v-if="currentTypeId == 4" :to="`/pvstringdetail/${column.deviceId}/2`">
+              <img v-if="column.status==0" src="../assets/Hosting4.png" alt="">
+              <img v-else-if="column.status==1" src="../assets/Hosting4_error.png" alt="">
+              <img v-else src="../assets/Hosting4_warning.png" alt="">
+          </router-link>
+          </div>
+          <p>
+          <span>损失：{{column.loss}}</span>
+          </p>
+          <p>
+          <span>损失百分比：{{column.lossPercent}}%</span>
+          </p>
         </div>
-        <p>
-          <span>电压(高)：{{column.hu}}</span>
-          <span>功率：{{column.pac}}</span>
-        </p>
-        <p>
-          <span>电压(低)：{{column.lu}}</span>
-          <span>频率：{{column.fac}}</span>
-        </p>
-        <p>
-          <a class="pvstring">下级设备：逆变器({{column.inverterCount}})</a>
-        </p>
-      </div>
-    </div>
-    <div class="page-warp">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-size="pageSize"
-        :hide-on-single-page="hideOnSinglePage"
-        :total="totalCount"
-        @current-change="handleCurrentChange"
-        v-model:currentPage="currentPage">
-      </el-pagination>
+        </div>
+        <div class="page-warp" v-if="currentTypeId == 4">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :page-size="pageSize"
+          :hide-on-single-page="hideOnSinglePage"
+          :total="totalCount"
+          @current-change="handleCurrentChange"
+          v-model:currentPage="currentPage">
+        </el-pagination>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, computed, ref } from 'vue'
-import { PvstringInfo } from '../store'
-import { emitter } from '@/views/Monitor.vue'
+import { PvStringEfficiencyAnalysis } from '../store'
+import { emitter } from '@/views/AnalysisDetail.vue'
 
 export default defineComponent({
-  name: 'MonitorPvStringList',
+  name: 'AnalysisList',
   props: {
     list: {
-      type: Array as PropType<PvstringInfo[]>,
+      type: Array as PropType<PvStringEfficiencyAnalysis[]>,
       required: true
     },
     title: {
@@ -59,11 +73,19 @@ export default defineComponent({
     totalCount: {
       type: Number,
       required: true
+    },
+    currentTypeId: {
+      type: String,
+      required: true
+    },
+    lossType: {
+      type: String,
+      required: true
     }
   },
   setup(props) {
     const columnList = computed(() => {
-      console.log('list', props.list)
+      console.log('analysis list', props.list)
       return props.list
     })
     const hideOnSinglePage = true
@@ -72,7 +94,7 @@ export default defineComponent({
     const pageSize = 5
     const handleCurrentChange = () => {
       console.log('handleCurrentChange', currentPage.value)
-      emitter.emit('handleCurrentChange', { currentPage: currentPage.value })
+      emitter.emit('handleCurrentChange', { currentPage: currentPage.value, lossType: props.lossType })
     }
     return {
       columnList,
@@ -149,6 +171,7 @@ export default defineComponent({
   width: 3rem;
   height: 2rem;
 }
+
 .center-item-bg-warning .content-title{
   color: #FFBE02;
 }
@@ -195,6 +218,15 @@ export default defineComponent({
   padding-left: 0.1rem;
   box-sizing: border-box;
 }
+
+.pvstring {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.1rem;
+  box-sizing: border-box;
+}
+
 .page-warp{
   width: 100%;
   box-sizing: border-box;
@@ -206,19 +238,12 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
 }
+
 ::v-deep {
   .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
     /*对页数的样式进行修改*/
     background-color: #013D63;
     color: #FFF;
   }
-}
-
-.pvstring {
-  display: inline-block;
-  width: 100%;
-  text-align: left;
-  padding-left: 0.1rem;
-  box-sizing: border-box;
 }
 </style>

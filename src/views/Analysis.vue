@@ -2,7 +2,7 @@
   <div class="main-right">
     <div class="main-right-menu">
       <p class="main-menu-title">运行监测</p>
-      <div class="main-menu-item" v-for="column in efficiencyanalysisData.lossDtos" :key="column.lossName">
+      <div class="main-menu-item" v-for="column in efficiencyAnalysisData.lossDtos" :key="column.lossName">
         <img :src="require('../assets/menu_icon.png')" alt=""/>
         <p>
           {{column.lossName}}<br>
@@ -30,8 +30,8 @@
                 <img :src="require('../assets/nibian.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main-chart-title">光伏消耗</p>
-                  <div class="main-chart-desc">
-                    <span>{{efficiencyanalysisData.efficiencyAnalysis.pv_string}}</span>
+                  <div class="main-chart-desc" v-if="efficiencyAnalysisData != undefined && efficiencyAnalysisData.efficiencyAnalysis != undefined">
+                    <span>{{efficiencyAnalysisData.efficiencyAnalysis.pv_string}}</span>
                   </div>
                   <p class="main-chart-bottom main-chart-bottom1">光伏板</p>
                 </div>
@@ -40,8 +40,8 @@
                 <img :src="require('../assets/nibian.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main-chart-title">逆变器消耗</p>
-                  <div class="main-chart-desc main-chart-desc1">
-                    <span>{{efficiencyanalysisData.efficiencyAnalysis.inverter}}</span>
+                  <div class="main-chart-desc main-chart-desc1" v-if="efficiencyAnalysisData != undefined && efficiencyAnalysisData.efficiencyAnalysis != undefined">
+                    <span>{{efficiencyAnalysisData.efficiencyAnalysis.inverter}}</span>
                   </div>
                   <p class="main-chart-bottom main-chart-bottom1">逆变器</p>
                 </div>
@@ -50,24 +50,24 @@
                 <img :src="require('../assets/nibian.png')" alt="">
                 <div class="main-chart-box">
                   <p class="main-chart-title">电网消耗</p>
-                  <div class="main-chart-desc main-chart-desc1">
-                    <span>{{efficiencyanalysisData.efficiencyAnalysis.power_grid}}</span>
+                  <div class="main-chart-desc main-chart-desc1" v-if="efficiencyAnalysisData != undefined && efficiencyAnalysisData.efficiencyAnalysis != undefined">
+                    <span>{{efficiencyAnalysisData.efficiencyAnalysis.power_grid}}</span>
                   </div>
                   <p class="main-chart-bottom main-chart-bottom1">电网</p>
                 </div>
               </div>
             </div>
             <div class="main-chart-img">
-              <router-link :to="`/analysisdetail/1`">
+              <router-link :to="`/analysisdetail/4`">
                 <img class="guangfu_img" :src="require('../assets/guangfu_img.png')" alt="">
               </router-link>
-              <router-link :to="`/analysisdetail/2`">
+              <router-link :to="`/analysisdetail/3`">
                 <img class="huiliu_img" :src="require('../assets/huiliu_img.png')" alt="">
               </router-link>
-              <router-link :to="`/analysisdetail/3`">
+              <router-link :to="`/analysisdetail/2`">
                 <img class="nibian_img" :src="require('../assets/nibian_img.png')" alt="">
               </router-link>
-              <router-link :to="`/analysisdetail/4`">
+              <router-link :to="`/analysisdetail/1`">
                 <img class="shengya_img" :src="require('../assets/shengya_img.png')" alt="">
               </router-link>
               <img class="dianwang_img" :src="require('../assets/dianwang_img.png')" alt="">
@@ -82,8 +82,8 @@
                 <div class="main-chart-box">
                   <p class="main--chart-bottom-title">汇流箱</p>
                   <p class="main-chart-bottom-desc main-chart-desc1">汇流箱消耗</p>
-                  <div class="main-chart-desc main-chart-desc2">
-                    <span>{{efficiencyanalysisData.efficiencyAnalysis.combiner_box}}</span>
+                  <div class="main-chart-desc main-chart-desc2" v-if="efficiencyAnalysisData != undefined && efficiencyAnalysisData.efficiencyAnalysis != undefined">
+                    <span>{{efficiencyAnalysisData.efficiencyAnalysis.combiner_box}}</span>
                   </div>
                 </div>
               </div>
@@ -92,8 +92,8 @@
                 <div class="main-chart-box">
                   <p class="main--chart-bottom-title">升压变</p>
                   <p class="main-chart-bottom-desc main-chart-desc1">升压变消耗</p>
-                  <div class="main-chart-desc main-chart-desc2">
-                    <span>{{efficiencyanalysisData.efficiencyAnalysis.tansformer}}</span>
+                  <div class="main-chart-desc main-chart-desc2" v-if="efficiencyAnalysisData != undefined && efficiencyAnalysisData.efficiencyAnalysis != undefined">
+                    <span>{{efficiencyAnalysisData.efficiencyAnalysis.tansformer}}</span>
                   </div>
                 </div>
               </div>
@@ -118,10 +118,10 @@ export default defineComponent({
     store.dispatch('getEfficiencyanalysis')
     // 获取当前气象数据
     store.dispatch('getMeteoData')
-    const efficiencyanalysisData = computed(() => store.state.efficiencyanalysis)
+    const efficiencyAnalysisData = computed(() => store.state.efficiencyanalysis)
     const meteoData = computed(() => store.state.meteoData)
     return {
-      efficiencyanalysisData,
+      efficiencyAnalysisData,
       meteoData
     }
   }

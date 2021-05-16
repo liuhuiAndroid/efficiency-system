@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <el-menu class="container__menu" :default-active="1" mode="horizontal" @select="handleSelect" background-color="#021138" text-color="#FFF" active-text-color="#409EFF">
+  <el-menu class="container__menu" :default-active="showMenu" mode="horizontal" @select="handleSelect" background-color="#021138" text-color="#FFF" active-text-color="#409EFF">
     <el-menu-item index="1">设备监控</el-menu-item>
     <el-menu-item index="2">设备能效</el-menu-item>
   </el-menu>
@@ -772,6 +772,7 @@ export default defineComponent({
     })
 
     const showMenu = ref('1')
+    showMenu.value = `${route.params.type}`
     function handleSelect(key: string, keyPath: string) {
       showMenu.value = key
       console.log('showMenu', showMenu)

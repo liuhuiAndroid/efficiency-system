@@ -9,7 +9,7 @@
           <span>{{column.deviceName}}</span>
           <router-link :to="`/combinerdetail/${column.deviceId}`">
             <img v-if="column.status==0" src="../assets/Hosting3.png" alt="">
-            <!-- <img v-else-if="column.status==1" src="../assets/Hosting3_error.png" alt=""> -->
+            <img v-else-if="column.status==1" src="../assets/Hosting3_error.png" alt="">
             <img v-else src="../assets/Hosting3_warning.png" alt="">
           </router-link>
         </div>

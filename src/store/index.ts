@@ -388,9 +388,6 @@ export interface GlobalDataProps {
   benchMarkList: BenchMarkList[];
   efficiencyanalysis: Efficiencyanalysis;
   pvStringEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
-  combinerBoxEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
-  inverterEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
-  transformerEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -433,10 +430,7 @@ export default createStore<GlobalDataProps>({
     pvStringLosses: {},
     benchMarkList: [],
     efficiencyanalysis: {},
-    pvStringEfficiencyAnalysis: [],
-    combinerBoxEfficiencyAnalysis: [],
-    inverterEfficiencyAnalysis: [],
-    transformerEfficiencyAnalysis: []
+    pvStringEfficiencyAnalysis: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -543,15 +537,6 @@ export default createStore<GlobalDataProps>({
     },
     setPvStringEfficiencyAnalysis (state, rawData) {
       state.pvStringEfficiencyAnalysis = rawData.entity
-    },
-    setCombinerBoxEfficiencyAnalysis (state, rawData) {
-      state.combinerBoxEfficiencyAnalysis = rawData.entity
-    },
-    setInverterEfficiencyAnalysis (state, rawData) {
-      state.inverterEfficiencyAnalysis = rawData.entity
-    },
-    setTransformerEfficiencyAnalysis (state, rawData) {
-      state.transformerEfficiencyAnalysis = rawData.entity
     }
   },
   actions: {
@@ -678,20 +663,20 @@ export default createStore<GlobalDataProps>({
     },
 
     // 获取光伏组串能效分析
-    getpvstringefficiencyanalysis ({ commit }, payload) {
+    getPvStringEfficiencyAnalysis ({ commit }, payload) {
       return asyncAndCommit('/web/analysis/getpvstringefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取汇流箱能效分析
     getCombinerBoxEfficiencyAnalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/getcombinerboxefficiencyanalysis', 'setCombinerBoxEfficiencyAnalysis', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/analysis/getcombinerboxefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取逆变器能效分析
-    getinverterefficiencyanalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/getinverterefficiencyanalysis', 'setInverterEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    getInverterEfficiencyAnalysis ({ commit }, payload) {
+      return asyncAndCommit('/web/analysis/getinverterefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
     },
     // 获取升压变能效分析
     getTransformerEfficiencyAnalysis ({ commit }, payload) {
-      return asyncAndCommit('/web/analysis/gettransformerefficiencyanalysis', 'setTransformerEfficiencyAnalysis', commit, { method: 'post', data: payload })
+      return asyncAndCommit('/web/analysis/gettransformerefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
     }
   },
   modules: {
