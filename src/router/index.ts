@@ -39,25 +39,25 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requiredLogin: false }
       },
       {
-        path: '/pvstringdetail/:id/:type',
+        path: '/pvstringdetail/:id/:type?',
         name: 'PvstringDetail',
         component: () => import(/* webpackChunkName: "pvstringdetail" */ '../views/PvstringDetail.vue'),
         meta: { requiredLogin: false }
       },
       {
-        path: '/combinerdetail/:id/:type',
+        path: '/combinerdetail/:id/:type?',
         name: 'CombinerDetail',
         component: () => import(/* webpackChunkName: "combinerdetail" */ '../views/CombinerDetail.vue'),
         meta: { requiredLogin: false }
       },
       {
-        path: '/inverterdetail/:id/:type',
+        path: '/inverterdetail/:id/:type?',
         name: 'InverterDetail',
         component: () => import(/* webpackChunkName: "inverterdetail" */ '../views/InverterDetail.vue'),
         meta: { requiredLogin: false }
       },
       {
-        path: '/transformerdetail/:id/:type',
+        path: '/transformerdetail/:id/:type?',
         name: 'TransformerDetail',
         component: () => import(/* webpackChunkName: "transformerdetail" */ '../views/TransformerDetail.vue'),
         meta: { requiredLogin: false }
