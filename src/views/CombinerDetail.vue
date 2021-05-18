@@ -765,9 +765,11 @@ export default defineComponent({
     })
 
     var showMenu = ref('1')
-    if (route.params.type === undefined && route.params.type === '') {
+    if (route.params.type !== undefined && route.params.type !== '') {
       console.log('route.params.type', route.params.type)
       showMenu.value = `${route.params.type}`
+    } else {
+      console.log('route.params.type', route.params.type)
     }
 
     function handleSelect(key: string, keyPath: string) {

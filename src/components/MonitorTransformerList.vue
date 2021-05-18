@@ -1,6 +1,6 @@
 <template>
   <div class="center-item">
-    <p class="center-item-title">
+    <p class="center-item-title" v-show="columnList!=null && columnList!= undefined && columnList.length>0">
       {{title}}
     </p>
     <div class="center-item-content" v-for="column in columnList" :key="column.deviceId">
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, ref } from 'vue'
+import { defineComponent, PropType, computed, ref, watch } from 'vue'
 import { PvstringInfo } from '../store'
 import { emitter } from '@/views/Monitor.vue'
 

@@ -163,7 +163,6 @@ export default defineComponent({
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 0.24rem;
 }
 
 .main-menu-item img{
