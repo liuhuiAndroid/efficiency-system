@@ -359,6 +359,13 @@ interface StationMonthlyPower {
   actualPower?: number,
 }
 
+export interface DeviceSuggestion {
+  deviceId?: string,
+  deviceNo?: string,
+  deviceType?: number,
+  deviceStatus?: number,
+  suggestions?: string[]
+}
 export interface GlobalDataProps {
   token: string;
   loading: boolean;
@@ -388,6 +395,8 @@ export interface GlobalDataProps {
   benchMarkList: BenchMarkList[];
   efficiencyanalysis: Efficiencyanalysis;
   pvStringEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
+  stationSuggestion: string[];
+  deviceSuggestion: DeviceSuggestion[];
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -430,7 +439,9 @@ export default createStore<GlobalDataProps>({
     pvStringLosses: {},
     benchMarkList: [],
     efficiencyanalysis: {},
-    pvStringEfficiencyAnalysis: []
+    pvStringEfficiencyAnalysis: [],
+    stationSuggestion: [],
+    deviceSuggestion: []
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -537,6 +548,12 @@ export default createStore<GlobalDataProps>({
     },
     setPvStringEfficiencyAnalysis (state, rawData) {
       state.pvStringEfficiencyAnalysis = rawData.entity
+    },
+    setStationSuggestion (state, rawData) {
+      state.stationSuggestion = rawData.entity.suggestions
+    },
+    setDeviceSuggestion (state, rawData) {
+      state.deviceSuggestion = rawData.entity
     }
   },
   actions: {
@@ -677,6 +694,13 @@ export default createStore<GlobalDataProps>({
     // 获取升压变能效分析
     getTransformerEfficiencyAnalysis ({ commit }, payload) {
       return asyncAndCommit('/web/analysis/gettransformerefficiencyanalysis', 'setPvStringEfficiencyAnalysis', commit, { method: 'post', data: payload })
+    },
+    // 获取设备建议
+    getStationSuggestion ({ commit }, payload) {
+      return asyncAndCommit('/web/suggestion/getstationsuggestion', 'setStationSuggestion', commit, { method: 'post', data: payload })
+    },
+    getDeviceSuggestion ({ commit }, payload) {
+      return asyncAndCommit('/web/suggestion/getdevicesuggestion', 'setDeviceSuggestion', commit, { method: 'post', data: payload })
     }
   },
   modules: {

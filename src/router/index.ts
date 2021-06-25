@@ -78,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/suggestion',
         name: 'Suggestion',
         component: () => import(/* webpackChunkName: "suggestion" */ '../views/Suggestion.vue'),
-        meta: { requiredLogin: true }
+        meta: { requiredLogin: false }
       },
       // {
       //   path: '/setting',
