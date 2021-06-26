@@ -3,9 +3,6 @@
     <div class="right-equipment-suggest">
       <h3>设备提升建议</h3>
       <div class="equipment-box">
-        <!-- <div class="item" v-for="(dv,index) of deviceSuggestion" :key="index">
-          <EquipmentSuggest/>
-        </div> -->
         <EquipmentSuggest/>
       </div>
     </div>

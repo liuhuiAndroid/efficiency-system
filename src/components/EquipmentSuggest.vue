@@ -3,12 +3,16 @@
     <img src="@/assets/bac.png" alt="" class="bac">
     <div class="top">光伏组串 {{item.deviceNo }}</div>
     <div class="body">
-      <img src="@/assets/Hosting4_error.png" alt="" class="pic">
+      <img v-if="item.status==0" src="@/assets/Hosting4.png" alt="" class="pic">
+      <img v-else-if="item.status==1" src="@/assets/Hosting4_error.png" alt="" class="pic">
+      <img v-else src="@/assets/Hosting4_warning.png" alt="" class="pic">
       <span class="line"></span>
       <span class="suggestion">
-        <p v-for="(sug,index) of item.suggestions" :key="index">{{sug}}</p>
+        <p v-for="(sug,index) of item.suggestions.slice(0,3)" :key="index">
+          {{index+1}}:&#32;&#32;{{sug}}
+        </p>
       </span>
-      <span class="lookMore" @click="showInfo(item)">查看更多</span>
+      <span class="lookMore" @click="showInfo(item)">查看全部</span>
     </div>
   </div>
   <teleport to='#app'>
@@ -137,5 +141,10 @@ export default defineComponent({
     left: 2.3rem;
     color: rgb(47, 142, 231);
     cursor:pointer;
+  }
+  p {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
 </style>

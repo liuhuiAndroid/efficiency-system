@@ -8,7 +8,7 @@
     <div class="body">
         <div class="content">
             <div class="info" v-for="(item,index) of info.suggestions" :key="index">
-                {{item}}
+                {{index+1}}:&#32;&#32;{{item}}
             </div>
         </div>
     </div>
@@ -106,6 +106,7 @@ export default defineComponent({
         width: 100%;
         line-height: 20px;
         margin-bottom: 5px;
+        padding-bottom: 10px;
         color: #fff;
         border-bottom: 1px solid #ccc;
     }
