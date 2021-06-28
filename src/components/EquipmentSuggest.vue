@@ -1,11 +1,34 @@
 <template>
   <div class="equipment-suggest-item" v-for="(item,index) of deviceSuggestion" :key="index">
     <img src="@/assets/bac.png" alt="" class="bac">
-    <div class="top">光伏组串 {{item.deviceNo }}</div>
+    <div class="top">
+      <span v-if="item.deviceType== 4">升压变</span>
+      <span v-if="item.deviceType== 3">逆变器</span>
+      <span v-if="item.deviceType== 2">汇流箱</span>
+      <span v-if="item.deviceType== 1">光伏组串</span>
+      {{item.deviceNo }}
+    </div>
     <div class="body">
-      <img v-if="item.status==0" src="@/assets/Hosting4.png" alt="" class="pic">
-      <img v-else-if="item.status==1" src="@/assets/Hosting4_error.png" alt="" class="pic">
-      <img v-else src="@/assets/Hosting4_warning.png" alt="" class="pic">
+      <router-link v-if="item.deviceType== 4" :to="`/transformerdetail/${item.deviceId}`">
+        <img v-if="item.deviceStatus==0" src="@/assets/Hosting.png" alt="" class="pic">
+        <img v-else-if="item.deviceStatus==1" src="@/assets/Hosting_error.png" alt="" class="pic">
+        <img v-else src="@/assets/Hosting_warning.png" alt="" class="pic">
+      </router-link>
+      <router-link v-if="item.deviceType== 3" :to="`/inverterdetail/${item.deviceId}`">
+        <img v-if="item.deviceStatus==0" src="@/assets/Hosting2.png" alt="" class="pic">
+        <img v-else-if="item.deviceStatus==1" src="@/assets/Hosting2_error.png" alt="" class="pic">
+        <img v-else src="@/assets/Hosting2_warning.png" alt="" class="pic">
+      </router-link>
+      <router-link v-if="item.deviceType== 2" :to="`/combinerdetail/${item.deviceId}`">
+        <img v-if="item.deviceStatus==0" src="@/assets/Hosting3.png" alt="" class="pic">
+        <img v-else-if="item.deviceStatus==1" src="@/assets/Hosting3_error.png" alt="" class="pic">
+        <img v-else src="@/assets/Hosting3_warning.png" alt="" class="pic">
+      </router-link>
+      <router-link v-if="item.deviceType== 1" :to="`/pvstringdetail/${item.deviceId}`">
+        <img v-if="item.deviceStatus==0" src="@/assets/Hosting4.png" alt="" class="pic">
+        <img v-else-if="item.deviceStatus==1" src="@/assets/Hosting4_error.png" alt="" class="pic">
+        <img v-else src="@/assets/Hosting4_warning.png" alt="" class="pic">
+      </router-link>
       <span class="line"></span>
       <span class="suggestion">
         <p v-for="(sug,index) of item.suggestions.slice(0,3)" :key="index">

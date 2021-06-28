@@ -82,7 +82,7 @@ export default defineComponent({
     }
     .box .body {
         position: absolute;
-        width: 89%;
+        width: 95%;
         height: 240px;
         top: 55px;
         padding-left: 24px;
@@ -100,13 +100,13 @@ export default defineComponent({
     }
     .box .body .content {
         box-sizing: border-box;
-        width: 95%;
+        width: 100%;
     }
     .box .body .info {
         width: 100%;
         line-height: 20px;
         margin-bottom: 5px;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
         color: #fff;
         border-bottom: 1px solid #ccc;
     }
