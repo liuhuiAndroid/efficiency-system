@@ -20,7 +20,7 @@
       <div class="container__title">
         <p>
           环境数据：
-          <span style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
+          <span v-if="meteoData.temperature" style="margin-left: 0.2rem;">{{`温度：${meteoData.temperature}`}}</span>
           <span>{{`湿度：${meteoData.humidity}`}}</span>
           <span>{{`压力：${meteoData.pressure}`}}</span>
           <span>{{`风向：${meteoData.windDirection}`}}</span>

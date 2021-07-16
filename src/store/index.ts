@@ -69,7 +69,7 @@ export interface CombinerBoxInfo {
   u: string;
   i: string;
   p: string;
-  temperature: string;
+  temperature?: string;
   pvStringCount: number;
 }
 
@@ -107,7 +107,7 @@ export interface DeviceDataOfToday {
   u: number;
   i: number;
   p: number;
-  temperature: number;
+  temperature?: number;
 }
 
 export interface DeviceDataOfTodayForTransformer {

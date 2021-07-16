@@ -59,3 +59,100 @@ POST http://114.80.110.197/testpassportjava/json/reply/CouponRelationRequest
 Content-Type: application/json
 
 {"couponId":"9CA52F20","cityCode":"022","endTime":"2021-05-12T14:00:00.000+0800","appName":"APP_iOS","userId":"U100074064","remark":"{\"estateName\":\"彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕彭晨燕\",\"propertyType\":\"办公楼\",\"estateImage\":\"https:\\\/\\\/pic.centanet.com\\\/tianjin\\\/postimage\\\/xinfang\\\/20200826\\\/0473af7c7762a579242f8c4a32048ed5.jpg\",\"couponContent\":\"￥3000\",\"couponTitle\":\"购房优惠券\",\"estateId\":\"10594\"}","source":"XINFANG","UserToken":"-VQwR4VstNo-xuINdcw\/Ur7AVpj93BUzudA\/zZvwgDYXdJffBWn6MrATCijzOH3kQPckbNzBEUfTg\/YNYDvGiM\/x-KohtTkINm0O3kjXMkYEXA\/L5Kbye-jjFYSUn-wd","CityCode":"022"}
+
+
+
+
+POST http://10.4.18.194:7050/056/talk/SendGroupSystemMessage
+Content-Type: application/json
+
+{
+    "ToGroupId":"msg056uu1000094211182",
+    "Content": "我是文本消息",
+    "MsgType":"Text",
+    "MsgTimestamp":"1621473413000"
+}
+
+
+###
+POST http://10.4.18.194:7050/056/talk/SendGroupSystemMessage
+Content-Type: application/json
+
+{
+    "ToGroupId":"msg056uu1000094211182",
+    "Content": "{\"Type\":2,
+    \"Title\":\"推荐话术\",
+    \"Description\":\"描述介绍。。。。\",
+    \"Sentences\":[
+        \"推荐话术1111\",
+        \"推荐话术2222\",
+        \"推荐话术3333\",
+        \"推荐话术2222\"]}",
+    "MsgType":"Sentence",
+    "MsgTimestamp":"1621473413000"
+}
+
+###
+POST http://10.4.18.194:7050/056/talk/SendGroupSystemMessage
+Content-Type: application/json
+
+{
+    "ToGroupId":"msg056uu1000094211182",
+    "Content": "{
+    \"Type\":3,
+    \"Title\":\"推荐房源\",
+    \"Content\":\"点击房源，直接发送房源卡片给客户\",
+    \"LinkMessages\":[
+        {
+            \"Type\":0,
+            \"Content\":\"我正在关注红星国际晶品轩 3室2厅 470万的二手房源\",
+            \"Title\":\"红星国际晶品轩\",
+            \"ImageUri\":\"https://img0tj.centainfo.com/images/20191026/041645_baf27dcf-d7c0-4a47-870c-c378340ea687_600x420_w.jpg\",
+            \"Url\":\"https://wap.centanet.com/tj/ershoufang/tjhd0015610091.html\",
+            \"ImageTextType\":1,
+            \"Ext\":\"{\\\"zytype\\\":\\\"101\\\",\\\"id\\\":\\\"tjhd0015610091\\\",\\\"cityen\\\":\\\"tj\\\",\\\"type\\\":\\\"ershoufang\\\"}\",
+            \"ImageTextExt\":{
+                \"AdsNo\":\"tjhd0015610091\",
+                \"EstateName\":\"红星国际晶品轩\",
+                \"HallCount\":2,
+                \"Image\":\"https://img0tj.centainfo.com/images/20191026/041645_baf27dcf-d7c0-4a47-870c-c378340ea687_600x420_w.jpg\",
+                \"RentType\":\"S\",
+                \"Area\":131.05999755859375,
+                \"AvgPrice\":35861.4375,
+                \"Price\":4700000,
+                \"RoomCount\":3
+            }
+        },
+        {
+            \"Type\":0,
+            \"Content\":\"我正在关注红星国际晶品轩 3室2厅 470万的二手房源\",
+            \"Title\":\"红星国际晶品轩\",
+            \"ImageUri\":\"https://img0tj.centainfo.com/images/20191026/041645_baf27dcf-d7c0-4a47-870c-c378340ea687_600x420_w.jpg\",
+            \"Url\":\"https://wap.centanet.com/tj/ershoufang/tjhd0015610091.html\",
+            \"ImageTextType\":1,
+            \"Ext\":\"{\\\"zytype\\\":\\\"101\\\",\\\"id\\\":\\\"tjhd0015610091\\\",\\\"cityen\\\":\\\"tj\\\",\\\"type\\\":\\\"ershoufang\\\"}\",
+            \"ImageTextExt\":{
+                \"AdsNo\":\"tjhd0015610091\",
+                \"EstateName\":\"红星国际晶品轩\",
+                \"HallCount\":2,
+                \"Image\":\"https://img0tj.centainfo.com/images/20191026/041645_baf27dcf-d7c0-4a47-870c-c378340ea687_600x420_w.jpg\",
+                \"RentType\":\"S\",
+                \"Area\":131.05999755859375,
+                \"AvgPrice\":35861.4375,
+                \"Price\":4700000,
+                \"RoomCount\":3
+            }
+        }
+    ],\"BtnUrl\":\"https://wap.centanet.com/tj/\"}",
+    "MsgType":"BatchLink",
+    "MsgTimestamp":"1621473413000"
+}
+
+### 用户画像接口
+POST http://10.4.18.194:7050/056/Talk/GetPersonasTags
+Content-Type: application/json; charset=utf-8
+
+{
+  "ChatId":"msg022uu104588993tj18070189",
+  "UserId":"u_u104588993"
+}
