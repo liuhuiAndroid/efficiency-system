@@ -300,6 +300,10 @@ export interface Efficiencyanalysis {
   lossDtos?: AnalysisLossDto[]
 }
 
+export interface Healthdiagnosis {
+  results?: string[]
+}
+
 export interface PvStringEfficiencyAnalysisDevices {
   deviceId?: string,
   deviceName?: string,
@@ -397,6 +401,7 @@ export interface GlobalDataProps {
   pvStringEfficiencyAnalysis: PvStringEfficiencyAnalysis[];
   stationSuggestion: string[];
   deviceSuggestion: DeviceSuggestion[];
+  healthdiagnosis: Healthdiagnosis;
 }
 
 const asyncAndCommit = async (url: string, mutationName: string, commit: Commit,
@@ -441,7 +446,8 @@ export default createStore<GlobalDataProps>({
     efficiencyanalysis: {},
     pvStringEfficiencyAnalysis: [],
     stationSuggestion: [],
-    deviceSuggestion: []
+    deviceSuggestion: [],
+    healthdiagnosis: {}
   },
   // mutations 不可以包含异步操作
   mutations: {
@@ -554,6 +560,9 @@ export default createStore<GlobalDataProps>({
     },
     setDeviceSuggestion (state, rawData) {
       state.deviceSuggestion = rawData.entity
+    },
+    setHealthdiagnosis (state, rawData) {
+      state.healthdiagnosis = rawData.entity
     }
   },
   actions: {
@@ -701,6 +710,10 @@ export default createStore<GlobalDataProps>({
     },
     getDeviceSuggestion ({ commit }, payload) {
       return asyncAndCommit('/web/suggestion/getdevicesuggestion', 'setDeviceSuggestion', commit, { method: 'post', data: payload })
+    },
+    // 健康诊断
+    healthdiagnosis ({ commit }, payload) {
+      return asyncAndCommit('/web/device/healthdiagnosis', 'setHealthdiagnosis', commit, { method: 'post', data: payload, headers: { 'Content-Type': 'multipart/form-data' } })
     }
   },
   modules: {

@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import animated from 'animate.css'
-import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage, ElMessageBox, ElPagination, ElRow, ElCol, ElCard, ElContainer, ElHeader, ElAside, ElMain, ElFooter, ElImage, ElDropdown, ElDropdownItem, ElDropdownMenu, ElMenu, ElMenuItem, ElMenuItemGroup } from 'element-plus'
+import { ElButton, ElInput, ElSpace, ElForm, ElFormItem, ElLoading, ElMessage, ElMessageBox, ElPagination, ElRow, ElCol, ElCard, ElContainer, ElHeader, ElAside, ElMain, ElFooter, ElImage, ElDropdown, ElDropdownItem, ElDropdownMenu, ElMenu, ElMenuItem, ElMenuItemGroup, ElUpload, ElDivider } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
@@ -61,7 +61,9 @@ const components = [
   ElDropdownMenu,
   ElMenu,
   ElMenuItem,
-  ElMenuItemGroup
+  ElMenuItemGroup,
+  ElUpload,
+  ElDivider
 ]
 components.forEach(component => {
   app.component(component.name, component)

@@ -34,6 +34,7 @@
   <el-menu class="container__menu" :default-active="showMenu" mode="horizontal" @select="handleSelect" background-color="#021138" text-color="#FFF" active-text-color="#409EFF">
     <el-menu-item index="1">设备监控</el-menu-item>
     <el-menu-item index="2">设备能效</el-menu-item>
+    <img class="container__health" src="@/assets/icon_health_btn_1.png" alt="" @click="showInfo()">
   </el-menu>
   <div class="container__content" v-show="showMenu=='1'">
     <div class="container__content__chart" ref="uCharts"></div>
@@ -48,6 +49,15 @@
     <div class="container__content__chart" ref="prAndHealthLineCharts"></div>
   </div>
 </div>
+<teleport to='#app'>
+    <div class="box" v-show="show">
+      <div class="mask">
+      </div>
+      <div class="showInfo">
+          <UploadWindow :pvstringDetailProps="pvstringDetailProps" :currentDeviceId="currentDeviceId" @key="receiveflag"/>
+      </div>
+    </div>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -59,8 +69,9 @@ import { useStore } from 'vuex'
 import * as echarts from 'echarts'
 import { currentTime, get30AgoTime } from '@/utils/DateUtils'
 import { Percentage } from '@/utils/NumberUtils'
-
+import UploadWindow from '@/components/UploadWindow.vue'
 export default defineComponent({
+  components: { UploadWindow },
   setup() {
     const route = useRoute()
     var currentDeviceId = route.params.id
@@ -744,7 +755,7 @@ export default defineComponent({
 
     const meteoData = computed(() => store.state.meteoData)
 
-    var refreshUI = function() {
+    const refreshUI = function() {
       // 获取当前气象数据
       store.dispatch('getMeteoData')
       // 获取光伏组串详情
@@ -787,7 +798,16 @@ export default defineComponent({
       }
       console.log('showMenu', showMenu)
     }
+    const show = ref(false)
+    const showInfo = () => {
+      show.value = true
+    }
+    const receiveflag = (e:boolean) => {
+      show.value = e
+    }
     return {
+      show,
+      showInfo,
       pvstringDetailProps,
       uCharts,
       iCharts,
@@ -800,7 +820,8 @@ export default defineComponent({
       meteoData,
       handleSelect,
       showMenu,
-      currentDeviceId
+      currentDeviceId,
+      receiveflag
     }
   }
 })
@@ -843,6 +864,13 @@ export default defineComponent({
     margin-right: .3rem;
     margin-top: .1rem;
   }
+  &__health{
+    position: absolute;
+    right: .2rem;
+    z-index: 100;
+    width: 110px;
+    height: 41px;
+  }
   &__content{
     display: flex;
     flex-direction: row;
@@ -869,5 +897,30 @@ export default defineComponent({
 .container::-webkit-scrollbar-thumb{
   border-radius: 3px;
   background-color: #00B1FF;
+}
+.box {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.showInfo {
+  z-index: 100;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 340px;
+  height: 300px;
+}
+.mask {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(58, 1, 1, 0.747);
+  opacity: 0.6;
 }
 </style>
